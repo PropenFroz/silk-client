@@ -31,14 +31,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import WelcomePage from './pages/welcome'
-import TestBackend1 from './pages/testbackend1'
+import TestBE from './pages/be1'
 
 function App() {  
   return (
     <Router basename="/silk">
       <Switch>
         <Route path="/welcome"><WelcomePage /></Route>
-        <Route path="/testbackend1"><TestBackend1 /></Route>
+        <Route path="/be1"><TestBE /></Route>
       </Switch>
     </Router>
   );
