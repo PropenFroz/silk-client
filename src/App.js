@@ -32,6 +32,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import WelcomePage from './pages/welcome'
 import TestBE from './pages/be1'
+import LaporanKeuanganBuku from './pages/laporanKeuanganBuku'
 
 function App() {  
   return (
@@ -39,6 +40,7 @@ function App() {
       <Switch>
         <Route path="/welcome"><WelcomePage /></Route>
         <Route path="/be1"><TestBE /></Route>
+        <Route path="/laporanKeuanganBuku"><LaporanKeuanganBuku /></Route>
       </Switch>
     </Router>
   );
