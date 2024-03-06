@@ -10,7 +10,7 @@ import Styles from '../styles/welcome'
 export default function Welcome() {
     return (
         <Styles>
-            <Navbar welcome={true} />
+            <Navbar welcome={false} />
                 <div className="circle1"></div>
             <div id="welcome">
                 <Container>
