@@ -13,8 +13,8 @@ export default function LaporanTransaksi() {
     const [endDate, setEndDate] = useState(null);
 
     const handleExport = () => {
-        const formattedStartDate = startDate.toISOString().split('T')[0];
-        const formattedEndDate = endDate.toISOString().split('T')[0];
+        const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+        const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
 
         const url = `http://localhost:8080/api/entry-transaksi-siswa/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
         window.open(url, '_blank');
