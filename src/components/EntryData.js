@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
-import ModalBerhasil from "./SummaryModal";
-import sendEntryData from "../service/entryDataTransaksiSiswaService";
+import SummaryModal from './SummaryModal';
+import Berhasil from './modal';
 import { fetchGradeKursus, fetchJurusanKursus } from "../service/fetchDataService"; 
 
 export default function EntryData() { 
@@ -20,6 +20,7 @@ export default function EntryData() {
     });
 
     const [showModal, setShowModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [gradeKursus, setGradeKursus] = useState([]);
     const [jurusanKursus, setJurusanKursus] = useState([]);
 
@@ -28,7 +29,7 @@ export default function EntryData() {
             .then(data => {
                 setGradeKursus(data);
             })
-            .catch(error => console.error('Error fetching grades:', error));
+            .catch(error => console.error('Error fetching gradeKursus:', error));
 
         fetchJurusanKursus()
             .then(data => {
@@ -46,12 +47,13 @@ export default function EntryData() {
     };
 
     const handleSubmit = () => {
-        console.log(formData);
-        sendEntryData(formData, setShowModal);
-    };
-
-    const handleCloseModal = () => {
-        setShowModal(false);
+        const isFormValid = Object.values(formData).every(value => value !== '');
+        if (!isFormValid) {
+            alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
+            return;
+        } else {
+            setShowModal(true);
+        }
     };
 
     return (
@@ -153,7 +155,20 @@ export default function EntryData() {
                 </div>
             </div>
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
-            <ModalBerhasil formData={formData} show={showModal} onHide={handleCloseModal} />
+            <SummaryModal
+                formData={formData}
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                onSuccess={() => {
+                    setShowSuccessModal(true);
+                }}
+            />
+            <Berhasil 
+                show={showSuccessModal}
+                onHide={() => {
+                    setShowSuccessModal(false);
+                }}
+            />
          </div>
     );
 };

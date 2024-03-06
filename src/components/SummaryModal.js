@@ -1,19 +1,26 @@
-import React from 'react';
+import React from "react";
 import Modal from 'react-bootstrap/Modal';
-import ModalBerhasil from './modal'; 
+import sendEntryData from "../service/entryDataTransaksiSiswaService";
 
+function SummaryModal({ formData, show, onHide, onSuccess }) {
 
-function SummaryModal({ formData, show, onHide }) {
+  const handleSubmit = () => {
+    sendEntryData(formData, () => {
+      onHide();
+      onSuccess();
+    });
+    
+  };
 
   return (
     <Modal show={show} onHide={onHide}>
-        <Modal.Title>Ringkasan Formulir</Modal.Title>
+      <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
-        <p><strong>Jenis Pembayaran:</strong> {formData.jenisPembayaran}</p>
+        <p><strong>Jenis Pembayaran:</strong> {formData.jenisTransaksi}</p>
         <p><strong>Tanggal Pembayaran:</strong> {formData.tanggalPembayaran}</p>
         <p><strong>Nama Siswa:</strong> {formData.namaSiswa}</p>
-        <p><strong>Jurusan:</strong> {formData.jurusan}</p>
-        <p><strong>Grade:</strong> {formData.grade}</p>
+        <p><strong>Jurusan:</strong> {formData.jurusanKursus}</p>
+        <p><strong>Grade:</strong> {formData.gradeKursus}</p>
         <p><strong>Uang Pendaftaran:</strong> {formData.uangPendaftaran}</p>
         <p><strong>Uang Kursus:</strong> {formData.uangKursus}</p>
         <p><strong>Uang Buku:</strong> {formData.uangBuku}</p>
@@ -22,7 +29,7 @@ function SummaryModal({ formData, show, onHide }) {
         <p><strong>Keterangan:</strong> {formData.keterangan}</p>
       </Modal.Body>
       <Modal.Footer>
-        <ModalBerhasil></ModalBerhasil> {/* Ganti Submit dengan Button */}
+        <button className="btn-submit" onClick={handleSubmit}>Submit</button>
       </Modal.Footer>
     </Modal>
   );
