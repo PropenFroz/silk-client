@@ -1,0 +1,39 @@
+.btn-update {
+    background-color: #28a745;
+    color: #fff; 
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  
+  .btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+
+.btn-update:hover {
+    background-color: #96d09a;
+}
+
+.btn-delete:hover {
+    background-color: #ec6e7b;
+}  
+
+.table thead th {
+    background-color: #d5d5d5;
+    color: #000000;
+    font-size: 14px;
+    vertical-align: middle; 
+}
+
+.table  {
+    color: #000000;
+    background: #ffffff;
+    font-size: 12px;
+    vertical-align: middle; 
+}

@@ -1,0 +1,16 @@
+.datepicker-input {
+    font-size: 14px;
+    border: 1px solid #ffffff;
+}
+
+.datepicker-wrapper {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: inline-flex;
+    padding: 3px 10px;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

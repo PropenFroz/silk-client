@@ -1,48 +1,9 @@
 import styled from 'styled-components'
 
 const Styles = styled.div`
-    background-color: #F8F8F8;
     min-height: 100vh;
     text-align: center;
-
-    .circle1, .circle2, .circle3, .circle4 {
-        background-color: rgba(102, 153, 255, .2);
-        border-radius: 50%;
-        position: fixed;
-        z-index: 0;
-    }
-
-    .circle1, .circle2 {
-        background-color: rgba(255, 98, 209, 0.25);
-    }
-
-    .circle1 {
-        width: 21vw;
-        height: 21vw;
-        left: 20%;
-        top: -10%;
-    }
-
-    .circle2 {
-        width: 22vw;
-        height: 22vw;
-        right: -10%;
-        top: 75%;
-    }
-
-    .circle3 {
-        width: 30vw;
-        height: 30vw;
-        left: -5%;
-        bottom: -15%;
-    }
-
-    .circle4 {
-        width: 20vw;
-        height: 20vw;
-        left: 60%;
-        top: 30%;
-    }
+    margin-top: 50px;
 
     #welcome {
         position: relative;
