@@ -13,29 +13,15 @@
 .button-base {
     align-items: center;
     background-color: #ffffff;
+    border: 1px solid #202020; 
     border-radius: 8px;
     display: inline-flex;
     flex: 0 0 auto;
     gap: 8px;
     justify-content: center;
     overflow: hidden;
-    padding: 10px 16px;
+    padding: 6px 10px;
     position: relative;
-  }
-
-  .text-input {
-    align-items: center;
-    background-color:  #ffffff;
-    border: 1px solid;
-    border-color: #12121214;
-    border-radius: 8px;
-    display: inline-flex;
-    gap: 8px;
-    padding: 10px 16px;
-    position: relative;
-    width: 190px;
-    margin-right: 10px;
-    margin-bottom: 10px;
   }
 
   .button-base-2 {
@@ -47,18 +33,13 @@
     gap: 8px;
     justify-content: center;
     overflow: hidden;
-    padding: 10px 16px;
+    padding: 7px 10px;
     position: relative;
   }
 
   .text-12 {
     color: #344053;
-    font-family: var(--text-sm-medium-font-family);
-    font-size: var(--text-sm-medium-font-size);
-    font-style: var(--text-sm-medium-font-style);
-    font-weight: var(--text-sm-medium-font-weight);
-    letter-spacing: var(--text-sm-medium-letter-spacing);
-    line-height: var(--text-sm-medium-line-height);
+    font-size:  14px;
     margin-top: -1px;
     position: relative;
     white-space: nowrap;
@@ -68,7 +49,7 @@
   .text-13 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 20px;
@@ -89,4 +70,5 @@
 .button-group {
     display: flex; /* Menggunakan display flex untuk mengatur tata letak */
     justify-content: space-between; /* Menggunakan justify-content untuk menjaga jarak yang sama antara tombol */
+    margin-top: 50px ;
 }

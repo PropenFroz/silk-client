@@ -4,14 +4,8 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import Container from 'react-bootstrap/Container'
-import CardDeck from 'react-bootstrap/CardDeck'
-import Card from 'react-bootstrap/Card'
 
 import Styles from '../styles/welcome'
-
-const directory = [
-        { title: ["Laporan", "Transaksi"], to: "/laporan", class:"laporan" },
-    ]
 
 export default function Welcome() {
     return (

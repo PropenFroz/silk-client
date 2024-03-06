@@ -1,14 +1,13 @@
-// tableLaporan.js
 
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 import Button from './button'; // Import Button component
 
-export default function TableLaporan() {
+export default function TableLaporanKeuanganBuku() {
     return (
         <div className="table-wrapper">
-            <Table responsive striped bordered hover>
+            <Table responsive bordered>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -50,6 +49,11 @@ export default function TableLaporan() {
                             <Button className="btn-update">Update</Button> {/* Gunakan komponen tombol */}
                             <Button className="btn-delete">Delete</Button> {/* Gunakan komponen tombol */}
                         </td>
+                    </tr>
+                    <tr>
+                        <td colSpan="12">Total</td>
+                        <td >Rp90.000</td>
+                        <td >Rp1.000.000</td>
                     </tr>
                     {/* Add more rows as needed */}
                 </tbody>

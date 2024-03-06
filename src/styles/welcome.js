@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 const Styles = styled.div`
-    background-color: #F4F7FE;
     min-height: 100vh;
     text-align: center;
+    margin-top: 50px;
 
     #welcome {
         position: relative;
