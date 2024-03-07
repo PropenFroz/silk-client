@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
-import SummaryModal from './summaryModal';
+import SummaryModal from './summaryModalEntryPembelianBuku';
 import Berhasil from './modal';
-import { fetchJurusanKursus } from "../service/fetchDataService"; 
+import { fetchJurusanKursus, fetchBukuPurwacaraka } from "../service/fetchDataService"; 
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
-        jenisTransaksi: 1,
-        tanggalPembayaran: '',
-        namaSiswa: '',
-        jurusanKursus: 1,
-        gradeKursus: 1,
-        uangPendaftaran: '',
-        uangKursus: '',
-        uangBuku: '',
-        cash: '',
-        transfer: '',
-        keterangan: ''
+        bukuPurwacaraka: 1,
+        tanggalBeli: '',
+        jumlahBeli: '',
+        tanggalJual: '',
+        jumlahJual: '',
+        hargaBeli: '',
+        hargaJual: ''
     });
 
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [jurusanKursus, setJurusanKursus] = useState([]);
+    const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
 
     useEffect(() => {
         fetchJurusanKursus()
@@ -29,6 +26,12 @@ export default function EntryData() {
                 setJurusanKursus(data);
             })
             .catch(error => console.error('Error fetching jurusanKursus:', error));
+
+        fetchBukuPurwacaraka()
+            .then(data => {
+                setBukuPurwacaraka(data);
+            })
+            .catch(error => console.error('Error fetching gradeKursus:', error));
     }, []);
 
     const handleChange = (e) => {
@@ -54,36 +57,28 @@ export default function EntryData() {
             <div class="row">
             <div className="col-sm">
                     <div className="input-field">
-                    <label htmlFor="jurusanKursus" className="form-label">Nama Buku</label>
-                        <select className="form-select" name="jurusanKursus" onChange={handleChange} defaultValue={1}>
-                            {jurusanKursus.map(jurusan => (
-                                <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>{jurusan.namaJurusan}</option>
+                    <label htmlFor="bukuPurwacaraka" className="form-label">Nama Buku</label>
+                        <select className="form-select" name="bukuPurwacaraka" onChange={handleChange} defaultValue={1}>
+                            {bukuPurwacaraka.map(bukuPurwacaraka => (
+                                <option key={bukuPurwacaraka.idBukuPurwacara} value={bukuPurwacaraka.idBukuPurwacara}>{bukuPurwacaraka.namaBuku}</option>
                             ))}
                         </select>
                     </div>
                 </div>
-                <div className="col-sm">
-                    <div className="input-field">
-                    <label htmlFor="jurusanKursus" className="form-label">Jurusan</label>
-                        <select className="form-select" name="jurusanKursus" onChange={handleChange} defaultValue={1}>
-                            {jurusanKursus.map(jurusan => (
-                                <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>{jurusan.namaJurusan}</option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
+            <div className="col-sm">
+            </div>
             </div>
             <div class="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Beli</label>
-                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} />
+                        <input type="date" className="form-control" name="tanggalBeli" onChange={handleChange} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Jumlah Beli</label>
-                        <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} />
+                        <input type="number" className="form-control" name="jumlahBeli" onChange={handleChange} />
                     </div>
                 </div>
             </div>
@@ -91,13 +86,13 @@ export default function EntryData() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Jual</label>
-                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} />
+                        <input type="date" className="form-control" name="tanggalJual" onChange={handleChange} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Jumlah Jual</label>
-                        <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} />
+                        <input type="number" className="form-control" name="jumlahJual" onChange={handleChange} />
                     </div>
                 </div>
             </div>
@@ -105,13 +100,13 @@ export default function EntryData() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Harga Beli</label>
-                        <input type="number" className="form-control" name="cash" onChange={handleChange} />
+                        <input type="number" className="form-control" name="hargaBeli" onChange={handleChange} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Harga Jual</label>
-                        <input type="number"className="form-control" name="transfer" onChange={handleChange} />
+                        <input type="number"className="form-control" name="hargaJual" onChange={handleChange} />
                     </div>
                 </div>
             </div>
