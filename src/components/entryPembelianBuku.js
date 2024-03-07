@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
 import SummaryModal from './summaryModalEntryPembelianBuku';
 import Berhasil from './modal';
-import { fetchJurusanKursus, fetchBukuPurwacaraka } from "../service/fetchDataService"; 
+import { fetchBukuPurwacaraka } from "../service/fetchDataService"; 
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
@@ -17,16 +17,9 @@ export default function EntryData() {
 
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const [jurusanKursus, setJurusanKursus] = useState([]);
     const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
 
     useEffect(() => {
-        fetchJurusanKursus()
-            .then(data => {
-                setJurusanKursus(data);
-            })
-            .catch(error => console.error('Error fetching jurusanKursus:', error));
-
         fetchBukuPurwacaraka()
             .then(data => {
                 setBukuPurwacaraka(data);
@@ -124,6 +117,7 @@ export default function EntryData() {
                 show={showSuccessModal}
                 onHide={() => {
                     setShowSuccessModal(false);
+                    window.location.reload();
                 }}
             />
          </div>
