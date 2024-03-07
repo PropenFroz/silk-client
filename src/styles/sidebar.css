@@ -1,0 +1,37 @@
+
+.brand-text {
+    font-size: 16px; /* Atur ukuran font sesuai kebutuhan */
+    font-weight: bold; /* Atur ketebalan font sesuai kebutuhan */
+    color: #333; /* Atur warna font sesuai kebutuhan */
+    text-decoration: none;
+  }
+
+.sidebar-header {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .sidebar-menu-item {
+    font-size: 13px;
+    font-weight: 500;;
+  }
+  
+  .sidebar-footer-link {
+    font-size: 14px;
+  }
+  
+  .sidebar-section-label {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 20px;
+    color: #737070; /* Atur warna teks sesuai keinginan */
+  }
+
+  .sidebar-divider {
+    border-top: 1px solid #ccc; /* Atur warna dan ketebalan garis sesuai keinginan */
+    margin: 10px 0; /* Berikan margin di atas dan bawah garis pembatas */
+  }
+
+  .text-decoration-none{
+    font-size: 12px;
+  }

@@ -1,0 +1,13 @@
+/* components/Profile.css */
+.profile-container {
+  width: 1030px;
+  height: 561px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #dde1e6;
+  background: var(--white-100, #fff);
+  margin: auto; /* Add this to center horizontally */
+  display: flex; /* Add this to enable flexbox */
+  align-items: center; /* Add this to center vertically */
+  justify-content: center; /* Add this to center horizontally */
+}
