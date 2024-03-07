@@ -3,7 +3,10 @@ import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 import Button from './button';
 
-export default function TabelLaporanTransaksiSiswa() {
+export default function TabelLaporanTransaksiSiswa({ transactions }) {
+    if (!transactions || transactions.length === 0) {
+        return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
+    }
     return (
         <div className="table-wrapper">
             <Table responsive bordered>
@@ -25,34 +28,26 @@ export default function TabelLaporanTransaksiSiswa() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>19/12/13</td>
-                        <td>Abdillah Sulthan</td>
-                        <td>G(1)</td>
-                        <td>G(1)</td>
-                        <td>Rp300.000</td>
-                        <td>Rp300.000</td>
-                        <td>Rp100.000</td>
-                        <td>Rp300.000</td>
-                        <td>0</td>
-                        <td>Rp400.000</td>
-                        <td>Cuti 3 Bulan</td>
-                        <td>
-                            <Button className="btn-update">Update</Button> {/* Gunakan komponen tombol */}
-                            <Button className="btn-delete">Delete</Button> {/* Gunakan komponen tombol */}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="5">Total</td>
-                        <td>Rp300.000</td>
-                        <td>Rp300.000</td>
-                        <td>Rp100.000</td>
-                        <td>Rp300.000</td>
-                        <td>Rp0</td>
-                        <td>Rp400.000</td>
-                    </tr>
-                   
+                    {transactions.map((transaction, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{transaction.tanggalPembayaran}</td>
+                            <td>{transaction.namaSiswa}</td>
+                            <td>{transaction.jurusanKursus.namaJurusan}</td>
+                            <td>{transaction.gradeKursus.namaGrade}</td>
+                            <td>{transaction.uangPendaftaran}</td>
+                            <td>{transaction.uangKursus}</td>
+                            <td>{transaction.uangBuku}</td>
+                            <td>{transaction.cash}</td>
+                            <td>{transaction.transfer}</td>
+                            <td>{transaction.cash + transaction.transfer}</td>
+                            <td>{transaction.keterangan}</td>
+                            <td>
+                                <Button className="btn-update">Update</Button> 
+                                <Button className="btn-delete">Delete</Button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
         </div>

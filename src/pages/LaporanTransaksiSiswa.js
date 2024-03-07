@@ -10,6 +10,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 export default function LaporanTransaksi() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [transactions, setTransactions] = useState([]);
 
     const handleExport = () => {
         if (!startDate || !endDate) {
@@ -21,6 +22,23 @@ export default function LaporanTransaksi() {
     
             const url = `http://localhost:8080/api/entry-transaksi-siswa/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
             window.open(url, '_blank');
+        }
+    };
+
+    const handleView = async () => {
+        if (!startDate || !endDate) {
+            alert("Mohon isi kedua tanggal terlebih dahulu.");
+            return;
+        }
+        try {
+            const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+            const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+            const url = `http://localhost:8080/api/entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            setTransactions(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         }
     };
 
@@ -45,7 +63,7 @@ export default function LaporanTransaksi() {
                             placeholder="Tanggal Akhir"
                         />
 
-                        <Button className="button">
+                        <Button className="button" onClick={handleView}>
                             <div className="button-base-2">
                                 <div className="text-13">Tampilkan</div>
                             </div>
@@ -60,7 +78,7 @@ export default function LaporanTransaksi() {
                         </Button>
                     </div>
                 </div>
-                <TableLaporan />
+                <TableLaporan transactions={transactions}/>
             </div>
         </div>
     )
