@@ -1,18 +1,18 @@
 .btn-update {
-    background-color: #28a745;
-    color: #fff; 
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
+    background-color: #28a745; /* Warna hijau */
+    color: #fff; /* Warna putih untuk teks */
+    padding: 8px 16px; /* Padding tombol */
+    border: none; /* Hapus border */
+    border-radius: 20px; /* Sudut yang lebih bulat */
     font-size: 12px;
   }
   
   .btn-delete {
-    background-color: #dc3545;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
+    background-color: #dc3545; /* Warna merah */
+    color: #fff; /* Warna putih untuk teks */
+    padding: 8px 16px; /* Padding tombol */
+    border: none; /* Hapus border */
+    border-radius: 20px; /* Sudut yang lebih bulat */
     font-size: 12px;
   }
 
@@ -25,14 +25,14 @@
 }  
 
 .table thead th {
-    background-color: #d5d5d5;
-    color: #000000;
+    background-color: #d5d5d5; /* Warna latar belakang judul kolom */
+    color: #000000; /* Warna teks judul kolom */
     font-size: 14px;
     vertical-align: middle; 
 }
 
 .table  {
-    color: #000000;
+    color: #000000; /* Warna teks dalam sel data */
     background: #ffffff;
     font-size: 12px;
     vertical-align: middle; 

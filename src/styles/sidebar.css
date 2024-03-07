@@ -1,7 +1,8 @@
+
 .brand-text {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
+    font-size: 16px; /* Atur ukuran font sesuai kebutuhan */
+    font-weight: bold; /* Atur ketebalan font sesuai kebutuhan */
+    color: #333; /* Atur warna font sesuai kebutuhan */
     text-decoration: none;
   }
 
@@ -23,12 +24,12 @@
     font-size: 12px;
     font-weight: 500;
     padding: 10px 20px;
-    color: #737070;
+    color: #737070; /* Atur warna teks sesuai keinginan */
   }
 
   .sidebar-divider {
-    border-top: 1px solid #ccc;
-    margin: 10px 0;
+    border-top: 1px solid #ccc; /* Atur warna dan ketebalan garis sesuai keinginan */
+    margin: 10px 0; /* Berikan margin di atas dan bawah garis pembatas */
   }
 
   .text-decoration-none{

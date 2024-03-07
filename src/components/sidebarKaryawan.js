@@ -15,10 +15,14 @@ import { faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 const SideBarKaryawan = () => {
 
   return (
-    <div className={`app`}>
+    <div
+      className={`app`}
+      style={{ display: "flex",}}
+    >
       <CDBSidebar
         textColor="#1C1C1C"
         backgroundColor="#FFFFFF"
+        style={{ height: "100vh" }}
       >
         <CDBSidebarHeader
           prefix={
@@ -33,10 +37,10 @@ const SideBarKaryawan = () => {
         <CDBSidebarContent className="sidebar-content">
         <div className="sidebar-section-label">Input Data</div>
           <CDBSidebarMenu>
-            <NavLink exact to="/entry-transaksi-siswa" activeClassName="activeClicked">
+            <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/entry-pembelian-buku" activeClassName="activeClicked">
+            <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-book" className="sidebar-menu-item">Pembelian Buku</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
@@ -45,8 +49,8 @@ const SideBarKaryawan = () => {
            
             <hr className="sidebar-divider" />
             <div className="sidebar-section-label">Laporan</div>
-            <NavLink exact to="/laporan-transaksi-siswa" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
+            <NavLink exact to="/" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Iuran</CDBSidebarMenuItem>
@@ -54,7 +58,7 @@ const SideBarKaryawan = () => {
             <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Pembayaran Kursus</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-keuangan-buku" activeClassName="activeClicked">
+            <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Keuangan & Stok Buku</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">

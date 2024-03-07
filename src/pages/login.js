@@ -22,8 +22,8 @@ export const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                history.push('/homepageKaryawan');
-                console.log(data)
+                history.push('/welcome');
+                console.log(data);
                 console.log("Redirecting to welcome page...");
                 
             } else {
