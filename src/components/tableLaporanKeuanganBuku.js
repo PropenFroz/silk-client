@@ -1,9 +1,16 @@
-import React from "react";
+// TableLaporanKeuanganBuku.js
+import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
-import Button from "./button"; // Import Button component
+import Button from "./button";
+import { fetchTransaksiBukuByDate } from "../service/fetchDataService";
 
-export default function TableLaporanKeuanganBuku() {
+export default function TabelLaporanTransaksiBuku({ transactions }) {
+  // Check if transactions are available
+  if (!transactions || transactions.length === 0) {
+    return <div>No transactions available</div>;
+  }
+
   return (
     <div className="table-wrapper">
       <Table responsive bordered>
@@ -21,36 +28,37 @@ export default function TableLaporanKeuanganBuku() {
             <th scope="col">Keuntungan</th>
             <th scope="col">Total Keuntungan</th>
             <th scope="col">Total Penjualan</th>
-            <th scope="col">Saldo</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Keyboard A & Piano Pop 1A</td>
-            <td>Keyboard</td>
-            <td>19/12/13</td>
-            <td>5</td>
-            <td>19/12/13</td>
-            <td>3</td>
-            <td>Rp60.000</td>
-            <td>Rp90.000</td>
-            <td>Rp1.000.000</td>
-            <td>Rp90.000</td>
-            <td>Rp1.000.000</td>
-            <td>Rp1.000.000</td>
-            <td>
-              <Button className="btn-update">Update</Button> {/* Gunakan komponen tombol */}
-              <Button className="btn-delete">Delete</Button> {/* Gunakan komponen tombol */}
-            </td>
-          </tr>
+          {transactions.map((transaction, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{transaction.bukuPurwacaraka.namaBuku}</td>
+              <td>{transaction.bukuPurwacaraka.jurusanKursus.namaJurusan}</td>
+              <td>{transaction.tanggalBeli}</td>
+              <td>{transaction.jumlahBeli}</td>
+              <td>{transaction.tanggalJual}</td>
+              <td>{transaction.jumlahJual}</td>
+              <td>{`Rp${transaction.hargaBeli.toLocaleString()}`}</td>
+              <td>{`Rp${transaction.hargaJual.toLocaleString()}`}</td>
+              <td>{`Rp${transaction.hargaJual - transaction.hargaBeli}`}</td>
+              <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
+              <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
+              <td>
+                <Button className="btn-update">Update</Button>
+                <Button className="btn-delete">Delete</Button>
+              </td>
+            </tr>
+          ))}
+          {/* Calculate and display the total */}
           <tr>
             <td colSpan="10">Total</td>
-            <td>Rp90.000</td>
-            <td>Rp1.000.000</td>
+            <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli), 0)}`}</td>
+            <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * transaction.hargaJual, 0)}`}</td>
+            <td colSpan="1"></td>
           </tr>
-          {/* Add more rows as needed */}
         </tbody>
       </Table>
     </div>

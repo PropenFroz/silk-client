@@ -34,6 +34,7 @@ import TestBE from "./pages/be1";
 import LaporanKeuanganBuku from "./pages/laporanKeuanganBuku";
 import SidebarKaryawan from "./components/sidebarKaryawan";
 import MyProfile from "./pages/myProfile";
+import UpdatePembelianBuku from "./pages/updatePembelianBuku";
 
 // import LaporanTransaksi from './pages/laporanTransaksi'
 // import EntryTransaksi from './pages/entryTransaksi'
@@ -57,8 +58,9 @@ function App() {
         <Route path="/lihatProfile">
           <MyProfile />
         </Route>
-        {/* <Route path="/laporanTransaksi"><LaporanTransaksi /></Route>
-        <Route path="/entryTransaksi"><EntryTransaksi /></Route> */}
+        <Route path="/updateBuku">
+          <UpdatePembelianBuku />
+        </Route>
       </Switch>
     </Router>
   );
