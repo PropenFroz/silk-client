@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/sidebarKaryawan';
 import '../styles/laporan.css';
-import TableLaporan from '../components/tabelLaporanTransaksiSiswa';
+import TableLaporan from '../components/tableLaporanTransaksiSiswa';
 import Button from '../components/button';
 import CustomDatePicker from '../components/datePicker'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,7 +30,7 @@ export default function LaporanTransaksi() {
                 <Sidebar/>
             </div>
             <div className="dashboard-content">
-                <h2>Laporan Transaksi</h2>
+                <h2>Laporan Transaksi Siswa</h2>
                 <div className="button-group">
                     <div className="left-buttons">
                         <CustomDatePicker

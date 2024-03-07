@@ -37,7 +37,7 @@ const SideBarKaryawan = () => {
         <CDBSidebarContent className="sidebar-content">
         <div className="sidebar-section-label">Input Data</div>
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/entry-transaksi-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
@@ -49,8 +49,8 @@ const SideBarKaryawan = () => {
            
             <hr className="sidebar-divider" />
             <div className="sidebar-section-label">Laporan</div>
-            <NavLink exact to="/" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi</CDBSidebarMenuItem>
+            <NavLink exact to="/laporan-transaksi-siswa" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Iuran</CDBSidebarMenuItem>
@@ -58,7 +58,7 @@ const SideBarKaryawan = () => {
             <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Pembayaran Kursus</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-keuangan-buku" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Keuangan & Stok Buku</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
@@ -76,14 +76,12 @@ const SideBarKaryawan = () => {
         </CDBSidebarContent>
 
         <CDBSidebarFooter style={{ textAlign: "center" }}>
-          {/* Profile button with icon */}
           <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px"}}>
             <NavLink to="/profile" className="text-decoration-none" style={{ color: "inherit" }}>
               <FontAwesomeIcon icon={faUser} /> Profile Saya
             </NavLink>
           </div>
 
-          {/* Logout button with icon */}
           <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px"}}>
             <NavLink to="/logout" className="text-decoration-none" style={{ color: "inherit" }}>
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
