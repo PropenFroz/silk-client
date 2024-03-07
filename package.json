@@ -10,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.3.3",
+    "cdbreact": "^1.5.18",
     "react": "^16.14.0",
     "react-bootstrap": "^1.6.8",
     "react-datepicker": "^2.16.0",

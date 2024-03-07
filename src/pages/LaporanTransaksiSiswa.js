@@ -1,31 +1,36 @@
 import React, { useState } from 'react';
-import Styles from '../styles/welcome';
+import Sidebar from '../components/sidebarKaryawan';
 import '../styles/laporan.css';
-import TableLaporan from '../components/TabelLaporanTransaksiSiswa';
+import TableLaporan from '../components/tabelLaporanTransaksiSiswa';
 import Button from '../components/button';
 import CustomDatePicker from '../components/datePicker'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { Container } from 'react-bootstrap';
 
 export default function LaporanTransaksi() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
     const handleExport = () => {
-        const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-        const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-
-        const url = `http://localhost:8080/api/entry-transaksi-siswa/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-        window.open(url, '_blank');
+        if (!startDate || !endDate) {
+            alert("Mohon isi kedua tanggal terlebih dahulu.");
+            return;
+        } else {
+            const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+            const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+    
+            const url = `http://localhost:8080/api/entry-transaksi-siswa/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            window.open(url, '_blank');
+        }
     };
 
     return (
-        <Styles>
-    
-            <Container>
+        <div className="dashboard d-flex">
+            <div>
+                <Sidebar/>
+            </div>
+            <div className="dashboard-content">
                 <h2>Laporan Transaksi</h2>
-
                 <div className="button-group">
                     <div className="left-buttons">
                         <CustomDatePicker
@@ -55,9 +60,8 @@ export default function LaporanTransaksi() {
                         </Button>
                     </div>
                 </div>
-
                 <TableLaporan />
-            </Container>
-        </Styles>
+            </div>
+        </div>
     )
 }

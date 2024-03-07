@@ -1,0 +1,36 @@
+.brand-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+  }
+
+.sidebar-header {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .sidebar-menu-item {
+    font-size: 13px;
+    font-weight: 500;;
+  }
+  
+  .sidebar-footer-link {
+    font-size: 14px;
+  }
+  
+  .sidebar-section-label {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 20px;
+    color: #737070;
+  }
+
+  .sidebar-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  .text-decoration-none{
+    font-size: 12px;
+  }
