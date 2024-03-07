@@ -60,15 +60,15 @@
   }
 
 .left-buttons {
-    display: flex; /* Menggunakan display flex untuk mengatur tata letak */
+    display: flex;
 }
 
 .right-buttons {
-    display: flex; /* Menggunakan display flex untuk mengatur tata letak */
+    display: flex;
 }
 
 .button-group {
-    display: flex; /* Menggunakan display flex untuk mengatur tata letak */
-    justify-content: space-between; /* Menggunakan justify-content untuk menjaga jarak yang sama antara tombol */
+    display: flex;
+    justify-content: space-between;
     margin-top: 50px ;
 }

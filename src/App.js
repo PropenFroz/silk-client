@@ -1,31 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-import WelcomePage from './pages/welcome'
-import TestBE from './pages/be1'
 import LaporanKeuanganBuku from './pages/laporanKeuanganBuku'
 import Login from './pages/login';
-import SidebarKaryawan from './components/sidebarKaryawan';
-
-// import LaporanTransaksi from './pages/laporanTransaksi'
-// import EntryTransaksi from './pages/entryTransaksi'
-
+import LaporanTransaksiSiswa from './pages/laporanTransaksiSiswa';
+import EntryTransaksiSiswa from './pages/entryDataTransaksiSiswa';
+import EntryPembelianBuku from './pages/entryPembelianBuku';
+import Homepage from './pages/homepageKaryawan';
 
 function App() {  
   return (
     <Router basename="/silk">
       <Switch>
-        <Route path="/welcome"><WelcomePage /></Route>
-        <Route path="/be1"><TestBE /></Route>
-        <Route path="/laporanKeuanganBuku"><LaporanKeuanganBuku /></Route>
-        <Route path="/sideBarKaryawan"><SidebarKaryawan /></Route>
+        <Route path="/laporan-keuangan-buku"><LaporanKeuanganBuku /></Route>
+        <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
+        <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/login"><Login /></Route>
-        {/* <Route path="/laporanTransaksi"><LaporanTransaksi /></Route>
-        <Route path="/entryTransaksi"><EntryTransaksi /></Route> */}
+        <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
+        <Route path="/homepage-karyawan"><Homepage/></Route>
       </Switch>
     </Router>
   );
 }
 
 export default App;
-
