@@ -167,6 +167,7 @@ export default function EntryData() {
                 show={showSuccessModal}
                 onHide={() => {
                     setShowSuccessModal(false);
+                    window.location.reload()
                 }}
             />
          </div>
