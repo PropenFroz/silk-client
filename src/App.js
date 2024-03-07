@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import LaporanTransaksiSiswa from './pages/LaporanTransaksiSiswa';
+import LaporanTransaksiSiswa from './pages/laporanTransaksiSiswa';
 import EntryTransaksiSiswa from './pages/entryDataTransaksiSiswa';
 
 function App() {  
