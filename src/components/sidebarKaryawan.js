@@ -40,7 +40,7 @@ const SideBarKaryawan = () => {
             <NavLink exact to="/entry-transaksi-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/entry-pembelian-buku" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-book" className="sidebar-menu-item">Pembelian Buku</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
