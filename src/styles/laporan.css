@@ -1,7 +1,5 @@
-/* components/laporanKeuanganBuku/laporanKeuanganBuku.css */
-
 h2 {
-    font-size: 30px; /* Ubah ukuran font judul */
+    font-size: 30px;
     text-align: left;
     font-weight: bold;
 }
@@ -13,5 +11,3 @@ h2 {
     overflow-y: hidden;
     margin: 20px;
   }
-
-
