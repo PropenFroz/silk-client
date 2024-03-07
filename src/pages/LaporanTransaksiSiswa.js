@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/sidebarKaryawan';
 import '../styles/laporan.css';
-import TableLaporan from '../components/tabelLaporanTransaksiSiswa';
+import TableLaporan from '../components/TabelLaporanTransaksiSiswa';
 import Button from '../components/button';
 import CustomDatePicker from '../components/datePicker'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
-import SummaryModal from './summaryModal';
+import SummaryModal from './SummaryModal';
 import Berhasil from './modal';
 import { fetchJurusanKursus } from "../service/fetchDataService"; 
 

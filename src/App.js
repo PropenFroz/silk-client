@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LaporanKeuanganBuku from './pages/laporanKeuanganBuku'
 import Login from './pages/login';
-import LaporanTransaksiSiswa from './pages/laporanTransaksiSiswa';
+import LaporanTransaksiSiswa from './pages/LaporanTransaksiSiswa';
 import EntryTransaksiSiswa from './pages/entryDataTransaksiSiswa';
 import EntryPembelianBuku from './pages/entryPembelianBuku';
 import Homepage from './pages/homepageKaryawan';
