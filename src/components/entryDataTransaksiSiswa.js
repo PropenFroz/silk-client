@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
-import SummaryModal from './summaryModal';
+import SummaryModal from './summaryModalEntryDataTransaksiSiswa';
 import Berhasil from './modal';
 import { fetchGradeKursus, fetchJurusanKursus } from "../service/fetchDataService"; 
 
@@ -69,8 +69,8 @@ export default function EntryData() {
                         </select>
                     </div>
                 </div>
-                <div className="col-sm">
-                </div>
+            <div className="col-sm">
+            </div>
                
             </div>
             <div class="row">
