@@ -37,6 +37,8 @@ export default function LaporanTransaksi() {
             const response = await fetch(url);
             const data = await response.json();
             setTransactions(data);
+            setStartDate(startDate);
+            setEndDate(endDate);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -78,7 +80,7 @@ export default function LaporanTransaksi() {
                         </Button>
                     </div>
                 </div>
-                <TableLaporan transactions={transactions}/>
+                <TableLaporan transactions={transactions} startDate={startDate} endDate={endDate} setTransactions={setTransactions} />
             </div>
         </div>
     )
