@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 import Button from './button';
+import DeleteConfirmationModal from './deleteModalLaporanTransaksiSiswa';
+import { deleteEntryTransaksiSiswa } from '../service/deleteDataTransaksiSiswaService';
+
 
 export default function TabelLaporanTransaksiSiswa({ transactions }) {
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+    };
+
+    const handleShowDeleteModal = (transactionId) => {
+        setSelectedTransactionId(transactionId);
+        setShowDeleteModal(true);
+    };
+
+    const handleDelete = async () => {
+        try {
+            const isDeleted = await deleteEntryTransaksiSiswa(selectedTransactionId);
+            if (isDeleted) {
+                setShowDeleteModal(false); // Sembunyikan modal jika penghapusan berhasil
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     if (!transactions || transactions.length === 0) {
         return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
     }
@@ -44,12 +70,17 @@ export default function TabelLaporanTransaksiSiswa({ transactions }) {
                             <td>{transaction.keterangan}</td>
                             <td>
                                 <Button className="btn-update">Update</Button> 
-                                <Button className="btn-delete">Delete</Button>
+                                <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.idEntryTransaksiSiswa)}>Delete</Button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
+            <DeleteConfirmationModal 
+                show={showDeleteModal} 
+                handleClose={handleCloseDeleteModal} 
+                handleDelete={handleDelete} 
+            />
         </div>
     )
 }
