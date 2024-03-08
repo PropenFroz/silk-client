@@ -1,66 +1,24 @@
-// import axios from 'axios';
-
-// import React, { useState, useEffect } from 'react';
-// import './App.css';
-
-// function App() {
-//   const [response, setResponse] = useState('')
-//   const [error, setError] = useState('')
-//   const url = 'https://silk-purwa.up.railway.app/api/test'
-//   axios
-//     .get(url)
-//     .then((resp) => {
-//       setResponse(resp.data)
-//     })
-//     .catch((err) => {
-//       setError(err.toString())
-//     })
-//   return (
-//     <div>
-//       <h1>Spring React Testing PROPENFROZ</h1>
-//       <hr />
-//       {error ? <div>{error}</div> : <div>{response}</div>}
-//     </div>
-//   )
-// }
-
-// export default App
-
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-import WelcomePage from "./pages/welcome";
-import TestBE from "./pages/be1";
 import LaporanKeuanganBuku from "./pages/laporanKeuanganBuku";
-import SidebarKaryawan from "./components/sidebarKaryawan";
 import MyProfile from "./pages/myProfile";
-import UpdatePembelianBuku from "./pages/updatePembelianBuku";
-
-// import LaporanTransaksi from './pages/laporanTransaksi'
-// import EntryTransaksi from './pages/entryTransaksi'
+import UpdatePembelianBuku from "./components/updatePembelianBuku";
+// import EntryPembelianBuku from "./pages/entryPembelianBuku";
 
 function App() {
   return (
     <Router basename="/silk">
       <Switch>
-        <Route path="/welcome">
-          <WelcomePage />
-        </Route>
-        <Route path="/be1">
-          <TestBE />
-        </Route>
-        <Route path="/laporanKeuanganBuku">
+        <Route path="/laporan-keuangan-buku">
           <LaporanKeuanganBuku />
-        </Route>
-        <Route path="/sideBarKaryawan">
-          <SidebarKaryawan />
         </Route>
         <Route path="/lihatProfile">
           <MyProfile />
         </Route>
-        <Route path="/update-pembelian-buku/">
-          <UpdatePembelianBuku />
-        </Route>
+        <Route path="/entry-transaksi-buku/update/:id" component={UpdatePembelianBuku} />
+        {/* <Route path="/entry-pembelian-buku">
+          <EntryPembelianBuku />
+        </Route> */}
       </Switch>
     </Router>
   );

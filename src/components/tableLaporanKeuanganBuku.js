@@ -1,6 +1,7 @@
 // TableLaporanKeuanganBuku.js
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../styles/tableLaporan.css";
 import Button from "./button";
 import DeleteConfirmationModal from "./deleteModalLaporanBuku";
@@ -18,18 +19,6 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
     setShowDeleteModal(true);
   };
 
-  // Kode sebelumnya
-  //   const handleDelete = async () => {
-  //     try {
-  //         const isDeleted = await deleteEntryTransaksiBuku(selectedTransactionId);
-  //         if (isDeleted) {
-  //             setShowDeleteModal(false); // Sembunyikan modal jika penghapusan berhasil
-  //         }
-  //     } catch (error) {
-  //         console.error('Error:', error);
-  //     }
-  // };
-
   if (!transactions || transactions.length === 0) {
     return <div>No transactions available</div>;
   }
@@ -40,7 +29,7 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
       if (isDeleted) {
         const updatedTransactions = await fetchData(startDate, endDate);
         setTransactions(updatedTransactions);
-        setShowDeleteModal(false); // Sembunyikan modal jika penghapusan berhasil
+        setShowDeleteModal(false);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -48,7 +37,6 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
   };
 
   const fetchData = async (startDate, endDate) => {
-    // Ambil data dari server dengan rentang tanggal yang sama
     try {
       const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
       const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
@@ -98,14 +86,16 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
               <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
               <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
               <td>
-                <Button className="btn-update">Update</Button>
+                <Link to={`/entry-transaksi-buku/update/${transaction.idEntryBuku}`}>
+                  <Button className="btn-update">Update</Button>
+                </Link>
                 <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.idEntryBuku)}>
                   Delete
                 </Button>
               </td>
             </tr>
           ))}
-          {/* Calculate and display the total */}
+
           <tr>
             <td colSpan="10">Total</td>
             <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli), 0)}`}</td>

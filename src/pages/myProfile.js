@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Sidebar from "../components/sidebarKaryawan";
-import Styles from "../styles/welcome";
 import "../styles/laporan.css";
 import ProfileComponent from "../components/profileComponent"; // Correct import path
 import Button from "../components/button";

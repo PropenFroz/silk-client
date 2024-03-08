@@ -1,34 +1,58 @@
 import React, { useState, useEffect } from "react";
-import "../styles/updatepembelianbuku.css";
-// import SummaryModal from './summaryModal';
+import { useParams } from "react-router-dom";
+import SummaryModal from "./summaryModalUpdatePembelianBuku";
 import Berhasil from "./modal";
-import { fetchJurusanKursus } from "../service/fetchDataService";
+import "../styles/updatePembelianBuku.css";
+import { fetchBukuPurwacaraka } from "../service/fetchDataService";
 
 export default function UpdatePembelianBuku() {
   const [formData, setFormData] = useState({
-    jenisTransaksi: 1,
-    tanggalPembayaran: "",
-    namaSiswa: "",
-    jurusanKursus: 1,
-    gradeKursus: 1,
-    uangPendaftaran: "",
-    uangKursus: "",
-    uangBuku: "",
-    cash: "",
-    transfer: "",
-    keterangan: "",
+    bukuPurwacaraka: "",
+    tanggalBeli: "",
+    jumlahBeli: "",
+    tanggalJual: "",
+    jumlahJual: "",
+    hargaBeli: "",
+    hargaJual: "",
   });
 
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [jurusanKursus, setJurusanKursus] = useState([]);
+  const { id } = useParams();
+  const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
 
   useEffect(() => {
-    fetchJurusanKursus()
-      .then((data) => {
-        setJurusanKursus(data);
+    fetch(`http://localhost:8080/api/entry-transaksi-buku/get/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return response.json();
       })
-      .catch((error) => console.error("Error fetching jurusanKursus:", error));
+      .then((data) => {
+        const formattedTanggalBeli = new Date(data.tanggalBeli).toISOString().split("T")[0];
+        const formattedTanggalJual = new Date(data.tanggalJual).toISOString().split("T")[0];
+        setFormData({
+          bukuPurwacaraka: data.bukuPurwacaraka,
+          tanggalBeli: formattedTanggalBeli,
+          jumlahBeli: data.jumlahBeli,
+          tanggalJual: formattedTanggalJual,
+          jumlahJual: data.jumlahJual,
+          hargaBeli: data.hargaBeli,
+          hargaJual: data.hargaJual,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching transaction:", error);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    fetchBukuPurwacaraka()
+      .then((data) => {
+        setBukuPurwacaraka(data);
+      })
+      .catch((error) => console.error("Error fetching gradeKursus:", error));
   }, []);
 
   const handleChange = (e) => {
@@ -39,28 +63,29 @@ export default function UpdatePembelianBuku() {
     });
   };
 
-  //   const handleSubmit = () => {
-  //     const isFormValid = Object.values(formData).every((value) => value !== "");
-  //     if (!isFormValid) {
-  //       alert("Mohon lengkapi semua kolom sebelum mengirimkan data.");
-  //       return;
-  //     } else {
-  //       setShowModal(true);
-  //     }
-  //   };
+  const handleSubmit = () => {
+    const isFormValid = Object.values(formData).every((value) => value !== "");
+    if (!isFormValid) {
+      alert("Mohon lengkapi semua kolom sebelum mengirimkan data.");
+      return;
+    } else {
+      console.log("Form data:", formData);
+      setShowModal(true);
+    }
+  };
 
   return (
     <div className="frame">
-      <div class="row">
+      <div className="row">
         <div className="col-sm">
           <div className="input-field">
-            <label htmlFor="jurusanKursus" className="form-label">
+            <label htmlFor="bukuPurwacaraka" className="form-label">
               Nama Buku
             </label>
-            <select className="form-select" name="jurusanKursus" onChange={handleChange} defaultValue={1}>
-              {jurusanKursus.map((jurusan) => (
-                <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>
-                  {jurusan.namaJurusan}
+            <select className="form-select" name="bukuPurwacaraka" onChange={handleChange} value={formData.idBukuPurwacaraka}>
+              {bukuPurwacaraka.map((bukuPurwacaraka) => (
+                <option key={bukuPurwacaraka.idBukuPurwacara} value={bukuPurwacaraka.idBukuPurwacara} selected={formData.idBukuPurwacaraka == bukuPurwacaraka.idBukuPurwacara}>
+                  {bukuPurwacaraka.namaBuku}
                 </option>
               ))}
             </select>
@@ -68,64 +93,66 @@ export default function UpdatePembelianBuku() {
         </div>
         <div className="col-sm"></div>
       </div>
-      <div class="row">
+      <div className="row">
         <div className="col-sm">
           <div className="input-field">
             <label className="form-label">Tanggal Beli</label>
-            <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} />
+            <input type="date" className="form-control" name="tanggalBeli" value={formData.tanggalBeli} onChange={handleChange} />
           </div>
         </div>
         <div className="col-sm">
           <div className="input-field">
             <label className="form-label">Jumlah Beli</label>
-            <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} />
+            <input type="number" className="form-control" name="jumlahBeli" value={formData.jumlahBeli} onChange={handleChange} />
           </div>
         </div>
       </div>
-      <div class="row">
+      <div className="row">
         <div className="col-sm">
           <div className="input-field">
             <label className="form-label">Tanggal Jual</label>
-            <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} />
+            <input type="date" className="form-control" name="tanggalJual" value={formData.tanggalJual} onChange={handleChange} />
           </div>
         </div>
         <div className="col-sm">
           <div className="input-field">
             <label className="form-label">Jumlah Jual</label>
-            <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} />
+            <input type="number" className="form-control" name="jumlahJual" value={formData.jumlahJual} onChange={handleChange} />
           </div>
         </div>
       </div>
-      <div class="row">
+      <div className="row">
         <div className="col-sm">
           <div className="input-field">
             <label className="form-label">Harga Beli</label>
-            <input type="number" className="form-control" name="cash" onChange={handleChange} />
+            <input type="number" className="form-control" name="hargaBeli" value={formData.hargaBeli} onChange={handleChange} />
           </div>
         </div>
         <div className="col-sm">
           <div className="input-field">
             <label className="form-label">Harga Jual</label>
-            <input type="number" className="form-control" name="transfer" onChange={handleChange} />
+            <input type="number" className="form-control" name="hargaJual" value={formData.hargaJual} onChange={handleChange} />
           </div>
         </div>
       </div>
 
-      {/* <button type="button" className="btn-submit" onClick={handleSubmit}>
+      <button type="button" className="btn-submit" onClick={handleSubmit}>
         Submit
-      </button> */}
-      {/* <SummaryModal
+      </button>
+      <SummaryModal
         formData={formData}
+        id={id}
         show={showModal}
         onHide={() => setShowModal(false)}
         onSuccess={() => {
           setShowSuccessModal(true);
         }}
-      /> */}
+      />
       <Berhasil
         show={showSuccessModal}
         onHide={() => {
           setShowSuccessModal(false);
+          window.location.href = "/silk/laporan-keuangan-buku";
         }}
       />
     </div>

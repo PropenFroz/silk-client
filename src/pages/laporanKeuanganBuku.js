@@ -64,7 +64,6 @@ export default function LaporanKeuanganBuku() {
 
         {/* kode sebelumnya */}
         {/* <TableLaporanKeuanganBuku transactions={transactions} /> */}
-        
       </div>
     </div>
   );
