@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
 import Button from "./button";
@@ -45,9 +44,7 @@ export default function TabelLaporanTransaksiBuku({ transactions }) {
               <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
               <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
               <td>
-              <Link to={`/entry-transaksi-buku/update/${transaction.idEntryBuku}`}>
                 <Button className="btn-update">Update</Button>
-              </Link>
                 <Button className="btn-delete">Delete</Button>
               </td>
             </tr>
