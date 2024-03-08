@@ -25,6 +25,8 @@ export default function LaporanKeuanganBuku() {
       const response = await fetch(url);
       const data = await response.json();
       setTransactions(data);
+      setStartDate(startDate);
+      setEndDate(endDate);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,7 +60,11 @@ export default function LaporanKeuanganBuku() {
             </Button>
           </div>
         </div>
-        <TableLaporanKeuanganBuku transactions={transactions} />
+        <TableLaporanKeuanganBuku transactions={transactions} startDate={startDate} endDate={endDate} setTransactions={setTransactions} />
+
+        {/* kode sebelumnya */}
+        {/* <TableLaporanKeuanganBuku transactions={transactions} /> */}
+        
       </div>
     </div>
   );

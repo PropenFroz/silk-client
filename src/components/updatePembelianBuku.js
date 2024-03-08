@@ -39,15 +39,15 @@ export default function UpdatePembelianBuku() {
     });
   };
 
-//   const handleSubmit = () => {
-//     const isFormValid = Object.values(formData).every((value) => value !== "");
-//     if (!isFormValid) {
-//       alert("Mohon lengkapi semua kolom sebelum mengirimkan data.");
-//       return;
-//     } else {
-//       setShowModal(true);
-//     }
-//   };
+  //   const handleSubmit = () => {
+  //     const isFormValid = Object.values(formData).every((value) => value !== "");
+  //     if (!isFormValid) {
+  //       alert("Mohon lengkapi semua kolom sebelum mengirimkan data.");
+  //       return;
+  //     } else {
+  //       setShowModal(true);
+  //     }
+  //   };
 
   return (
     <div className="frame">

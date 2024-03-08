@@ -58,7 +58,7 @@ function App() {
         <Route path="/lihatProfile">
           <MyProfile />
         </Route>
-        <Route path="/updateBuku">
+        <Route path="/update-pembelian-buku/">
           <UpdatePembelianBuku />
         </Route>
       </Switch>

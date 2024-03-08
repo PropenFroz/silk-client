@@ -3,13 +3,64 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
 import Button from "./button";
-import { fetchTransaksiBukuByDate } from "../service/fetchDataService";
+import DeleteConfirmationModal from "./deleteModalLaporanBuku";
+import { deleteEntryTransaksiBuku } from "../service/deleteDataTransaksiBukuService";
 
-export default function TabelLaporanTransaksiBuku({ transactions }) {
-  // Check if transactions are available
+export default function TabelLaporanTransaksiBuku({ transactions, startDate, endDate, setTransactions }) {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  const handleShowDeleteModal = (transactionId) => {
+    setSelectedTransactionId(transactionId);
+    setShowDeleteModal(true);
+  };
+
+  // Kode sebelumnya
+  //   const handleDelete = async () => {
+  //     try {
+  //         const isDeleted = await deleteEntryTransaksiBuku(selectedTransactionId);
+  //         if (isDeleted) {
+  //             setShowDeleteModal(false); // Sembunyikan modal jika penghapusan berhasil
+  //         }
+  //     } catch (error) {
+  //         console.error('Error:', error);
+  //     }
+  // };
+
   if (!transactions || transactions.length === 0) {
     return <div>No transactions available</div>;
   }
+
+  const handleDelete = async () => {
+    try {
+      const isDeleted = await deleteEntryTransaksiBuku(selectedTransactionId);
+      if (isDeleted) {
+        const updatedTransactions = await fetchData(startDate, endDate);
+        setTransactions(updatedTransactions);
+        setShowDeleteModal(false); // Sembunyikan modal jika penghapusan berhasil
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const fetchData = async (startDate, endDate) => {
+    // Ambil data dari server dengan rentang tanggal yang sama
+    try {
+      const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+      const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+      const url = `http://localhost:8080/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  };
 
   return (
     <div className="table-wrapper">
@@ -48,7 +99,9 @@ export default function TabelLaporanTransaksiBuku({ transactions }) {
               <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
               <td>
                 <Button className="btn-update">Update</Button>
-                <Button className="btn-delete">Delete</Button>
+                <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.idEntryBuku)}>
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}
@@ -61,6 +114,7 @@ export default function TabelLaporanTransaksiBuku({ transactions }) {
           </tr>
         </tbody>
       </Table>
+      <DeleteConfirmationModal show={showDeleteModal} handleClose={handleCloseDeleteModal} handleDelete={handleDelete} />
     </div>
   );
 }
