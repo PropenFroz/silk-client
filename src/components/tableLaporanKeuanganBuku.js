@@ -6,10 +6,13 @@ import "../styles/tableLaporan.css";
 import Button from "./button";
 import DeleteConfirmationModal from "./deleteModalLaporanBuku";
 import { deleteEntryTransaksiBuku } from "../service/deleteDataTransaksiBukuService";
+import { useHistory } from "react-router-dom";
 
 export default function TabelLaporanTransaksiBuku({ transactions, startDate, endDate, setTransactions }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  const history = useHistory();
+
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
   };
@@ -22,6 +25,10 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
   if (!transactions || transactions.length === 0) {
     return <div>No transactions available</div>;
   }
+
+  const handleUpdate = (transactionId) => {
+    history.push(`/update-pembelian-buku/${transactionId}`);
+  };
 
   const handleDelete = async () => {
     try {
@@ -86,9 +93,12 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
               <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
               <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
               <td>
-                <Link to={`/entry-transaksi-buku/update/${transaction.idEntryBuku}`}>
+                {/* <Link to={`/entry-transaksi-buku/update/${transaction.idEntryBuku}`}>
                   <Button className="btn-update">Update</Button>
-                </Link>
+                </Link> */}
+                <Button className="btn-update" onClick={() => handleUpdate(transaction.idEntryBuku)}>
+                  Update
+                </Button>
                 <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.idEntryBuku)}>
                   Delete
                 </Button>

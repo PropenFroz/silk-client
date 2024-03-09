@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LaporanKeuanganBuku from "./pages/laporanKeuanganBuku";
 import ProfilePage from "./pages/profilePage";
-import UpdatePembelianBuku from "./components/updatePembelianBuku";
+import UpdateDataPembelianBuku from "./pages/updatePembelianBuku";
 // import EntryPembelianBuku from "./pages/entryPembelianBuku";
 
 function App() {
@@ -15,7 +15,10 @@ function App() {
         <Route path="/lihatProfile">
           <ProfilePage />
         </Route>
-        <Route path="/entry-transaksi-buku/update/:id" component={UpdatePembelianBuku} />
+        <Route path="/update-pembelian-buku/:id">
+          <UpdateDataPembelianBuku />
+        </Route>
+
         {/* <Route path="/entry-pembelian-buku">
           <EntryPembelianBuku />
         </Route> */}

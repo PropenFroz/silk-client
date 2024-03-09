@@ -1,7 +1,7 @@
 const sendEntryData = (formData, setShowModal, id) => {
   const requestData = {
     bukuPurwacaraka: formData.bukuPurwacaraka,
-    jurusanKursus: formData.jurusanKursus,
+    jurusanKursus: formData.bukuPurwacaraka.jurusanKursus,
     tanggalBeli: new Date(formData.tanggalBeli).toISOString(),
     jumlahBeli: formData.jumlahBeli,
     tanggalJual: new Date(formData.tanggalJual).toISOString(),

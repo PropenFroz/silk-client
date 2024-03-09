@@ -17,6 +17,9 @@ export default function LaporanKeuanganBuku() {
     if (!startDate || !endDate) {
       alert("Mohon isi kedua tanggal terlebih dahulu.");
       return;
+    } else if (startDate > endDate) {
+      alert("Mohon pilih tanggal awal yang lebih kecil dari tanggal akhir.");
+      return;
     }
     try {
       const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
@@ -38,7 +41,7 @@ export default function LaporanKeuanganBuku() {
         <Sidebar />
       </div>
       <div className="dashboard-content">
-        <h2>Laporan Transaksi Siswa</h2>
+        <h2>Laporan Pembelian Buku</h2>
         <div className="button-group">
           <div className="left-buttons">
             <CustomDatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholder="Tanggal Awal" />
