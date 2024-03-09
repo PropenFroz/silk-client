@@ -12,18 +12,22 @@ export default function LaporanKeuanganBuku() {
   const [endDate, setEndDate] = useState(null);
   const [transactions, setTransactions] = useState([]);
 
-  const handleExport = () => {
-    if (!startDate || !endDate) {
-        alert("Mohon isi kedua tanggal terlebih dahulu.");
-        return;
-    } else {
-        const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-        const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+    const handleExport = () => {
+      if (!startDate || !endDate) {
+          alert("Mohon isi kedua tanggal terlebih dahulu.");
+          return;
+      } else if (startDate > endDate) {
+          alert("Mohon pilih tanggal awal yang lebih kecil dari tanggal akhir.");
+          return;
+      }
+      else {
+          const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+          const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
 
-        const url = `http://localhost:8080/api/entry-transaksi-buku/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-        window.open(url, '_blank');
-    }
-};
+          const url = `http://localhost:8080/api/entry-transaksi-buku/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+          window.open(url, '_blank');
+      }
+    };
 
 
   const handleView = async () => {
