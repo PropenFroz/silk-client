@@ -33,18 +33,24 @@ export default function LaporanKeuanganBuku() {
     if (!startDate || !endDate) {
       alert("Mohon isi kedua tanggal terlebih dahulu.");
       return;
+    } else if (startDate > endDate) {
+      alert("Tanggal mulai harus sebelum tanggal akhir.");
+      return;
+    } else {
+        try {
+          const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+          const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+          const url = `http://localhost:8080/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+          const response = await fetch(url);
+          const data = await response.json();
+          setTransactions(data);
+          setStartDate(startDate);
+          setEndDate(endDate);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+    };
     }
-    try {
-      const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-      const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-      const url = `http://localhost:8080/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setTransactions(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   return (
     <div className="dashboard d-flex">
@@ -74,7 +80,7 @@ export default function LaporanKeuanganBuku() {
             </Button>
           </div>
         </div>
-        <TableLaporanKeuanganBuku transactions={transactions} />
+        <TableLaporanKeuanganBuku transactions={transactions} startDate={startDate} endDate={endDate} setTransactions={setTransactions} />
       </div>
     </div>
   );

@@ -17,6 +17,8 @@ function App() {
         <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
         <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>
         <Route path="/homepage-karyawan"><Homepage/></Route>
+        <Route path="/update-pembelian-buku/:id"><UpdateDataPembelianBuku /></Route>
+        <Route path="/lihat-profile"><ProfilePage /></Route>
       </Switch>
     </Router>
   );
