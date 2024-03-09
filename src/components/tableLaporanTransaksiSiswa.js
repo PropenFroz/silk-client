@@ -4,11 +4,13 @@ import '../styles/tableLaporan.css';
 import Button from './button';
 import DeleteConfirmationModal from './deleteModalLaporanTransaksiSiswa';
 import { deleteEntryTransaksiSiswa } from '../service/deleteDataTransaksiSiswaService';
+import { useHistory } from "react-router-dom";
 
 
 export default function TabelLaporanTransaksiSiswa({ transactions, startDate, endDate, setTransactions }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+    const history = useHistory();
 
     const handleCloseDeleteModal = () => {
         setShowDeleteModal(false);
@@ -45,6 +47,10 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
           return [];
         }
       };
+
+    const handleUpdate = (transactionId) => {
+        history.push(`/update-transaksi-siswa/${transactionId}`);
+    };
 
     if (!transactions || transactions.length === 0) {
         return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
@@ -85,7 +91,7 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
                             <td>{transaction.cash + transaction.transfer}</td>
                             <td>{transaction.keterangan}</td>
                             <td>
-                                <Button className="btn-update">Update</Button> 
+                                <Button className="btn-update" onClick={() => handleUpdate(transaction.idEntryTransaksiSiswa)}>Update</Button> 
                                 <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.idEntryTransaksiSiswa)}>Delete</Button>
                             </td>
                         </tr>
