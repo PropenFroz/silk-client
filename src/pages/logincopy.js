@@ -13,7 +13,7 @@ import { parseJwt, handleLogError } from '../components/auth/context/Helpers'
 
 export const Login = () => {
     const Auth = useAuth()
-    // const isLoggedIn = Auth.userIsAuthenticated()
+    const isLoggedIn = Auth.userIsAuthenticated()
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -31,9 +31,14 @@ export const Login = () => {
     const HandleLogin = async () => {
         try {
             const response = await orderApi.authenticate(username, password)
+            console.log("ini response" + response)
             const { accessToken } = response.data
+            console.log("ini accessToken" + accessToken)
             const data = parseJwt(accessToken)
+            console.log("ini data" + data)
+
             const authenticatedUser = { data, accessToken }
+            console.log("ini authenticatedUser" + authenticatedUser)
       
             Auth.userLogin(authenticatedUser)
       
@@ -47,10 +52,10 @@ export const Login = () => {
         }
     }; 
 
-    // if (isLoggedIn) {
-    //     history.push('/daftarAkun');
-    //     return null; // Menempatkan return null setelah pemanggilan history.push agar komponen tidak merender apa pun setelah pengalihan halaman
-    // }
+    if (isLoggedIn) {
+        history.push('/admin/daftarAkun');
+        return null; // Menempatkan return null setelah pemanggilan history.push agar komponen tidak merender apa pun setelah pengalihan halaman
+    }
 
     return (
         <div className="hifi-login-page">

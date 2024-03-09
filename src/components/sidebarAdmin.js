@@ -6,12 +6,23 @@ import {
   CDBSidebarHeader,
   CDBSidebarMenu,
   CDBSidebarMenuItem } from "cdbreact";
-import { NavLink } from "react-router-dom";
+  
+import { NavLink, useHistory } from "react-router-dom";
 import "../styles/sidebar.css"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons'; // Menggunakan hanya icon faUser
+import { useAuth } from './auth/context/AuthContext';
 
 const SideBarAdmin = () => {
+  const history = useHistory(); // Initialize history
+  const { userLogout } = useAuth(); // Use useAuth hook to access userLogout function
+
+  // Function to handle logout
+  const handleLogout = () => {
+    userLogout(); // Call userLogout function from useAuth hook
+    history.push('/login'); // Redirect to login page after logout
+  };
+
   return (
     <div className={`app`} style={{ display: "flex",}}>
       <CDBSidebar
@@ -50,9 +61,9 @@ const SideBarAdmin = () => {
           </div>
           {/* Logout button with icon */}
           <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px"}}>
-            <NavLink to="/logout" className="text-decoration-none" style={{ color: "inherit" }}>
+            <button onClick={handleLogout} className="text-decoration-none" style={{ color: "inherit", border: "none", background: "none", cursor: "pointer" }}>
               <FontAwesomeIcon icon={faUser} /> Logout
-            </NavLink>
+            </button>
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>

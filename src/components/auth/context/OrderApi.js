@@ -12,7 +12,7 @@ export const orderApi = {
 }
 
 function authenticate(username, password) {
-  return instance.post('/auth/authenticate', { username, password }, {
+  return instance.post('/api/login', { username, password }, {
     headers: {                    'Content-Type': 'application/json'
     },
     'Access-Control-Allow-Origin': '*',
