@@ -18,6 +18,8 @@ export default function EntryData() {
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
+    const [namaBuku, setNamaBuku] = useState('');
+    const [namaJurusan, setnamaJurusan] = useState('');
 
     useEffect(() => {
         fetchBukuPurwacaraka()
@@ -36,6 +38,9 @@ export default function EntryData() {
     };
 
     const handleSubmit = () => {
+        setNamaBuku(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).namaBuku);
+        setnamaJurusan(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).jurusanKursus.namaJurusan);
+
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
@@ -107,6 +112,8 @@ export default function EntryData() {
             
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
+                namaBuku={namaBuku}
+                namaJurusan={namaJurusan}
                 formData={formData}
                 show={showModal}
                 onHide={() => setShowModal(false)}
