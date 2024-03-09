@@ -41,7 +41,7 @@ export default function LaporanKeuanganBuku() {
         <Sidebar />
       </div>
       <div className="dashboard-content">
-        <h2>Laporan Pembelian Buku</h2>
+        <h2>Laporan Transaksi Buku</h2>
         <div className="button-group">
           <div className="left-buttons">
             <CustomDatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholder="Tanggal Awal" />

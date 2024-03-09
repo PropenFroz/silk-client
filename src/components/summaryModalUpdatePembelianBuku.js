@@ -2,9 +2,8 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import sendEntryData from "../service/updatePembelianBukuService";
 
-function SummaryModal({ formData, show, onHide, onSuccess, id }) {
+function SummaryModal({ formData, namaBuku, namaJurusan, show, onHide, onSuccess, id }) {
   const handleSubmit = () => {
-    console.log("ini", id);
     sendEntryData(
       formData,
       () => {
@@ -20,10 +19,10 @@ function SummaryModal({ formData, show, onHide, onSuccess, id }) {
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
         <p>
-          <strong>Nama Buku:</strong> {formData.bukuPurwacaraka}
+          <strong>Nama Buku:</strong> {namaBuku}
         </p>
         <p>
-          <strong>Jurusan:</strong> {formData.jurusanKursus}
+          <strong>Jurusan:</strong> {namaJurusan}
         </p>
         <p>
           <strong>Tanggal Beli:</strong> {formData.tanggalBeli}
