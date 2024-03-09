@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LaporanKeuanganBuku from "./pages/laporanKeuanganBuku";
-import MyProfile from "./pages/myProfile";
+import ProfilePage from "./pages/profilePage";
 import UpdatePembelianBuku from "./components/updatePembelianBuku";
 // import EntryPembelianBuku from "./pages/entryPembelianBuku";
 
@@ -13,7 +13,7 @@ function App() {
           <LaporanKeuanganBuku />
         </Route>
         <Route path="/lihatProfile">
-          <MyProfile />
+          <ProfilePage />
         </Route>
         <Route path="/entry-transaksi-buku/update/:id" component={UpdatePembelianBuku} />
         {/* <Route path="/entry-pembelian-buku">

@@ -7,7 +7,7 @@ import CustomDatePicker from "../components/datePicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
-export default function MyProfile() {
+export default function ProfilePage() {
   // const [startDate, setStartDate] = useState(null);
   // const [endDate, setEndDate] = useState(null);
 
