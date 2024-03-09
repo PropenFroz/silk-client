@@ -76,14 +76,12 @@ const SideBarKaryawan = () => {
         </CDBSidebarContent>
 
         <CDBSidebarFooter style={{ textAlign: "center" }}>
-          {/* Profile button with icon */}
           <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px"}}>
             <NavLink to="/profile" className="text-decoration-none" style={{ color: "inherit" }}>
               <FontAwesomeIcon icon={faUser} /> Profile Saya
             </NavLink>
           </div>
 
-          {/* Logout button with icon */}
           <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px"}}>
             <NavLink to="/logout" className="text-decoration-none" style={{ color: "inherit" }}>
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
