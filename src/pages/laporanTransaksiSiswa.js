@@ -16,7 +16,11 @@ export default function LaporanTransaksi() {
         if (!startDate || !endDate) {
             alert("Mohon isi kedua tanggal terlebih dahulu.");
             return;
-        } else {
+        } else if (startDate > endDate) {
+            alert("Mohon pilih tanggal awal yang lebih kecil dari tanggal akhir.");
+            return;
+        }
+        else {
             const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
             const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
     
