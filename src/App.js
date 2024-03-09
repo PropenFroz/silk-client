@@ -11,6 +11,7 @@ import Login from './pages/login';
 import SidebarKaryawan from './components/sidebarKaryawan';
 import Login1 from './pages/logincopy';
 
+import UpdateDataTransaksiSiswa from './pages/updateDataTransaksiSiswa';
 
 function App() {  
   return (
@@ -28,6 +29,7 @@ function App() {
 
         {/* <Route path="/laporanTransaksi"><LaporanTransaksi /></Route>
         <Route path="/entryTransaksi"><EntryTransaksi /></Route> */}
+        <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>
       </Switch>
       </Router>
         </AuthProvider>
