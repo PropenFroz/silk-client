@@ -58,8 +58,12 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
         return date.toLocaleDateString('id-ID', options);
     };
 
-    if (!transactions || transactions.length === 0) {
+    if (!transactions) {
         return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
+    }
+
+    if (transactions.length === 0) {
+        return <div>Data Tidak Ditemukan</div>;
     }
     return (
         <div className="table-wrapper">
