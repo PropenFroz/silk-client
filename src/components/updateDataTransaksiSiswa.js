@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
 import SummaryModal from './summaryModalUpdateDataTransaksiSiswa';
-import Berhasil from './modal';
+import Berhasil from './modalSuccessUpdate';
 import { fetchGradeKursus, fetchJurusanKursus, fetchEntryDataById} from "../service/fetchDataService";
 import updateEntryData from "../service/updateDataTransaksiSiswaService";
 
