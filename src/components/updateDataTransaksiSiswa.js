@@ -24,6 +24,8 @@ export default function UpdateData({ id }) {
     const [jurusanKursus, setJurusanKursus] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [selectedJurusan, setSelectedJurusan] = useState('');
+    const [selectedGrade, setSelectedGrade] = useState('');
 
     useEffect(() => {
         // Fetch data for dropdown options
@@ -56,6 +58,9 @@ export default function UpdateData({ id }) {
     };
 
     const handleSubmit = () => {
+        setSelectedJurusan(jurusanKursus.find(jurusan => jurusan.idJurusanKursus === parseInt(formData.jurusanKursus.idJurusanKursus)).namaJurusan);
+        setSelectedGrade(gradeKursus.find(grade => grade.idGradeKursus === parseInt(formData.gradeKursus.idGradeKursus)).namaGrade);
+
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
@@ -193,6 +198,8 @@ export default function UpdateData({ id }) {
             <SummaryModal
                 id={id} 
                 formData={formData}
+                selectedJurusan={selectedJurusan}
+                selectedGrade={selectedGrade}
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 onSuccess={() => {
