@@ -17,7 +17,6 @@ function SummaryModal({ formData, show, onHide, onSuccess }) {
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
         <p><strong>Nama Buku:</strong> {formData.bukuPurwacaraka}</p>
-        <p><strong>Jurusan:</strong> {formData.jurusanKursus}</p>
         <p><strong>Tanggal Beli:</strong> {formData.tanggalBeli}</p>
         <p><strong>Jumlah Beli:</strong> {formData.jumlahBeli}</p>
         <p><strong>Tanggal Jual:</strong> {formData.tanggalJual}</p>

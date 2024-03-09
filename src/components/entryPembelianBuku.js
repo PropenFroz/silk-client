@@ -41,6 +41,7 @@ export default function EntryData() {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
+            console.log(formData);
             setShowModal(true);
         }
     };
