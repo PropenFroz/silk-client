@@ -1,0 +1,74 @@
+.ProfilePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .group {
+    background-color: #ffffff;
+    border: 1px solid #dde1e6;
+    border-radius: 8px;
+    height: 561px;
+    width: 800px; /* Sesuaikan lebar sesuai kebutuhan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlap-group {
+    position: relative;
+    padding: 20px;
+  }
+  
+  .user-instance {
+    width: 200px; /* Sesuaikan lebar sesuai kebutuhan */
+    height: auto; /* Pertahankan rasio aspek */
+    margin-bottom: 20px;
+  }
+  
+  .full-width-button-instance {
+    background-color: #4318ff;
+    border-radius: 8px;
+    color: #ffffff;
+    height: 37px;
+    width: 200px; /* Sesuaikan lebar sesuai kebutuhan */
+    margin-bottom: 20px;
+  }
+  
+  .div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .label {
+    color: #121212de;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .text-field-2 {
+    background-color: #ffffff;
+    border: 1px solid #12121233;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+  }
+  
+  .placeholder {
+    color: #667085;
+    font-size: 14px;
+  }
+  
+  .text-wrapper {
+    color: #514b4b;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
