@@ -5,6 +5,12 @@ import updateEntryData from "../service/updateDataTransaksiSiswaService";
 
 function SummaryModal({ id,  formData, show, onHide, onSuccess }) {
 
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', options);
+    };
+
     const handleSubmit = async () => {
         try {
           await updateEntryData(id, formData);
@@ -20,8 +26,18 @@ function SummaryModal({ id,  formData, show, onHide, onSuccess }) {
     <Modal show={show} onHide={onHide}>
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
-        <p><strong>Jenis Pembayaran:</strong> {formData.jenisTransaksi}</p>
-        <p><strong>Tanggal Pembayaran:</strong> {formData.tanggalPembayaran}</p>
+        <p><strong>Jenis Pembayaran:</strong> {
+            (() => {
+                switch (formData.jenisTransaksi) {
+                    case 1:
+                        return 'Pendaftaran';
+                    case 2:
+                        return 'Kursus';
+                    default:
+                        return 'Lainnya';
+                }
+            })()
+        }</p>
         <p><strong>Nama Siswa:</strong> {formData.namaSiswa}</p>
         <p><strong>Jurusan:</strong> {formData.jurusanKursus}</p>
         <p><strong>Grade:</strong> {formData.gradeKursus}</p>

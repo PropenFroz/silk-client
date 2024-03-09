@@ -52,6 +52,12 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
         history.push(`/update-transaksi-siswa/${transactionId}`);
     };
 
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', options);
+    };
+
     if (!transactions || transactions.length === 0) {
         return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
     }
@@ -79,7 +85,7 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
                     {transactions.map((transaction, index) => (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{transaction.tanggalPembayaran}</td>
+                            <td>{formatDate(transaction.tanggalPembayaran)}</td>
                             <td>{transaction.namaSiswa}</td>
                             <td>{transaction.jurusanKursus.namaJurusan}</td>
                             <td>{transaction.gradeKursus.namaGrade}</td>
