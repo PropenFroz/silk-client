@@ -15,14 +15,10 @@ import { faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 const SideBarKaryawan = () => {
 
   return (
-    <div
-      className={`app`}
-      style={{ display: "flex",}}
-    >
+    <div className={`app`}>
       <CDBSidebar
         textColor="#1C1C1C"
         backgroundColor="#FFFFFF"
-        style={{ height: "100vh" }}
       >
         <CDBSidebarHeader
           prefix={

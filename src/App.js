@@ -5,6 +5,7 @@ import LaporanTransaksiSiswa from './pages/laporanTransaksiSiswa';
 import EntryTransaksiSiswa from './pages/entryDataTransaksiSiswa';
 import EntryPembelianBuku from './pages/entryPembelianBuku';
 import UpdateDataTransaksiSiswa from './pages/updateDataTransaksiSiswa';
+import Homepage from './pages/homepageKaryawan';
 
 function App() {  
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
         <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>
+        <Route path="/homepage-karyawan"><Homepage/></Route>
       </Switch>
     </Router>
   );
