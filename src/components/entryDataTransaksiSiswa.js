@@ -19,6 +19,9 @@ export default function EntryData() {
         keterangan: ''
     });
 
+    const [selectedJenisTransaksi, setSelectedJenisTransaksi] = useState('');
+    const [selectedJurusan, setSelectedJurusan] = useState('');
+    const [selectedGrade, setSelectedGrade] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [gradeKursus, setGradeKursus] = useState([]);
@@ -45,8 +48,18 @@ export default function EntryData() {
             [name]: value
         });
     };
-
     const handleSubmit = () => {
+        setSelectedJurusan(jurusanKursus.find(jurusan => jurusan.idJurusanKursus === parseInt(formData.jurusanKursus)).namaJurusan);
+        setSelectedGrade(gradeKursus.find(grade => grade.idGradeKursus === parseInt(formData.gradeKursus)).namaGrade);
+
+        if(formData.jenisTransaksi === '1') {
+            setSelectedJenisTransaksi('Pendaftaran');
+        } else if(formData.jenisTransaksi === '2') {
+            setSelectedJenisTransaksi('Kursus');
+        } else if(formData.jenisTransaksi === '3') {
+            setSelectedJenisTransaksi('Lainnya');
+        }
+
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
@@ -157,6 +170,9 @@ export default function EntryData() {
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}
+                selectedJenisTransaksi={selectedJenisTransaksi}
+                selectedJurusan={selectedJurusan}
+                selectedGrade={selectedGrade}
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 onSuccess={() => {
