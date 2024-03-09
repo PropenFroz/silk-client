@@ -17,7 +17,7 @@ export default function LaporanTransaksi() {
             alert("Mohon isi kedua tanggal terlebih dahulu.");
             return;
         } else if (startDate > endDate) {
-            alert("Mohon pilih tanggal awal yang lebih kecil dari tanggal akhir.");
+            alert("Tanggal mulai harus sebelum tanggal akhir.");
             return;
         }
         else {
