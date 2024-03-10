@@ -36,6 +36,7 @@ function SummaryModal({ id,  formData, selectedJurusan, selectedGrade, show, onH
                 }
             })()
         }</p>
+        <p><strong>Tanggal Pembayaran:</strong> {formatDate(formData.tanggalPembayaran)}</p>
         <p><strong>Nama Siswa:</strong> {formData.namaSiswa}</p>
         <p><strong>Jurusan:</strong> {selectedJurusan}</p>
         <p><strong>Grade:</strong> {selectedGrade}</p>

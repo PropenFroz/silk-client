@@ -106,6 +106,16 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
                             </td>
                         </tr>
                     ))}
+                    <tr>
+                        <td colSpan="5">Total</td>
+                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangPendaftaran, 0)}`}</td>
+                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangKursus, 0)}`}</td>
+                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangBuku, 0)}`}</td>
+                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.cash, 0)}`}</td>
+                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.transfer, 0)}`}</td>
+                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + ( transaction.cash + transaction.transfer), 0)}`}</td>
+                        <td colSpan="1"></td>
+                    </tr>
                 </tbody>
             </Table>
             <DeleteConfirmationModal 

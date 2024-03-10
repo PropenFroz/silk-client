@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
+import { useHistory } from 'react-router-dom';
 import SummaryModal from './summaryModalUpdateDataTransaksiSiswa';
 import Berhasil from './modalSuccessUpdate';
 import { fetchGradeKursus, fetchJurusanKursus, fetchEntryDataById} from "../service/fetchDataService";
@@ -25,6 +26,7 @@ export default function UpdateData({ id }) {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [selectedJurusan, setSelectedJurusan] = useState('');
     const [selectedGrade, setSelectedGrade] = useState('');
+    const history = useHistory();
 
     useEffect(() => {
         fetchGradeKursus()
@@ -41,7 +43,10 @@ export default function UpdateData({ id }) {
 
         fetchEntryDataById(id)
             .then(data => {
-                setFormData(data);
+                const formattedDate = new Date(data.tanggalPembayaran).toISOString().split('T')[0];
+                const updatedData = { ...data, tanggalPembayaran: formattedDate };
+                setFormData(updatedData);
+                // setFormData(data);
             })
             .catch(error => console.error('Error fetching existing transaction data:', error));
     }, [id]);
@@ -83,6 +88,11 @@ export default function UpdateData({ id }) {
             setFormData(updatedFormData);
             setShowModal(true);
         }
+    };
+
+    const handleSuccessModalClose = () => {
+        setShowSuccessModal(false);
+        history.push("/laporan-transaksi-siswa");
     };
 
     return (
@@ -199,10 +209,7 @@ export default function UpdateData({ id }) {
             />
             <Berhasil 
                 show={showSuccessModal}
-                onHide={() => {
-                    setShowSuccessModal(false);
-                    window.location.reload()
-                }}
+                onHide={handleSuccessModalClose}
             />
          </div>
     );
