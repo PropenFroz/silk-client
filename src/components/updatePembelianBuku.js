@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SummaryModal from "./summaryModalUpdatePembelianBuku";
 import UpdateBerhasil from "./modalUpdate";
-import "../styles/updatePembelianBuku.css";
+import "../styles/updatePembelianBuk.css";
 import { fetchBukuPurwacaraka } from "../service/fetchDataService";
 
 export default function UpdatePembelianBuku() {
