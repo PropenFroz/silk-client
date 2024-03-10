@@ -79,7 +79,7 @@ const SideBarKaryawan = () => {
           </div>
 
           <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px"}}>
-            <NavLink to="/logout" className="text-decoration-none" style={{ color: "inherit" }}>
+            <NavLink to="/login" className="text-decoration-none" style={{ color: "inherit" }}>
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </NavLink>
           </div>

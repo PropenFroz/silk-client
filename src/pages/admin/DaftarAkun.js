@@ -8,7 +8,7 @@ function DaftarAkun() {
 
     useEffect(() => {
         // Fetch data from backend
-        fetch('http://localhost:8080/api/user/all')
+        fetch('https://silk-purwa.up.railway.app/api/user/all')
             .then(response => response.json())
             .then(data => setUsers(data));
     }, []);

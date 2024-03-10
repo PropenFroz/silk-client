@@ -11,9 +11,11 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const history = useHistory(); // Memindahkan panggilan useHistory() ke sini
 
+    const url = 'https://silk-purwa.up.railway.app/api/';
+
     const HandleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/login', {
+            const response = await fetch(`${url}login`, {
                 method: 'POST',
                 headers: {                    'Content-Type': 'application/json'
                 },
@@ -22,7 +24,7 @@ export const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                history.push('/welcome');
+                history.push('/homepage-karyawan');
                 console.log(data);
                 console.log("Redirecting to welcome page...");
                 

@@ -1,6 +1,6 @@
 export async function deleteEntryTransaksiBuku(transactionId) {
   try {
-    const url = `http://localhost:8080/api/entry-transaksi-buku/delete/${transactionId}`;
+    const url = `https://silk-purwa.up.railway.app/api/entry-transaksi-buku/delete/${transactionId}`;
     const response = await fetch(url, { method: "DELETE" });
     if (response.ok) {
       console.log("Data berhasil dihapus");

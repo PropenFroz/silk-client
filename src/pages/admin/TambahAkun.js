@@ -20,7 +20,7 @@ function TambahAkun() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/create', {
+            const response = await fetch('https://silk-purwa.up.railway.app/api/user/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

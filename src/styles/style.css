@@ -673,13 +673,16 @@ width: 419px;
 }
 
 .hifi-login-page .frame {
-align-items: center;
-display: inline-flex;
-gap: 8px;
-left: 0;
-position: absolute;
-top: 0;
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  left: 0;
+  position: absolute;
+  top: -60px; /* Menggeser ke atas sebesar 5px */
+  width: 430px; /* Atur lebar sesuai kebutuhan */
+  height: 100px; /* Atur tinggi sesuai kebutuhan */
 }
+
 
 .hifi-login-page .text-wrapper {
 color: #000000;
@@ -688,6 +691,7 @@ font-size: 50px;
 font-weight: 700;
 letter-spacing: -1.5px;
 line-height: 55px;
+top: 8px;
 position: relative;
 text-align: center;
 white-space: nowrap;
@@ -713,6 +717,7 @@ font-weight: 700;
 letter-spacing: -1.5px;
 line-height: 55px;
 margin-top: -1px;
+top: 0px;
 position: relative;
 text-align: center;
 white-space: nowrap;
@@ -720,18 +725,19 @@ width: fit-content;
 }
 
 .hifi-login-page .paragraph {
-color: var(--coolgray-90);
-font-family: "Inter-Regular", Helvetica;
-font-size: 18px;
-font-weight: 400;
-left: 62px;
-letter-spacing: 0;
-line-height: 25.2px;
-position: absolute;
-text-align: center;
-top: 79px;
-white-space: nowrap;
+  color: var(--coolgray-90);
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 62px;
+  letter-spacing: 0;
+  line-height: 25.2px;
+  position: absolute;
+  text-align: center;
+  top: 120px; /* Menggeser ke atas sebesar 5px */
+  white-space: nowrap;
 }
+
 
 .hifi-login-page .logo-purwa {
 height: 149px;

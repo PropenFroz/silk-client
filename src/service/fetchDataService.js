@@ -1,6 +1,6 @@
 export async function fetchGradeKursus() {
     try {
-        const response = await fetch('http://localhost:8080/api/grade-kursus/all');
+        const response = await fetch('https://silk-purwa.up.railway.app/api/grade-kursus/all');
         if (!response.ok) {
             throw new Error('Failed to fetch grades');
         }
@@ -14,7 +14,7 @@ export async function fetchGradeKursus() {
 
 export async function fetchJurusanKursus() {
     try {
-        const response = await fetch('http://localhost:8080/api/jurusan-kursus/all');
+        const response = await fetch('https://silk-purwa.up.railway.app/api/jurusan-kursus/all');
         if (!response.ok) {
             throw new Error('Failed to fetch jurusanKursus');
         }
