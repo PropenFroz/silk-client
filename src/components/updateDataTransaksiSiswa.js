@@ -44,7 +44,10 @@ export default function UpdateData({ id }) {
         // Fetch existing transaction data by ID and populate form fields
         fetchEntryDataById(id)
             .then(data => {
-                setFormData(data);
+                const formattedDate = new Date(data.tanggalPembayaran).toISOString().split('T')[0];
+                const updatedData = { ...data, tanggalPembayaran: formattedDate };
+                setFormData(updatedData);
+                // setFormData(data);
             })
             .catch(error => console.error('Error fetching existing transaction data:', error));
     }, [id]);
