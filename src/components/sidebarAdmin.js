@@ -43,10 +43,10 @@ const SideBarAdmin = () => {
         <CDBSidebarContent className="sidebar-content">
           {/* Hapus beberapa menu yang tidak diperlukan */}
           <CDBSidebarMenu>
-            <NavLink exact to="/admin/daftarAkun" activeClassName="activeClicked">
+            <NavLink exact to="/admin/daftar-akun" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Daftar Akun</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/tambahAkun" activeClassName="activeClicked">
+            <NavLink exact to="/admin/tambah-akun" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-book" className="sidebar-menu-item">Tambah Akun</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

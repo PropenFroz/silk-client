@@ -14,7 +14,7 @@ function DaftarAkun() {
     }, []);
 
     const handleTambahAkunClick = () => {
-        history.push('/admin/tambahAkun'); // Navigate to '/admin/tambahAkun' when button clicked
+        history.push('/admin/tambah-akun'); // Navigate to '/admin/tambahAkun' when button clicked
     };
 
     const handleDeleteUser = (id) => {
