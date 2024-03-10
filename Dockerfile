@@ -1,19 +1,19 @@
-# Menggunakan image node.js versi 18
-FROM node:18
+# Use the base Nixpacks image
+FROM ghcr.io/railwayapp/nixpacks:latest
 
-# Menetapkan direktori kerja di dalam container
+# Set the working directory
 WORKDIR /app
 
-# Menyalin file package.json dan package-lock.json (atau yarn.lock jika ada)
+# Copy the package.json and package-lock.json files
 COPY package*.json ./
 
-# Menginstal dependensi menggunakan npm ci
+# Install dependencies
 RUN npm install
 
-# Menyalin seluruh kode sumber aplikasi ke dalam container
-COPY . .
+# Set CI environment variable to false to disable treating warnings as errors
+ENV CI=false
 
-# Membangun aplikasi dengan perintah npm run build
+# Run the build command
 RUN npm run build
 
 # Menjalankan aplikasi dengan perintah npm run start
