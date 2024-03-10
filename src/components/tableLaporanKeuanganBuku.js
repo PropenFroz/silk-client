@@ -22,7 +22,7 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
   };
 
   if (!transactions || transactions.length === 0) {
-    return <div>No transactions available</div>;
+    return <div>Data Tidak Ditemukan</div>;
   }
 
   const handleUpdate = (transactionId) => {

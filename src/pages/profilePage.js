@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "../components/sidebarKaryawan";
-import "../styles/laporan.css";
+import "../styles/lihatprofil.css";
 import ProfileComponent from "../components/profileComponent"; // Correct import path
 import Button from "../components/button";
 import CustomDatePicker from "../components/datePicker";
