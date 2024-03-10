@@ -1,5 +1,5 @@
 import React from "react";
-import UpdatePembelianBuku from "../components/updatePembelianBuku";
+import UpdatePembelianBuku from "../components/UpdatePembelianBuk";
 import { useParams } from "react-router-dom";
 import "../styles/laporan.css";
 import SideBarKaryawan from "../components/sidebarKaryawan";
