@@ -16,6 +16,8 @@ export default function UpdatePembelianBuku() {
     hargaJual: "",
   });
 
+  const [namaBuku, setNamaBuku] = useState('');
+  const [namaJurusan, setnamaJurusan] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { id } = useParams();
@@ -64,6 +66,9 @@ export default function UpdatePembelianBuku() {
   };
 
   const handleSubmit = () => {
+    setNamaBuku(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).namaBuku);
+    setnamaJurusan(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).jurusanKursus.namaJurusan);
+
     const isFormValid = Object.values(formData).every((value) => value !== "");
     if (!isFormValid) {
       alert("Mohon lengkapi semua kolom sebelum mengirimkan data.");
@@ -82,9 +87,9 @@ export default function UpdatePembelianBuku() {
             <label htmlFor="bukuPurwacaraka" className="form-label">
               Nama Buku
             </label>
-            <select className="form-select" name="bukuPurwacaraka" onChange={handleChange} value={formData.idBukuPurwacaraka}>
+            <select className="form-select" name="bukuPurwacaraka" onChange={handleChange}>
               {bukuPurwacaraka.map((bukuPurwacaraka) => (
-                <option key={bukuPurwacaraka.idBukuPurwacara} value={bukuPurwacaraka.idBukuPurwacara} selected={formData.idBukuPurwacaraka == bukuPurwacaraka.idBukuPurwacara}>
+                <option key={bukuPurwacaraka.idBukuPurwacaraka} value={bukuPurwacaraka.idBukuPurwacaraka} selected={parseInt(formData.bukuPurwacaraka) === parseInt(bukuPurwacaraka.idBukuPurwacaraka)}>
                   {bukuPurwacaraka.namaBuku}
                 </option>
               ))}
@@ -141,6 +146,8 @@ export default function UpdatePembelianBuku() {
       </button>
       <SummaryModal
         formData={formData}
+        namaBuku={namaBuku}
+        namaJurusan={namaJurusan}
         id={id}
         show={showModal}
         onHide={() => setShowModal(false)}

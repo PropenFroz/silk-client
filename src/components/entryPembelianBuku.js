@@ -40,13 +40,12 @@ export default function EntryData() {
     const handleSubmit = () => {
         setNamaBuku(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).namaBuku);
         setnamaJurusan(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).jurusanKursus.namaJurusan);
-
+        
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
-            console.log(formData);
             setShowModal(true);
         }
     };

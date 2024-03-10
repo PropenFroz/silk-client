@@ -5,6 +5,8 @@ import LaporanTransaksiSiswa from './pages/laporanTransaksiSiswa';
 import EntryTransaksiSiswa from './pages/entryDataTransaksiSiswa';
 import EntryPembelianBuku from './pages/entryPembelianBuku';
 import UpdateDataTransaksiSiswa from './pages/updateDataTransaksiSiswa';
+import UpdateDataPembelianBuku from './pages/updatePembelianBuku';
+import ProfilePage from './pages/profilePage';
 import Homepage from './pages/homepageKaryawan';
 
 function App() {  

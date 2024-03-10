@@ -2,7 +2,7 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import sendEntryData from "../service/entryPembelianBukuService";
 
-function SummaryModal({namaBuku,namaJurusan, formData, show, onHide, onSuccess }) {
+function SummaryModal({ namaBuku, namaJurusan, formData, show, onHide, onSuccess }) {
 
   const handleSubmit = () => {
     sendEntryData(formData, () => {

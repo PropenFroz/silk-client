@@ -1,6 +1,5 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
-import sendEntryData from "../service/entryDataTransaksiSiswaService";
 import updateEntryData from "../service/updateDataTransaksiSiswaService";
 
 function SummaryModal({ id,  formData, selectedJurusan, selectedGrade, show, onHide, onSuccess }) {
@@ -18,7 +17,6 @@ function SummaryModal({ id,  formData, selectedJurusan, selectedGrade, show, onH
           onSuccess();
         } catch (error) {
           console.error("Error updating entry data:", error);
-          // Handle error accordingly, such as showing an error message to the user
         }
       };
 

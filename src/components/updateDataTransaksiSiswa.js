@@ -3,7 +3,6 @@ import '../styles/EntryData.css';
 import SummaryModal from './summaryModalUpdateDataTransaksiSiswa';
 import Berhasil from './modalSuccessUpdate';
 import { fetchGradeKursus, fetchJurusanKursus, fetchEntryDataById} from "../service/fetchDataService";
-import updateEntryData from "../service/updateDataTransaksiSiswaService";
 
 export default function UpdateData({ id }) { 
     const [formData, setFormData] = useState({
@@ -28,7 +27,6 @@ export default function UpdateData({ id }) {
     const [selectedGrade, setSelectedGrade] = useState('');
 
     useEffect(() => {
-        // Fetch data for dropdown options
         fetchGradeKursus()
             .then(data => {
                 setGradeKursus(data);
@@ -41,7 +39,6 @@ export default function UpdateData({ id }) {
             })
             .catch(error => console.error('Error fetching jurusanKursus:', error));
 
-        // Fetch existing transaction data by ID and populate form fields
         fetchEntryDataById(id)
             .then(data => {
                 setFormData(data);
@@ -86,12 +83,6 @@ export default function UpdateData({ id }) {
             setFormData(updatedFormData);
             setShowModal(true);
         }
-
-            // updateEntryData(id, updatedFormData)
-            // .then(() => {
-            //     setShowModal(true);
-            // })
-            // .catch(error => console.error('Error updating entry data:', error));
     };
 
     return (

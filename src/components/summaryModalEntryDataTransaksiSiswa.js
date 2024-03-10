@@ -2,7 +2,7 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import sendEntryData from "../service/entryDataTransaksiSiswaService";
 
-function SummaryModal({ formData, selectedJenisTransaksi, selectedJurusan, selectedGrade, show, onHide, onSuccess }) {
+function SummaryModal({ formData, selectedJurusan, selectedGrade, show, onHide, onSuccess }) {
 
   const handleSubmit = () => {
     sendEntryData(formData, () => {
@@ -16,7 +16,18 @@ function SummaryModal({ formData, selectedJenisTransaksi, selectedJurusan, selec
     <Modal show={show} onHide={onHide}>
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
-        <p><strong>Jenis Pembayaran:</strong> {selectedJenisTransaksi}</p>
+      <p><strong>Jenis Pembayaran:</strong> {
+            (() => {
+                switch (formData.jenisTransaksi) {
+                    case 1:
+                        return 'Pendaftaran';
+                    case 2:
+                        return 'Kursus';
+                    default:
+                        return 'Lainnya';
+                }
+            })()
+        }</p>
         <p><strong>Tanggal Pembayaran:</strong> {formData.tanggalPembayaran}</p>
         <p><strong>Nama Siswa:</strong> {formData.namaSiswa}</p>
         <p><strong>Jurusan:</strong> {selectedJurusan}</p>
