@@ -28,7 +28,7 @@ export async function fetchJurusanKursus() {
 
 export async function fetchBukuPurwacaraka() {
     try {
-        const response = await fetch('http://localhost:8080/api/buku-purwacaraka/all');
+        const response = await fetch('https://silk-purwa.up.railway.app/api/buku-purwacaraka/all');
         if (!response.ok) {
             throw new Error('Failed to fetch grades');
         }
@@ -42,7 +42,7 @@ export async function fetchBukuPurwacaraka() {
 
 export async function fetchEntryDataById(id){
     try {
-        const response = await fetch(`http://localhost:8080/api/entry-transaksi-siswa/${id}`);
+        const response = await fetch(`https://silk-purwa.up.railway.app/api/entry-transaksi-siswa/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
