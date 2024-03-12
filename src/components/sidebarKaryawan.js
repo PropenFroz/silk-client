@@ -25,7 +25,7 @@ const SideBarKaryawan = () => {
             <i className="fa fa-bars fa-large"></i>
           }
         >
-          <a href="/" className="text-decoration-none style" style={{color:"inherit"}}>
+          <a href="/homepage-karyawan" className="text-decoration-none style" style={{color:"inherit"}}>
           <span className="brand-text">Purwacaraka</span>
           </a>
         </CDBSidebarHeader>
