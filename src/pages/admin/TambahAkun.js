@@ -44,7 +44,7 @@ function TambahAkun() {
             <div>
                 <Sidebar />
             </div>
-            <div className="dashboard-content">
+            <div className="dashboard-laporan">
                 <h2>Create User</h2>
                 <form onSubmit={handleSubmit}>
                     <div>

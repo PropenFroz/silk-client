@@ -10,7 +10,7 @@ export default function UpdateDataPembelianBuku() {
   return (
     <div className="dashboard d-flex">
       <SideBarKaryawan />
-      <div className="dashboard-content">
+      <div className="dashboard-laporan">
         <h2>Update Pembelian Buku</h2>
         <UpdatePembelianBuku id={id} />
       </div>

@@ -40,7 +40,7 @@ function DaftarAkun() {
             <div>
                 <Sidebar />
             </div>
-            <div className="dashboard-content">
+            <div className="dashboard-laporan">
                 <h2>User List</h2>
                 <button onClick={handleTambahAkunClick}>Tambah Akun</button>
                 <table>

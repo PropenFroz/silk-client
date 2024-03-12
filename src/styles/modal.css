@@ -42,4 +42,19 @@ body.active-modal {
 
 .modal-body{
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.password {
+    display: flex;
+    width: 400px;
+    height: 48px;
+    padding: var(--8, 8px) var(--8, 8px) var(--8, 8px) var(--16, 16px);
+    align-items: center;
+    gap: var(--8, 8px);
+    border-radius: 8px;
+    border: 1px solid rgba(18, 18, 18, 0.20);
+    background: var(--white-100, #FFF);
 }

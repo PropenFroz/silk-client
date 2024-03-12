@@ -10,7 +10,7 @@ export default function EntryPembelianBuku() {
     return (
         <div className="dashboard d-flex">
             <SideBarKaryawan/>
-            <div className="dashboard-content">
+            <div className="dashboard-homepage">
                 <h2>Hi, Sonya!</h2>
                 <h3>Input Data</h3>
                 <div className='input-data'>

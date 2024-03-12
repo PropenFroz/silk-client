@@ -61,7 +61,7 @@ export default function LaporanTransaksi() {
             <div>
                 <Sidebar/>
             </div>
-            <div className="dashboard-content">
+            <div className="dashboard-laporan">
                 <h2>Laporan Transaksi Siswa</h2>
                 <div className="button-group">
                     <div className="left-buttons">
