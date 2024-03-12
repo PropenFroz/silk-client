@@ -1,9 +1,15 @@
-// components/LihatProfile.js
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "../styles/lihatprofil.css";
 import Button from "./button";
 
 const ProfileComponent = () => {
+  const history = useHistory();
+
+  const handlePasswordChange = () => {
+    history.push("/ubah-password");
+  };
+
   return (
     <div className="profile-container">
       <div className="right-section">
@@ -31,7 +37,7 @@ const ProfileComponent = () => {
         </div>
         <div className="row">
           <div className="info3">
-            <button className="btn-submit">Change Password</button>
+            <button className="btn-submit" onClick={handlePasswordChange}>Change Password</button>
           </div>
         </div>
       </div>

@@ -626,7 +626,7 @@ line-height: 18px !important;
 .hifi-login-page .text-field-instance {
 left: 79px !important;
 position: absolute !important;
-top: 256px !important;
+top: 260px !important;
 width: 520px !important;
 }
 
@@ -638,6 +638,7 @@ font-style: unset !important;
 font-weight: 400 !important;
 letter-spacing: 0 !important;
 line-height: 19.6px !important;
+
 }
 
 .hifi-login-page .text-field-3 {
@@ -745,4 +746,14 @@ left: 0;
 position: absolute;
 top: 0;
 width: 57px;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: blue;
+  margin-bottom: 10px;
 }
