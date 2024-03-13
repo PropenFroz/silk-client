@@ -34,7 +34,7 @@ function App() {
         <Route path="/update-pembelian-buku/:id">
           <UpdateDataPembelianBuku />
         </Route>
-        <Route path="/lihat-profile">
+        <Route path="/profile">
           <ProfilePage />
         </Route>
       </Switch>
