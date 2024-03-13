@@ -1,7 +1,7 @@
 // components/LihatProfile.js
 import React from "react";
 import "../styles/lihatprofil.css";
-import Button from "./button"; // Import Button component
+import Button from "./button";
 
 const ProfileComponent = () => {
   return (

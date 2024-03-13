@@ -1,6 +1,3 @@
-// Button.js
-
-
 import React from 'react';
 import '../styles/button.css'; // Import CSS file for button styling
 

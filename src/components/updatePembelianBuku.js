@@ -16,8 +16,8 @@ export default function UpdatePembelianBuku() {
     hargaJual: "",
   });
 
-  const [namaBuku, setNamaBuku] = useState("");
-  const [namaJurusan, setnamaJurusan] = useState("");
+  const [namaBuku, setNamaBuku] = useState('');
+  const [namaJurusan, setnamaJurusan] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { id } = useParams();
@@ -66,8 +66,8 @@ export default function UpdatePembelianBuku() {
   };
 
   const handleSubmit = () => {
-    setNamaBuku(bukuPurwacaraka.find((buku) => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).namaBuku);
-    setnamaJurusan(bukuPurwacaraka.find((buku) => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).jurusanKursus.namaJurusan);
+    setNamaBuku(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).namaBuku);
+    setnamaJurusan(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).jurusanKursus.namaJurusan);
 
     const isFormValid = Object.values(formData).every((value) => value !== "");
     if (!isFormValid) {

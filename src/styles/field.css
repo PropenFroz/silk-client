@@ -1,0 +1,186 @@
+.field {
+    background-color: var(--coolgray-10);
+    display: flex;
+    gap: 8px;
+    position: relative;
+    width: 210px;
+}
+
+.field .icon-jam-icons {
+    height: 24px !important;
+    position: relative !important;
+    width: 24px !important;
+}
+
+.field .text {
+    flex: 1;
+    font-family: var(--body-m-font-family);
+    font-size: var(--body-m-font-size);
+    font-style: var(--body-m-font-style);
+    font-weight: var(--body-m-font-weight);
+    letter-spacing: var(--body-m-letter-spacing);
+    line-height: var(--body-m-line-height);
+    position: relative;
+}
+
+.field .div {
+    position: relative;
+}
+
+.field .text-wrapper {
+    color: var(--coolgray-90);
+    flex: 1;
+    font-family: var(--body-m-font-family);
+    font-size: var(--body-m-font-size);
+    font-style: var(--body-m-font-style);
+    font-weight: var(--body-m-font-weight);
+    letter-spacing: var(--body-m-letter-spacing);
+    line-height: var(--body-m-line-height);
+    margin-top: -1px;
+    position: relative;
+}
+
+.field .resize-indicator {
+    height: 7px;
+    left: 200px;
+    position: absolute;
+    top: 86px;
+    width: 7px;
+}
+
+.field .rectangle {
+    background-color: var(--coolgray-90);
+    height: 1px;
+    left: 2px;
+    position: absolute;
+    top: 4px;
+    transform: rotate(-45deg);
+    width: 5px;
+}
+
+.field .rectangle-2 {
+    background-color: var(--coolgray-90);
+    height: 1px;
+    left: -1px;
+    position: absolute;
+    top: 3px;
+    transform: rotate(-45deg);
+    width: 9px;
+}
+
+.field.textarea-true {
+    align-items: flex-start;
+    height: 96px;
+    padding: 14px 16px;
+}
+
+.field.focus {
+    border: 2px solid;
+    border-color: var(--primary-90);
+}
+
+.field.alert {
+    border: 2px solid;
+    border-color: var(--defaultalert);
+}
+
+.field.default {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: var(--coolgray-30);
+}
+
+.field.textarea-false {
+    align-items: center;
+    height: 48px;
+    padding: 12px 16px;
+}
+
+.field.filled {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: var(--coolgray-30);
+}
+
+.field.textarea-false.disabled {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: var(--coolgray-30);
+}
+
+.field.disabled .text {
+    color: var(--coolgray-40);
+}
+
+.field.focus .text {
+    color: var(--coolgray-60);
+    margin-top: -1px;
+}
+
+.field.alert .text {
+    color: var(--coolgray-90);
+    margin-top: -1px;
+}
+
+.field.default .text {
+    color: var(--coolgray-60);
+}
+
+.field.filled .text {
+    color: var(--coolgray-90);
+}
+
+.field.disabled .div {
+    color: var(--coolgray-40);
+    flex: 1;
+    font-family: var(--body-m-font-family);
+    font-size: var(--body-m-font-size);
+    font-style: var(--body-m-font-style);
+    font-weight: var(--body-m-font-weight);
+    letter-spacing: var(--body-m-letter-spacing);
+    line-height: var(--body-m-line-height);
+    margin-top: -1px;
+}
+
+.field.focus .div {
+    color: var(--coolgray-60);
+    flex: 1;
+    font-family: var(--body-m-font-family);
+    font-size: var(--body-m-font-size);
+    font-style: var(--body-m-font-style);
+    font-weight: var(--body-m-font-weight);
+    letter-spacing: var(--body-m-letter-spacing);
+    line-height: var(--body-m-line-height);
+    margin-top: -2px;
+}
+
+.field.alert .div {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    width: 178px;
+}
+
+.field.default .div {
+    color: var(--coolgray-60);
+    flex: 1;
+    font-family: var(--body-m-font-family);
+    font-size: var(--body-m-font-size);
+    font-style: var(--body-m-font-style);
+    font-weight: var(--body-m-font-weight);
+    letter-spacing: var(--body-m-letter-spacing);
+    line-height: var(--body-m-line-height);
+    margin-top: -1px;
+}
+
+.field.filled .div {
+    color: var(--coolgray-90);
+    flex: 1;
+    font-family: var(--body-m-font-family);
+    font-size: var(--body-m-font-size);
+    font-style: var(--body-m-font-style);
+    font-weight: var(--body-m-font-weight);
+    letter-spacing: var(--body-m-letter-spacing);
+    line-height: var(--body-m-line-height);
+    margin-top: -1px;
+}

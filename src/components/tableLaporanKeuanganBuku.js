@@ -1,7 +1,6 @@
 // TableLaporanKeuanganBuku.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "../styles/tableLaporan.css";
 import Button from "./button";
 import DeleteConfirmationModal from "./deleteModalLaporanBuku";
@@ -23,7 +22,7 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
   };
 
   if (!transactions || transactions.length === 0) {
-    return <div>No transactions available</div>;
+    return <div>Data Tidak Ditemukan</div>;
   }
 
   const handleUpdate = (transactionId) => {
@@ -93,9 +92,6 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
               <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
               <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
               <td>
-                {/* <Link to={`/entry-transaksi-buku/update/${transaction.idEntryBuku}`}>
-                  <Button className="btn-update">Update</Button>
-                </Link> */}
                 <Button className="btn-update" onClick={() => handleUpdate(transaction.idEntryBuku)}>
                   Update
                 </Button>

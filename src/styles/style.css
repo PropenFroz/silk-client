@@ -1,0 +1,742 @@
+.wireframe-homepage {
+  background-color: #f4f7fe;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.wireframe-homepage .div {
+  background-color: #f4f7fe;
+  height: 1024px;
+  overflow-x: hidden;
+  position: relative;
+  width: 1440px;
+}
+
+.wireframe-homepage .text-wrapper {
+  color: #1c1c1c;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 48px;
+  font-weight: 700;
+  left: 310px;
+  letter-spacing: -0.96px;
+  line-height: normal;
+  position: absolute;
+  top: 82px;
+}
+
+.wireframe-homepage .group {
+  height: 239px;
+  left: 310px;
+  position: absolute;
+  top: 194px;
+  width: 1048px;
+}
+
+.wireframe-homepage .text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 24px;
+  font-weight: 500;
+  left: 2px;
+  letter-spacing: -0.48px;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+}
+
+.wireframe-homepage .frame {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 24px;
+  left: 0;
+  position: absolute;
+  top: 53px;
+}
+
+.wireframe-homepage .img {
+  height: 194px;
+  margin-bottom: -8px;
+  margin-left: -4px;
+  position: relative;
+  width: 198px;
+}
+
+.wireframe-homepage .group-2 {
+  height: 194px;
+  margin-bottom: -8px;
+  position: relative;
+  width: 198px;
+}
+
+.wireframe-homepage .group-3 {
+  height: 194px;
+  margin-bottom: -8px;
+  margin-right: -4px;
+  position: relative;
+  width: 198px;
+}
+
+.wireframe-homepage .group-4 {
+  height: 301px;
+  left: 310px;
+  position: absolute;
+  top: 505px;
+  width: 1048px;
+}
+
+.wireframe-homepage .frame-2 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+  left: 0;
+  position: absolute;
+  top: 53px;
+}
+
+.wireframe-homepage .group-wrapper {
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #4318ff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 50px;
+  position: relative;
+  width: 499px;
+}
+
+.wireframe-homepage .group-5 {
+  height: 24px;
+  left: 11px;
+  position: relative;
+  top: 11px;
+  width: 187px;
+}
+
+.wireframe-homepage .clipboard-s {
+  height: 24px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 24px !important;
+}
+
+.wireframe-homepage .text-wrapper-3 {
+  color: #1c1c1c;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 29px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 1px;
+}
+
+.wireframe-homepage .frame-wrapper {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 50px;
+  position: relative;
+  width: 499px;
+}
+
+.wireframe-homepage .frame-3 {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 5px;
+  left: 13px;
+  position: relative;
+  top: 13px;
+}
+
+.wireframe-homepage .weight-regular-state-default {
+  height: 24px !important;
+  position: relative !important;
+  width: 24px !important;
+}
+
+.wireframe-homepage .text-wrapper-4 {
+  color: #1c1c1c;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.wireframe-homepage .frame-4 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+  left: 547px;
+  position: absolute;
+  top: 55px;
+}
+
+.wireframe-homepage .sidebar-open {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  height: 1026px;
+  left: -1px;
+  position: absolute;
+  top: -1px;
+  width: 258px;
+}
+
+.wireframe-homepage .profil {
+  align-items: center;
+  align-self: stretch;
+  background-color: #ffffff;
+  border-radius: 16px 16px 0px 0px;
+  display: flex;
+  gap: 12px;
+  height: 96px;
+  justify-content: space-around;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .div-wrapper {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  position: relative;
+}
+
+.wireframe-homepage .text-wrapper-5 {
+  color: #1c1c1c;
+  font-family: "Red Hat Text-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-top: -1px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.wireframe-homepage .divider {
+  align-self: stretch;
+  background-color: #d9d9d9;
+  height: 1px;
+  margin-top: -66px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .navigation {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: -66px;
+  padding: 24px 24px 0px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .title {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0px 12px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .OVERLINE {
+  color: #5c5e64;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  line-height: 12px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.wireframe-homepage .dropdown {
+  align-items: flex-end;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .link {
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  padding: 10px 12px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .icon-instance-node {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.wireframe-homepage .label {
+  color: #5c5e64;
+  flex: 1;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  line-height: 20px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.wireframe-homepage .icon-chevron {
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.wireframe-homepage .navigation-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+  margin-top: -66px;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.wireframe-homepage .link-2 {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  left: 24px;
+  padding: 10px 12px;
+  position: absolute;
+  top: 670px;
+  width: 208px;
+}
+
+.wireframe-homepage .icons-instance {
+  height: 25px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.wireframe-homepage .label-2 {
+  color: #5c5e64;
+  flex: 1;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  line-height: 20px;
+  position: relative;
+}
+
+.wireframe-homepage .link-3 {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  left: 24px;
+  padding: 10px 12px;
+  position: absolute;
+  top: 617px;
+  width: 208px;
+}
+
+.sidebar-open {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  height: 1024px;
+  position: relative;
+  width: 256px;
+}
+
+.sidebar-open .profil {
+  align-items: center;
+  align-self: stretch;
+  background-color: #ffffff;
+  border-radius: 16px 16px 0px 0px;
+  display: flex;
+  gap: 12px;
+  height: 96px;
+  justify-content: space-around;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .frame {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  position: relative;
+}
+
+.sidebar-open .text-wrapper {
+  color: #1c1c1c;
+  font-family: "Red Hat Text-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-top: -1px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.sidebar-open .divider {
+  align-self: stretch;
+  background-color: #d9d9d9;
+  height: 1px;
+  margin-top: -66px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .navigation {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: -66px;
+  padding: 24px 24px 0px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .title {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0px 12px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .OVERLINE {
+  color: #5c5e64;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  line-height: 12px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.sidebar-open .dropdown {
+  align-items: flex-end;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .link {
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  padding: 10px 12px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .icon-instance-node {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.sidebar-open .label {
+  color: #5c5e64;
+  flex: 1;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  line-height: 20px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.sidebar-open .icon-chevron {
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.sidebar-open .div {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+  margin-top: -66px;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-open .link-2 {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  left: 24px;
+  padding: 10px 12px;
+  position: absolute;
+  top: 670px;
+  width: 208px;
+}
+
+.sidebar-open .icons-instance {
+  height: 25px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.sidebar-open .label-2 {
+  color: #5c5e64;
+  flex: 1;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  line-height: 20px;
+  position: relative;
+}
+
+.sidebar-open .link-3 {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  left: 24px;
+  padding: 10px 12px;
+  position: absolute;
+  top: 617px;
+  width: 208px;
+}
+
+.hifi-login-page {
+align-items: center;
+background-color: #f4f7fe;
+display: flex;
+flex-direction: column;
+height: 1024px;
+justify-content: center;
+position: relative;
+}
+
+.hifi-login-page .group {
+background-color: #ffffff;
+border: 1px solid;
+border-color: #1c1c1c33;
+border-radius: 20px;
+box-shadow: 4px 4px 4px #00000040;
+height: 576px;
+position: relative;
+width: 680px;
+}
+
+.hifi-login-page .button-instance {
+background-color: #4318ff !important;
+border: unset !important;
+border-color: unset !important;
+border-radius: 20px !important;
+display: flex !important;
+height: 63px !important;
+left: 79px !important;
+position: absolute !important;
+top: 456px !important;
+width: 520px !important;
+color: white !important; /* Menetapkan warna teks menjadi putih */
+
+align-items: center;
+justify-content: center;
+}
+
+.hifi-login-page .design-component-instance-node {
+color: #ffffff !important;
+font-family: "Inter-Bold", Helvetica !important;
+font-size: 18px !important;
+font-style: unset !important;
+font-weight: 700 !important;
+letter-spacing: 0.5px !important;
+line-height: 18px !important;
+}
+
+.hifi-login-page .text-field-instance {
+left: 79px !important;
+position: absolute !important;
+top: 256px !important;
+width: 520px !important;
+}
+
+.hifi-login-page .text-field-2 {
+color: #1c1c1c !important;
+font-family: "Inter-Regular", Helvetica !important;
+font-size: 14px !important;
+font-style: unset !important;
+font-weight: 400 !important;
+letter-spacing: 0 !important;
+line-height: 19.6px !important;
+}
+
+.hifi-login-page .text-field-3 {
+font-family: "Inter-Regular", Helvetica !important;
+font-size: 16px !important;
+font-style: unset !important;
+font-weight: 400 !important;
+letter-spacing: 0 !important;
+line-height: 22.4px !important;
+}
+
+.hifi-login-page .text-field-4 {
+left: 79px !important;
+position: absolute !important;
+top: 348px !important;
+width: 520px !important;
+}
+
+.hifi-login-page .div {
+height: 148px;
+left: 94px;
+position: absolute;
+top: 55px;
+width: 489px;
+}
+
+.hifi-login-page .group-2 {
+height: 104px;
+left: 72px;
+position: absolute;
+top: 22px;
+width: 419px;
+}
+
+.hifi-login-page .frame {
+align-items: center;
+display: inline-flex;
+gap: 8px;
+left: 0;
+position: absolute;
+top: 0;
+}
+
+.hifi-login-page .text-wrapper {
+color: #000000;
+font-family: "Red Hat Text-Bold", Helvetica;
+font-size: 50px;
+font-weight: 700;
+letter-spacing: -1.5px;
+line-height: 55px;
+position: relative;
+text-align: center;
+white-space: nowrap;
+width: fit-content;
+}
+
+.hifi-login-page .div-wrapper {
+align-items: center;
+background-color: #000000;
+display: inline-flex;
+flex: 0 0 auto;
+gap: 5px;
+justify-content: center;
+padding: 5px;
+position: relative;
+}
+
+.hifi-login-page .text-wrapper-2 {
+color: #ffffff;
+font-family: "Red Hat Text-Bold", Helvetica;
+font-size: 50px;
+font-weight: 700;
+letter-spacing: -1.5px;
+line-height: 55px;
+margin-top: -1px;
+position: relative;
+text-align: center;
+white-space: nowrap;
+width: fit-content;
+}
+
+.hifi-login-page .paragraph {
+color: var(--coolgray-90);
+font-family: "Inter-Regular", Helvetica;
+font-size: 18px;
+font-weight: 400;
+left: 62px;
+letter-spacing: 0;
+line-height: 25.2px;
+position: absolute;
+text-align: center;
+top: 79px;
+white-space: nowrap;
+}
+
+.hifi-login-page .logo-purwa {
+height: 149px;
+left: 0;
+position: absolute;
+top: 0;
+width: 57px;
+}
