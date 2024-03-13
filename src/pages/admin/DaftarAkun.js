@@ -8,7 +8,7 @@ function DaftarAkun() {
 
     useEffect(() => {
         // Fetch data from backend
-        fetch('http://localhost:8080/api/user/all')
+        fetch('https://silk-purwa.up.railway.app/api/user/all')
             .then(response => response.json())
             .then(data => setUsers(data));
     }, []);
@@ -19,7 +19,7 @@ function DaftarAkun() {
 
     const handleDeleteUser = (id) => {
         // Send request to backend to delete user with specified id
-        fetch(`http://localhost:8080/api/user/${id}`, { method: 'DELETE' })
+        fetch(`https://silk-purwa.up.railway.app/api/user/${id}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
                     // If deletion is successful, update the state to reflect changes

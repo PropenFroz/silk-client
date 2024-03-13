@@ -12,6 +12,8 @@ export default function LaporanKeuanganBuku() {
   const [endDate, setEndDate] = useState(null);
   const [transactions, setTransactions] = useState([]);
 
+  const url = 'https://silk-purwa.up.railway.app/api/';
+
   const handleExport = () => {
     if (!startDate || !endDate) {
         alert("Mohon isi kedua tanggal terlebih dahulu.");
@@ -23,8 +25,8 @@ export default function LaporanKeuanganBuku() {
         const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
         const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
 
-          const url = `http://localhost:8080/api/entry-transaksi-buku/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-          window.open(url, '_blank');
+        const exportUrl = `${url}entry-transaksi-buku/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+        window.open(exportUrl, '_blank');
       }
     };
 
@@ -40,7 +42,7 @@ export default function LaporanKeuanganBuku() {
         try {
           const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
           const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-          const url = `http://localhost:8080/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+          const url = `https://silk-purwa.up.railway.app/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
           const response = await fetch(url);
           const data = await response.json();
           setTransactions(data);

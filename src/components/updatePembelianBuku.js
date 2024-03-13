@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SummaryModal from "./summaryModalUpdatePembelianBuku";
 import UpdateBerhasil from "./modalUpdate";
-import "../styles/updatePembelianBuku.css";
+import "../styles/updatePembelianBuk.css";
 import { fetchBukuPurwacaraka } from "../service/fetchDataService";
 
 export default function UpdatePembelianBuku() {
@@ -24,7 +24,7 @@ export default function UpdatePembelianBuku() {
   const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/entry-transaksi-buku/get/${id}`)
+    fetch(`https://silk-purwa.up.railway.app/api/entry-transaksi-buku/get/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/sidebarAdmin'; // Import Sidebar component
+import "../../styles/style.css";
 
 function TambahAkun() {
     const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function TambahAkun() {
         password: '',
         role: ''
     });
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -20,7 +23,7 @@ function TambahAkun() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/create', {
+            const response = await fetch('https://silk-purwa.up.railway.app/api/user/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,11 +32,16 @@ function TambahAkun() {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to create user');
+                // Tangkap pesan error dari respons
+                const errorMessage = await response.text();
+                // Tampilkan pesan error kepada pengguna
+                setErrorMessage(errorMessage);
+                return;
             }
+            
 
             // Handle success response here if needed
-            console.log('User created successfully');
+            setSuccessMessage('User created successfully');
         } catch (error) {
             console.error('Error creating user:', error.message);
         }
@@ -46,6 +54,18 @@ function TambahAkun() {
             </div>
             <div className="dashboard-content">
                 <h2>Create User</h2>
+                {/* Tampilkan pesan kesalahan jika ada */}
+                {errorMessage && (
+                    <div className="error-message">
+                        {errorMessage}
+                    </div>
+                )}
+
+                {successMessage && (
+                    <div className="success-message">
+                        {successMessage}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Username:</label>

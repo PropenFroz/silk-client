@@ -9,34 +9,37 @@ import '../styles/style.css';
 export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory(); // Memindahkan panggilan useHistory() ke sini
+    const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
+
+    const url = 'https://silk-purwa.up.railway.app/api/';
 
     const HandleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/login', {
+            const response = await fetch(`${url}login`, {
                 method: 'POST',
-                headers: {                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
 
             if (response.ok) {
                 const data = await response.json();
-                history.push('/welcome');
+                history.push('/homepage-karyawan');
                 console.log(data);
                 console.log("Redirecting to welcome page...");
-                
             } else {
+                setErrorMessage('Username atau password tidak sesuai!');
                 console.error('Response not ok:', response.statusText);
             }
         } catch (error) {
             console.error('Error:', error);
-            // Tangani kesalahan fetch
         }
     };
 
+
     return (
         <div className="hifi-login-page">
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className="group">
                 <Button
                     brand="one"

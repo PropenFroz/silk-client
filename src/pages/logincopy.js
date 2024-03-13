@@ -31,11 +31,13 @@ export const Login = () => {
     const HandleLogin = async () => {
         try {
             const response = await orderApi.authenticate(username, password)
-            console.log("ini response" + response)
+            console.log("ini response ", JSON.stringify(response))
+
             const { accessToken } = response.data
-            console.log("ini accessToken" + accessToken)
+            console.log("ini accessToken", accessToken)
+            
             const data = parseJwt(accessToken)
-            console.log("ini data" + data)
+            console.log("ini data", JSON.stringify(data))
 
             const authenticatedUser = { data, accessToken }
             console.log("ini authenticatedUser" + authenticatedUser)

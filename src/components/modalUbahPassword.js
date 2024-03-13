@@ -1,11 +1,12 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
-import "../styles/modal.css";
+import Modal from 'react-bootstrap/Modal';
+import '../styles/modal.css';
 
 function ModalUbahPassword({ formData, show, onHide, onSuccess }) {
+
   const handleSubmit = () => {
-    onHide();
-    onSuccess();
+      onHide();
+      onSuccess();
   };
 
   return (
@@ -20,9 +21,7 @@ function ModalUbahPassword({ formData, show, onHide, onSuccess }) {
         <div className="password">xxxxxxxxxx</div>
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn-submit" onClick={handleSubmit}>
-          Submit
-        </button>
+        <button className="btn-submit" onClick={handleSubmit}>Submit</button>
       </Modal.Footer>
     </Modal>
   );

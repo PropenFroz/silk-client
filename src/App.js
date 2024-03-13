@@ -15,6 +15,7 @@ import Homepage from './pages/homepageKaryawan';
 import Login from './pages/login';
 import SidebarKaryawan from './components/sidebarKaryawan';
 import Login1 from './pages/logincopy';
+import UbahPassword from './pages/ubahPassword';
 
 function App() {  
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/admin/tambah-akun"><TambahAkun /></Route>
         <Route path="/profile">< ProfilePage /></Route>
         <Route path="/logincopy"><Login1 /></Route>
+        <Route path="/ubah-password"><UbahPassword /></Route>
       </Switch>
       </Router>
         </AuthProvider>
