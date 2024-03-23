@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Sidebar from "../components/sidebarKaryawan";
 import SidebarAdmin from '../components/sidebarAdmin'; // Import Sidebar component
 import "../styles/lihatprofil.css";

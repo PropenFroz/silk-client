@@ -5,12 +5,10 @@ import Button from "./button";
 
 import { useAuth } from '../components/auth/context/AuthContext';
 
-const ProfileComponent = () => {
-  const history = useHistory();
-
-  const handlePasswordChange = () => {
-    history.push("/ubah-password");
-  };
+export default function ProfileComponent() {
+  const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const handleSubmit = () => setShowModal(true);
 
   const Auth = useAuth();
   const user = Auth.getUser();
@@ -50,6 +48,4 @@ const ProfileComponent = () => {
       </div>
     </div>
   );
-};
-
-export default ProfileComponent;
+}
