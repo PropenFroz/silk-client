@@ -1,17 +1,27 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import "../styles/lihatprofil.css";
 import Button from "./button";
-
+import { useHistory } from "react-router-dom";
 import { useAuth } from '../components/auth/context/AuthContext';
+import UbahPassword from "./modalUbahPassword";
+import BerhasilUbahPassword from "./modalSuccessUpdatePass";
+import profile from "../components/icons/profile.png";
 
 export default function ProfileComponent() {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const handleSubmit = () => setShowModal(true);
-
   const Auth = useAuth();
   const user = Auth.getUser();
+  const history = useHistory();
+
+  const handlePasswordChange = () => {
+    setShowModal(true);
+  };
+
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+    window.location.reload(); // Reload the page after successful password change
+  };
 
   return (
     <div className="profile-container">
@@ -22,7 +32,6 @@ export default function ProfileComponent() {
           </div>
           <div className="row">
             <div className="profile-info-container">
-              {/* Menggunakan user.data.sub */}
               <div className="profile-info">{user.data.sub}</div>
             </div>
           </div>
@@ -34,7 +43,6 @@ export default function ProfileComponent() {
             </div>
             <div className="row">
               <div className="profile-info-container">
-                {/* Menggunakan user.data.role */}
                 <div className="profile-info">{user.data.role}</div>
               </div>
             </div>
@@ -45,6 +53,15 @@ export default function ProfileComponent() {
             <button className="btn-submit" onClick={handlePasswordChange}>Change Password</button>
           </div>
         </div>
+        <UbahPassword
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          onSuccess={() => setShowSuccessModal(true)}
+        />
+        <BerhasilUbahPassword
+          show={showSuccessModal}
+          onHide={handleSuccessModalClose}
+        />
       </div>
     </div>
   );
