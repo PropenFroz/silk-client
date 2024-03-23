@@ -3,12 +3,17 @@ import { useHistory } from "react-router-dom";
 import "../styles/lihatprofil.css";
 import Button from "./button";
 
+import { useAuth } from '../components/auth/context/AuthContext';
+
 const ProfileComponent = () => {
   const history = useHistory();
 
   const handlePasswordChange = () => {
     history.push("/ubah-password");
   };
+
+  const Auth = useAuth();
+  const user = Auth.getUser();
 
   return (
     <div className="profile-container">
@@ -19,7 +24,8 @@ const ProfileComponent = () => {
           </div>
           <div className="row">
             <div className="profile-info-container">
-              <div className="profile-info">Abdillah Katab Panggabean</div>
+              {/* Menggunakan user.data.sub */}
+              <div className="profile-info">{user.data.sub}</div>
             </div>
           </div>
         </div>
@@ -30,7 +36,8 @@ const ProfileComponent = () => {
             </div>
             <div className="row">
               <div className="profile-info-container">
-                <div className="profile-info">Karyawan</div>
+                {/* Menggunakan user.data.role */}
+                <div className="profile-info">{user.data.role}</div>
               </div>
             </div>
           </div>

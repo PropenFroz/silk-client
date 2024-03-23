@@ -23,11 +23,10 @@ export function AuthProvider({ children }) {
 
     console.log("ada ga stored user" + storedUser);
 
-    // // if user has token expired, logout user
-    // if (Date.now() > storedUser.data.exp * 1000) {
-    //   userLogout();
-    //   return false;
-    // }
+    if (Date.now() > storedUser.data.exp * 1000) {
+      userLogout();
+      return false;
+    }
     return true;
   };
 

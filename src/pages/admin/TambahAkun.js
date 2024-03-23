@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebarAdmin'; // Import Sidebar component
 import "../../styles/style.css";
+
+import { useAuth } from '../../components/auth/context/AuthContext';
+import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
 
 function TambahAkun() {
     const [formData, setFormData] = useState({
@@ -11,6 +14,19 @@ function TambahAkun() {
     });
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+
+    const Auth = useAuth();
+    const user = Auth.getUser();
+
+    const [users, setUsers] = useState([]);
+    const history = useHistory(); // Initialize history
+    const [isAdmin, setIsAdmin] = useState(true);
+
+    useEffect(() => {
+        if (user != null) {
+            setIsAdmin(user.data.role[0] === 'Admin');
+        }
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -46,6 +62,15 @@ function TambahAkun() {
             console.error('Error creating user:', error.message);
         }
     };
+
+    if (!isAdmin) {
+        history.push('/homepage-karyawan');
+        return null;
+    }
+    if (user == null) {
+        history.push('/login');
+        return null;
+    }
 
     return (
         <div className="dashboard d-flex">
