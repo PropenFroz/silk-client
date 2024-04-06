@@ -1,6 +1,6 @@
 const updateEntryData = async (id, formData) => {
     try {
-        const response = await fetch(`https://silk-purwa.up.railway.app/api/entry-transaksi-siswa/update/${id}`, {
+        const response = await fetch(`https://localhost:8080/api/entry-transaksi-siswa/update/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

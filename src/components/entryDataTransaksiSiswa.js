@@ -74,7 +74,7 @@ export default function EntryData() {
                         </select>
                     </div>
                 </div>
-            <div className="col-sm">
+                <div className="col-sm">
             </div>
                
             </div>

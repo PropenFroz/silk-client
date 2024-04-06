@@ -16,7 +16,7 @@ export default function ChangePassword() {
         }
 
         try {
-            const response = await fetch('https://silk-purwa.up.railway.app/api/user/2', {
+            const response = await fetch('https://localhost:8080/api/user/2', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

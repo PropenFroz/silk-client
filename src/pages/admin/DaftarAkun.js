@@ -19,7 +19,7 @@ function DaftarAkun() {
             setIsAdmin(user.data.role[0] === 'Admin');
         }
         // Fetch data from backend
-        fetch('https://silk-purwa.up.railway.app/api/user/all')
+        fetch('https://localhost:8080/api/user/all')
             .then(response => response.json())
             .then(data => setUsers(data));
     }, []);

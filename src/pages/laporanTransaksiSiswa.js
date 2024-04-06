@@ -12,7 +12,7 @@ export default function LaporanTransaksi() {
     const [endDate, setEndDate] = useState(null);
     const [transactions, setTransactions] = useState([]);
 
-    const url = 'https://silk-purwa.up.railway.app/api/';
+    const url = 'https://localhost:8080/api/';
 
     const handleExport = () => {
         if (!startDate || !endDate) {
@@ -45,7 +45,7 @@ export default function LaporanTransaksi() {
         try {
             const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
             const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-            const url = `https://silk-purwa.up.railway.app/api/entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            const url = `https://localhost:8080/api/entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
             const response = await fetch(url);
             const data = await response.json();
             setTransactions(data);

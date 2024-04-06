@@ -15,6 +15,7 @@ import Homepage from './pages/homepageKaryawan';
 import Login from './pages/login';
 import SidebarKaryawan from './components/sidebarKaryawan';
 import UbahPassword from './pages/ubahPassword';
+import EntryGajiGuru from './pages/entryGajiGuru';
 
 function App() {  
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
+        <Route path="/entry-gaji-guru"><EntryGajiGuru/></Route>
         <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>
         <Route path="/homepage-karyawan"><Homepage/></Route>
         <Route path="/update-pembelian-buku/:id"><UpdateDataPembelianBuku /></Route>
