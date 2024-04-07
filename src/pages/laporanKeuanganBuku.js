@@ -52,7 +52,7 @@ export default function LaporanKeuanganBuku() {
           console.error("Error fetching data:", error);
         }
     };
-    }
+  };
 
   return (
     <div className="dashboard d-flex">
