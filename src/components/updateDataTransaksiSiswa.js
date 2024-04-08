@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from 'react-select';
 import '../styles/EntryData.css';
 import { useHistory } from 'react-router-dom';
 import SummaryModal from './summaryModalUpdateDataTransaksiSiswa';
@@ -20,7 +21,7 @@ export default function UpdateData({ id }) {
 
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const [siswa, setSiswa] = useState([]);
+    const [siswaOptions, setSiswaOptions] = useState([]);
     const [selectedSiswa, setSelectedSiswa] = useState('');
     const [selectedTahunKursus, setSelectedTahunKursus] = useState('');
     const history = useHistory();
@@ -28,7 +29,10 @@ export default function UpdateData({ id }) {
     useEffect(() => {
         fetchSiswa()
             .then(data => {
-                setSiswa(data);
+                setSiswaOptions(data.map(siswa => ({
+                    value: siswa.idSiswa,
+                    label: siswa.namaSiswa
+                })));
                 if (data.length > 0) {
                     const firstSiswa = data[0];
                     const tahunKursusKeys = Object.keys(firstSiswa.tanggalKursusPerTahun);
@@ -47,8 +51,7 @@ export default function UpdateData({ id }) {
     }, [id]);
     
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = (name, value) => {
         if (name === 'tahunKursus') {
             setSelectedTahunKursus(value);
         }
@@ -59,7 +62,7 @@ export default function UpdateData({ id }) {
     };
 
     const handleSubmit = () => {
-        setSelectedSiswa(siswa.find(siswa => siswa.idSiswa === parseInt(formData.siswa.idSiswa)).namaSiswa);
+        setSelectedSiswa(siswaOptions.find(option => option.value === formData.siswa.idSiswa).label);
 
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
@@ -83,8 +86,6 @@ export default function UpdateData({ id }) {
             setShowModal(true);
         }
     };
-
-    console.log("Siswa:", formData.siswa)
 
     const handleSuccessModalClose = () => {
         setShowSuccessModal(false);
@@ -118,7 +119,7 @@ export default function UpdateData({ id }) {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tahun Kursus</label>
-                        <select className="form-select" name="tahunKursus" onChange={handleChange} value={selectedTahunKursus} defaultValue={1} disabled={formData.jenisTransaksi !== 2}>
+                        <select className="form-select" name="tahunKursus" onChange={e => handleChange(e.target.name, e.target.value)} value={selectedTahunKursus} defaultValue={1} disabled={formData.jenisTransaksi !== 2}>
                             {getTahunKursusOptions()}
                         </select>
                     </div>
@@ -126,17 +127,17 @@ export default function UpdateData({ id }) {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Pembayaran</label>
-                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} value={formData.tanggalPembayaran} />
+                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.tanggalPembayaran} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label htmlFor="siswa" className="form-label">Siswa</label>
-                        <select className="form-select" name="siswa" onChange={handleChange} defaultValue={1}>
-                            {siswa.map(siswa => (
-                                <option key={siswa.idSiswa} value={siswa.idSiswa} selected={parseInt(formData.siswa.idSiswa) === parseInt(siswa.idSiswa)}>{siswa.namaSiswa}</option>
-                            ))}
-                        </select>
+                        <Select
+                            options={siswaOptions}
+                            onChange={option => handleChange("siswa", option.value)}
+                            value={siswaOptions.find(option => option.value === formData.siswa.idSiswa)}
+                        />
                     </div>
                 </div>
             </div>
@@ -145,19 +146,19 @@ export default function UpdateData({ id }) {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Pendaftaran</label>
-                        <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} value={formData.uangPendaftaran} />
+                        <input type="number" className="form-control" name="uangPendaftaran" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.uangPendaftaran} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Kursus</label>
-                        <input type="number" className="form-control" name="uangKursus" onChange={handleChange} value={formData.uangKursus} />
+                        <input type="number" className="form-control" name="uangKursus" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.uangKursus} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Buku</label>
-                        <input type="number" className="form-control" name="uangBuku" onChange={handleChange} value={formData.uangBuku} />
+                        <input type="number" className="form-control" name="uangBuku" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.uangBuku} />
                     </div>
                 </div>
             </div>
@@ -165,13 +166,13 @@ export default function UpdateData({ id }) {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Cash</label>
-                        <input type="number" className="form-control" name="cash" onChange={handleChange} value={formData.cash} />
+                        <input type="number" className="form-control" name="cash" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.cash} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Transfer</label>
-                        <input type="number" className="form-control" name="transfer" onChange={handleChange} value={formData.transfer} />
+                        <input type="number" className="form-control" name="transfer" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.transfer} />
                     </div>
                 </div>
             </div>
@@ -179,7 +180,7 @@ export default function UpdateData({ id }) {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Keterangan</label>
-                        <input type="text" className="form-control" name="keterangan" onChange={handleChange} value={formData.keterangan} />
+                        <input type="text" className="form-control" name="keterangan" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.keterangan} />
                     </div>
                 </div>
                 <div className="col-sm">
