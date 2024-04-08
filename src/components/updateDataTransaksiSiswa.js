@@ -3,56 +3,55 @@ import '../styles/EntryData.css';
 import { useHistory } from 'react-router-dom';
 import SummaryModal from './summaryModalUpdateDataTransaksiSiswa';
 import Berhasil from './modalSuccessUpdate';
-import { fetchGradeKursus, fetchJurusanKursus, fetchEntryDataById} from "../service/fetchDataService";
+import { fetchSiswa, fetchEntryDataById } from "../service/fetchDataService";
 
-export default function UpdateData({ id }) { 
+export default function UpdateData({ id }) {
     const [formData, setFormData] = useState({
-        jenisTransaksi: 1,
+        tahunKursus: 1,
         tanggalPembayaran: '',
-        namaSiswa: '',
-        jurusanKursus: 1,
-        gradeKursus: 1,
+        siswa: '',
         uangPendaftaran: '',
         uangKursus: '',
         uangBuku: '',
         cash: '',
         transfer: '',
-        keterangan: ''
+        keterangan: '',
     });
 
-    const [gradeKursus, setGradeKursus] = useState([]);
-    const [jurusanKursus, setJurusanKursus] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const [selectedJurusan, setSelectedJurusan] = useState('');
-    const [selectedGrade, setSelectedGrade] = useState('');
+    const [siswa, setSiswa] = useState([]);
+    const [selectedSiswa, setSelectedSiswa] = useState('');
+    const [selectedTahunKursus, setSelectedTahunKursus] = useState(''); // Tambah state untuk menyimpan tahun kursus yang dipilih
     const history = useHistory();
 
     useEffect(() => {
-        fetchGradeKursus()
+        fetchSiswa()
             .then(data => {
-                setGradeKursus(data);
+                setSiswa(data);
+                if (data.length > 0) {
+                    const firstSiswa = data[0];
+                    const tahunKursusKeys = Object.keys(firstSiswa.tanggalKursusPerTahun);
+                    setSelectedTahunKursus(tahunKursusKeys[0]); // Set tahun kursus yang dipilih ke tahun pertama
+                }
             })
-            .catch(error => console.error('Error fetching gradeKursus:', error));
-
-        fetchJurusanKursus()
-            .then(data => {
-                setJurusanKursus(data);
-            })
-            .catch(error => console.error('Error fetching jurusanKursus:', error));
-
+            .catch(error => console.error('Error fetching siswa:', error));
+    
         fetchEntryDataById(id)
             .then(data => {
                 const formattedDate = new Date(data.tanggalPembayaran).toISOString().split('T')[0];
                 const updatedData = { ...data, tanggalPembayaran: formattedDate };
                 setFormData(updatedData);
-                // setFormData(data);
             })
             .catch(error => console.error('Error fetching existing transaction data:', error));
     }, [id]);
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (name === 'tahunKursus') {
+            setSelectedTahunKursus(value); // Perbarui tahun kursus yang dipilih
+        }
         setFormData({
             ...formData,
             [name]: value
@@ -60,31 +59,26 @@ export default function UpdateData({ id }) {
     };
 
     const handleSubmit = () => {
-        setSelectedJurusan(jurusanKursus.find(jurusan => jurusan.idJurusanKursus === parseInt(formData.jurusanKursus.idJurusanKursus)).namaJurusan);
-        setSelectedGrade(gradeKursus.find(grade => grade.idGradeKursus === parseInt(formData.gradeKursus.idGradeKursus)).namaGrade);
+        setSelectedSiswa(siswa.find(siswa => siswa.idSiswa === parseInt(formData.siswa.idSiswa)).namaSiswa);
 
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
-            console.log(formData);
-            const updatedFormData = { ...formData };
-
-            delete updatedFormData.gradeKursus;
-            delete updatedFormData.jurusanKursus;
-
-
-            updatedFormData.tanggalPembayaran = new Date(formData.tanggalPembayaran).toISOString()
-            updatedFormData.gradeKursus = formData.gradeKursus.idGradeKursus;
-            updatedFormData.jurusanKursus = formData.jurusanKursus.idJurusanKursus;
-            updatedFormData.transfer = formData.transfer.toString();
-            updatedFormData.uangBuku = formData.uangBuku.toString();
-            updatedFormData.uangKursus = formData.uangKursus.toString();
-            updatedFormData.uangPendaftaran = formData.uangPendaftaran.toString();
-            updatedFormData.cash = formData.cash.toString();
-
-            console.log(updatedFormData);
+            const updatedFormData = { 
+                ...formData,
+                tahunKursus: selectedTahunKursus, // Gunakan tahun kursus yang dipilih
+                tanggalPembayaran: new Date(formData.tanggalPembayaran).toISOString(),
+                siswa: formData.siswa.idSiswa,
+                uangPendaftaran: formData.uangPendaftaran.toString(),
+                uangKursus: formData.uangKursus.toString(),
+                uangBuku: formData.uangBuku.toString(),
+                cash: formData.cash.toString(),
+                transfer: formData.transfer.toString(),
+                keterangan: formData.keterangan,
+            };
+            console.log(updatedFormData)
             setFormData(updatedFormData);
             setShowModal(true);
         }
@@ -95,55 +89,50 @@ export default function UpdateData({ id }) {
         history.push("/laporan-transaksi-siswa");
     };
 
+    const getTahunKursusOptions = () => {
+        if (formData.siswa && formData.siswa.tanggalKursusPerTahun) {
+            const tahunKursusKeys = Object.keys(formData.siswa.tanggalKursusPerTahun);
+            return tahunKursusKeys.map(tahun => (
+                <option key={tahun} value={tahun}>{tahun}</option>
+            ));
+        } else {
+            return null;
+        }
+    };
+
     return (
         <div className="frame">
             <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
-                        <label htmlFor="jenisTransaksi" className="form-label">Jenis Pembayaran</label>
-                        <select className="form-select" name="jenisTransaksi" onChange={handleChange} value={formData.jenisTransaksi}>
-                            <option value={1}>Pendaftaran</option>
-                            <option value={2}>Kursus</option>
-                            <option value={3}>Lainnya</option>
-                        </select>
+                        <label className="form-label">Jenis Pembayaran: {formData.jenisTransaksi === 1 ? "Pendaftaran" : formData.jenisTransaksi === 2 ? "Kursus" : "Lainnya"}</label>
                     </div>
                 </div>
                 <div className="col-sm">
-                </div>  
-            </div>
-
-            <div className="row">
-                <div className="col-sm">
-                        <div className="input-field">
-                            <label className="form-label">Tanggal Pembayaran</label>
-                            <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} value={formData.tanggalPembayaran}/>
-                        </div>
-                    </div>
-                <div className="col-sm">
-                    <div className="input-field">
-                        <label className="form-label">Nama Siswa</label>
-                        <input type="text" className="form-control" name="namaSiswa" onChange={handleChange} value={formData.namaSiswa} />
-                    </div>
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
-                        <label htmlFor="jurusanKursus" className="form-label">Jurusan</label>
-                        <select className="form-select" name="jurusanKursus" onChange={handleChange} value={formData.jurusanKursus}>
-                            {jurusanKursus.map(jurusan => (
-                                <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>{jurusan.namaJurusan}</option>
-                            ))}
+                        <label className="form-label">Tahun Kursus</label>
+                        <select className="form-select" name="tahunKursus" onChange={handleChange} value={selectedTahunKursus} defaultValue={1} disabled={formData.jenisTransaksi !== 2}>
+                            {getTahunKursusOptions()}
                         </select>
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
-                        <label htmlFor="gradeKursus" className="form-label">Grade</label>
-                        <select className="form-select" name="gradeKursus" onChange={handleChange} value={formData.gradeKursus}>
-                            {gradeKursus.map(grade => (
-                                <option key={grade.idGradeKursus} value={grade.idGradeKursus}>{grade.namaGrade}</option>
+                        <label className="form-label">Tanggal Pembayaran</label>
+                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} value={formData.tanggalPembayaran} />
+                    </div>
+                </div>
+                <div className="col-sm">
+                    <div className="input-field">
+                        <label htmlFor="siswa" className="form-label">Siswa</label>
+                        <select className="form-select" name="siswa" onChange={handleChange} defaultValue={1}>
+                            {siswa.map(siswa => (
+                                <option key={siswa.idSiswa} value={siswa.idSiswa}>{siswa.namaSiswa}</option>
                             ))}
                         </select>
                     </div>
@@ -196,21 +185,21 @@ export default function UpdateData({ id }) {
             </div>
 
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
+
             <SummaryModal
                 id={id} 
                 formData={formData}
-                selectedJurusan={selectedJurusan}
-                selectedGrade={selectedGrade}
+                selectedSiswa={selectedSiswa}
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 onSuccess={() => {
                     setShowSuccessModal(true);
                 }}
             />
-            <Berhasil 
+            <Berhasil
                 show={showSuccessModal}
                 onHide={handleSuccessModalClose}
             />
-         </div>
+        </div>
     );
 };

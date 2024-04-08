@@ -43,7 +43,13 @@ const SideBarKaryawan = () => {
         <div className="sidebar-section-label">Input Data</div>
           <CDBSidebarMenu>
             <NavLink exact to="/entry-transaksi-siswa" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Pendaftaran Siswa</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/entry-transaksi-siswa-kursus" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Kursus Siswa</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/entry-transaksi-siswa-lainnya" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Lainnya Siswa</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/entry-pembelian-buku" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-book" className="sidebar-menu-item">Pembelian Buku</CDBSidebarMenuItem>

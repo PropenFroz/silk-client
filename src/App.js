@@ -8,6 +8,8 @@ import ProfilePage from "./pages/profilePage";
 import LaporanKeuanganBuku from './pages/laporanKeuanganBuku'
 import LaporanTransaksiSiswa from './pages/laporanTransaksiSiswa';
 import EntryTransaksiSiswa from './pages/entryDataTransaksiSiswa';
+import EntryTransaksiSiswaKursus from './pages/entryDataTransaksiSiswaKursus';
+import EntryTransaksiSiswaLainnya from './pages/entryDataTransaksiSiswaLainnya';
 import EntryPembelianBuku from './pages/entryPembelianBuku';
 import UpdateDataTransaksiSiswa from './pages/updateDataTransaksiSiswa';
 import UpdateDataPembelianBuku from './pages/updatePembelianBuku';
@@ -28,6 +30,8 @@ function App() {
         <Route path="/laporan-gaji-guru"><LaporanGajiGuru /></Route>
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
+        <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
+        <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>
         <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
         <Route path="/entry-gaji-guru"><EntryGajiGuru/></Route>
         <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>

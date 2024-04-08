@@ -1,14 +1,14 @@
 import React from 'react';
-import EntryData from '../components/entryDataTransaksiSiswa'
+import EntryData from '../components/entryDataTransaksiSiswaLainnya'
 import '../styles/laporan.css';
 import SideBarKaryawan from '../components/sidebarKaryawan';
 
-export default function EntryDataTransaksiSiswa() {
+export default function EntryDataTransaksiSiswaLainnya() {
     return (
         <div className="dashboard d-flex">
             <SideBarKaryawan/>
             <div className="dashboard-content">
-            <h2>Masukkan Data Transaksi Pendaftaran Siswa</h2>
+            <h2>Masukkan Data Transaksi Lainnya Siswa</h2>
             <EntryData />
             </div>
         </div>

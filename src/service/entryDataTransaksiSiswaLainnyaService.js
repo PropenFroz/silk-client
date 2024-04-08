@@ -2,9 +2,7 @@ const sendEntryData = (formData, setShowModal) => {
     const requestData = {
         jenisTransaksi: formData.jenisTransaksi,
         tanggalPembayaran: new Date(formData.tanggalPembayaran).toISOString(),
-        namaSiswa: formData.namaSiswa,
-        jurusanKursus: formData.jurusanKursus,
-        gradeKursus: formData.gradeKursus,
+        siswa: formData.siswa,
         uangPendaftaran: formData.uangPendaftaran,
         uangKursus: formData.uangKursus,
         uangBuku: formData.uangBuku,
@@ -13,7 +11,7 @@ const sendEntryData = (formData, setShowModal) => {
         keterangan: formData.keterangan
     };
 
-    fetch('http://localhost:8080/api/entry-transaksi-siswa-daftar', {
+    fetch('http://localhost:8080/api/entry-transaksi-siswa-lainnya', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

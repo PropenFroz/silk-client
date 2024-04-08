@@ -16,18 +16,7 @@ function SummaryModal({ formData, selectedJurusan, selectedGrade, show, onHide, 
     <Modal show={show} onHide={onHide}>
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
-      <p><strong>Jenis Pembayaran:</strong> {
-            (() => {
-                switch (formData.jenisTransaksi) {
-                    case 1:
-                        return 'Pendaftaran';
-                    case 2:
-                        return 'Kursus';
-                    default:
-                        return 'Lainnya';
-                }
-            })()
-        }</p>
+      <p><strong>Jenis Pembayaran:</strong> Pendaftaran</p>
         <p><strong>Tanggal Pembayaran:</strong> {formData.tanggalPembayaran}</p>
         <p><strong>Nama Siswa:</strong> {formData.namaSiswa}</p>
         <p><strong>Jurusan:</strong> {selectedJurusan}</p>

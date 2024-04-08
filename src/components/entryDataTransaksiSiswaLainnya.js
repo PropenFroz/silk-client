@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
-import SummaryModal from './summaryModalEntryDataTransaksiSiswa';
+import SummaryModal from './summaryModalEntryDataTransaksiSiswaLainnya';
 import Berhasil from './modal';
-import { fetchGradeKursus, fetchJurusanKursus } from "../service/fetchDataService"; 
+import { fetchSiswa } from "../service/fetchDataService"; 
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
-        jenisTransaksi: 1,
+        jenisTransaksi: 3,
         tanggalPembayaran: '',
-        namaSiswa: '',
-        jurusanKursus: 1,
-        gradeKursus: 1,
+        siswa: 1,
         uangPendaftaran: '',
         uangKursus: '',
         uangBuku: '',
@@ -19,25 +17,17 @@ export default function EntryData() {
         keterangan: ''
     });
 
-    const [selectedJurusan, setSelectedJurusan] = useState('');
-    const [selectedGrade, setSelectedGrade] = useState('');
+    const [selectedSiswa, setSelectedSiswa] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const [gradeKursus, setGradeKursus] = useState([]);
-    const [jurusanKursus, setJurusanKursus] = useState([]);
+    const [siswa, setSiswa] = useState([]);
 
     useEffect(() => {
-        fetchGradeKursus()
+        fetchSiswa()
             .then(data => {
-                setGradeKursus(data);
+                setSiswa(data);
             })
-            .catch(error => console.error('Error fetching gradeKursus:', error));
-
-        fetchJurusanKursus()
-            .then(data => {
-                setJurusanKursus(data);
-            })
-            .catch(error => console.error('Error fetching jurusanKursus:', error));
+            .catch(error => console.error('Error fetching siswa:', error));
     }, []);
 
     const handleChange = (e) => {
@@ -48,8 +38,7 @@ export default function EntryData() {
         });
     };
     const handleSubmit = () => {
-        setSelectedJurusan(jurusanKursus.find(jurusan => jurusan.idJurusanKursus === parseInt(formData.jurusanKursus)).namaJurusan);
-        setSelectedGrade(gradeKursus.find(grade => grade.idGradeKursus === parseInt(formData.gradeKursus)).namaGrade);
+        setSelectedSiswa(siswa.find(siswa => siswa.idSiswa === parseInt(formData.siswa)).namaSiswa);
 
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
@@ -72,33 +61,14 @@ export default function EntryData() {
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
-                        <label className="form-label">Nama Siswa</label>
-                        <input type="text"  className="form-control" name="namaSiswa" onChange={handleChange} />
+                    <label htmlFor="siswa" className="form-label">Siswa</label>
+                        <select className="form-select" name="siswa" onChange={handleChange} defaultValue={1}>
+                            {siswa.map(siswa => (
+                                <option key={siswa.idSiswa} value={siswa.idSiswa}>{siswa.namaSiswa}</option>
+                            ))}
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div className="col-sm">
-                    <div className="input-field">
-                    <label htmlFor="jurusanKursus" className="form-label">Jurusan</label>
-                        <select className="form-select" name="jurusanKursus" onChange={handleChange} defaultValue={1}>
-                            {jurusanKursus.map(jurusan => (
-                                <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>{jurusan.namaJurusan}</option>
-                            ))}
-                        </select>
-                    </div>
-                    
-                 </div>
-                 <div className="col-sm">
-                    <div className="input-field">
-                        <label htmlFor="gradeKursus" className="form-label">Grade</label>
-                        <select className="form-select" name="gradeKursus" onChange={handleChange} defaultValue={1}>
-                            {gradeKursus.map(grade => (
-                                <option key={grade.idGradeKursus} value={grade.idGradeKursus}>{grade.namaGrade}</option>
-                            ))}
-                        </select>
-                    </div>
-                 </div>
             </div>
             <div class="row">
                  <div className="col-sm">
@@ -147,8 +117,7 @@ export default function EntryData() {
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}
-                selectedJurusan={selectedJurusan}
-                selectedGrade={selectedGrade}
+                selectedSiswa={selectedSiswa}
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 onSuccess={() => {
