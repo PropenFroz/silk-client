@@ -22,7 +22,7 @@ export default function UpdateData({ id }) {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [siswa, setSiswa] = useState([]);
     const [selectedSiswa, setSelectedSiswa] = useState('');
-    const [selectedTahunKursus, setSelectedTahunKursus] = useState(''); // Tambah state untuk menyimpan tahun kursus yang dipilih
+    const [selectedTahunKursus, setSelectedTahunKursus] = useState('');
     const history = useHistory();
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function UpdateData({ id }) {
                 if (data.length > 0) {
                     const firstSiswa = data[0];
                     const tahunKursusKeys = Object.keys(firstSiswa.tanggalKursusPerTahun);
-                    setSelectedTahunKursus(tahunKursusKeys[0]); // Set tahun kursus yang dipilih ke tahun pertama
+                    setSelectedTahunKursus(tahunKursusKeys[0]);
                 }
             })
             .catch(error => console.error('Error fetching siswa:', error));
@@ -50,7 +50,7 @@ export default function UpdateData({ id }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'tahunKursus') {
-            setSelectedTahunKursus(value); // Perbarui tahun kursus yang dipilih
+            setSelectedTahunKursus(value);
         }
         setFormData({
             ...formData,
@@ -68,7 +68,7 @@ export default function UpdateData({ id }) {
         } else {
             const updatedFormData = { 
                 ...formData,
-                tahunKursus: selectedTahunKursus, // Gunakan tahun kursus yang dipilih
+                tahunKursus: selectedTahunKursus,
                 tanggalPembayaran: new Date(formData.tanggalPembayaran).toISOString(),
                 siswa: formData.siswa.idSiswa,
                 uangPendaftaran: formData.uangPendaftaran.toString(),
@@ -83,6 +83,8 @@ export default function UpdateData({ id }) {
             setShowModal(true);
         }
     };
+
+    console.log("Siswa:", formData.siswa)
 
     const handleSuccessModalClose = () => {
         setShowSuccessModal(false);
@@ -132,7 +134,7 @@ export default function UpdateData({ id }) {
                         <label htmlFor="siswa" className="form-label">Siswa</label>
                         <select className="form-select" name="siswa" onChange={handleChange} defaultValue={1}>
                             {siswa.map(siswa => (
-                                <option key={siswa.idSiswa} value={siswa.idSiswa}>{siswa.namaSiswa}</option>
+                                <option key={siswa.idSiswa} value={siswa.idSiswa} selected={parseInt(formData.siswa.idSiswa) === parseInt(siswa.idSiswa)}>{siswa.namaSiswa}</option>
                             ))}
                         </select>
                     </div>

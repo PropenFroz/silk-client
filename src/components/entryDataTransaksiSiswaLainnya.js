@@ -3,12 +3,13 @@ import '../styles/EntryData.css';
 import SummaryModal from './summaryModalEntryDataTransaksiSiswaLainnya';
 import Berhasil from './modal';
 import { fetchSiswa } from "../service/fetchDataService"; 
+import Select from 'react-select'; 
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
         jenisTransaksi: 3,
         tanggalPembayaran: '',
-        siswa: 1,
+        siswa: null,
         uangPendaftaran: '',
         uangKursus: '',
         uangBuku: '',
@@ -17,98 +18,97 @@ export default function EntryData() {
         keterangan: ''
     });
 
-    const [selectedSiswa, setSelectedSiswa] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const [siswa, setSiswa] = useState([]);
+    const [siswaOptions, setSiswaOptions] = useState([]);
+    const [selectedSiswa, setSelectedSiswa] = useState(null);
 
     useEffect(() => {
         fetchSiswa()
             .then(data => {
-                setSiswa(data);
+                const options = data.map(siswa => ({ value: siswa.idSiswa, label: siswa.namaSiswa }));
+                setSiswaOptions(options);
             })
             .catch(error => console.error('Error fetching siswa:', error));
     }, []);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = (selectedOption) => {
         setFormData({
             ...formData,
-            [name]: value
+            siswa: selectedOption ? selectedOption.value : null
         });
+        setSelectedSiswa(selectedOption);
     };
-    const handleSubmit = () => {
-        setSelectedSiswa(siswa.find(siswa => siswa.idSiswa === parseInt(formData.siswa)).namaSiswa);
 
-        const isFormValid = Object.values(formData).every(value => value !== '');
-        if (!isFormValid) {
+    const handleSubmit = () => {
+        if (!formData.siswa || !formData.tanggalPembayaran || !formData.uangPendaftaran || !formData.uangKursus || !formData.uangBuku || !formData.cash || !formData.transfer || !formData.keterangan) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
-            console.log(formData);
             setShowModal(true);
         }
     };
 
     return (
         <div className="frame">
-            <div class="row">
+            <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Pembayaran</label>
-                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={handleChange} />
+                        <input type="date" className="form-control" name="tanggalPembayaran" onChange={e => setFormData({ ...formData, tanggalPembayaran: e.target.value })} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
-                    <label htmlFor="siswa" className="form-label">Siswa</label>
-                        <select className="form-select" name="siswa" onChange={handleChange} defaultValue={1}>
-                            {siswa.map(siswa => (
-                                <option key={siswa.idSiswa} value={siswa.idSiswa}>{siswa.namaSiswa}</option>
-                            ))}
-                        </select>
+                        <label htmlFor="siswa" className="form-label">Siswa</label>
+                        <Select
+                            options={siswaOptions}
+                            value={selectedSiswa}
+                            onChange={handleChange}
+                            placeholder="Pilih Siswa"
+                        />
                     </div>
                 </div>
             </div>
-            <div class="row">
-                 <div className="col-sm">
+            <div className="row">
+                <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Pendaftaran</label>
-                        <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} />
+                        <input type="number" className="form-control" name="uangPendaftaran" onChange={e => setFormData({ ...formData, uangPendaftaran: e.target.value })} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Kursus</label>
-                        <input type="number" className="form-control" name="uangKursus" onChange={handleChange} />
+                        <input type="number" className="form-control" name="uangKursus" onChange={e => setFormData({ ...formData, uangKursus: e.target.value })} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Buku</label>
-                        <input type="number" className="form-control" name="uangBuku" onChange={handleChange} />
+                        <input type="number" className="form-control" name="uangBuku" onChange={e => setFormData({ ...formData, uangBuku: e.target.value })} />
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Cash</label>
-                        <input type="number" className="form-control" name="cash" onChange={handleChange} />
+                        <input type="number" className="form-control" name="cash" onChange={e => setFormData({ ...formData, cash: e.target.value })} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Transfer</label>
-                        <input type="number"className="form-control" name="transfer" onChange={handleChange} />
+                        <input type="number" className="form-control" name="transfer" onChange={e => setFormData({ ...formData, transfer: e.target.value })} />
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Keterangan</label>
-                        <input type="text" className="form-control" name="keterangan" onChange={handleChange} />
+                        <input type="text" className="form-control" name="keterangan" onChange={e => setFormData({ ...formData, keterangan: e.target.value })} />
                     </div>
                 </div>
                 <div className="col-sm">
@@ -117,7 +117,7 @@ export default function EntryData() {
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}
-                selectedSiswa={selectedSiswa}
+                selectedSiswa={selectedSiswa ? selectedSiswa.label : ''}
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 onSuccess={() => {

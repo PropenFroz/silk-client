@@ -99,8 +99,8 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
                 {transactions.map((transaction, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{transaction.murid}</td>
-                    <td>{transaction.gradeKursus.namaGrade}</td>
+                    <td>{transaction.siswa.namaSiswa}</td>
+                    <td>{transaction.siswa.gradeKursus.namaGrade}</td>
                     <td>{transaction.uangKursus}</td>
                     <td>{transaction.tanggal}</td>
                     <td>{transaction.minggu1}</td>
@@ -117,7 +117,7 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
                 ))}
                 <tr>
                   <td colSpan="5">
-                    <strong>Rincian Gaji:</strong>
+                    <strong>Total</strong>
                   </td>
                   <td>
                     {transactions.reduce((acc, curr) => acc + curr.minggu1, 0)}

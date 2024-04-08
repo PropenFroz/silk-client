@@ -1,44 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, Modal } from 'react-bootstrap';
-import { fetchGradeKursus, fetchJurusanKursus, fetchGuru } from "../service/fetchDataService"; 
+import { fetchSiswa, fetchJurusanKursus, fetchGuru } from "../service/fetchDataService";
+import Select from 'react-select'; 
 
 export default function EntryDetailGajiGuru() {
-    const [gradeKursus, setGradeKursus] = useState([]);
+    const [siswa, setSiswa] = useState([]);
     const [jurusanKursus, setJurusanKursus] = useState([]);
     const [guru, setGuru] = useState([]);
     const [muridList, setMuridList] = useState([]);
-    const [selectedGuru, setSelectedGuru] = useState("1");
-    const [selectedJurusan, setSelectedJurusan] = useState("1");
+    const [selectedGuru, setSelectedGuru] = useState(null);
+    const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        fetchGradeKursus()
+        fetchSiswa()
             .then(data => {
-                setGradeKursus(data);
+                setSiswa(data.map(siswa => ({ value: siswa.idSiswa, label: siswa.namaSiswa })));
             })
-            .catch(error => console.error('Error fetching gradeKursus:', error));
+            .catch(error => console.error('Error fetching siswa:', error));
 
         fetchJurusanKursus()
             .then(data => {
-                setJurusanKursus(data);
+                setJurusanKursus(data.map(jurusan => ({ value: jurusan.idJurusanKursus, label: jurusan.namaJurusan })));
             })
             .catch(error => console.error('Error fetching jurusanKursus:', error));
         
         fetchGuru()
             .then(data => {
-                setGuru(data);
+                setGuru(data.map(guru => ({ value: guru.idGuru, label: guru.namaGuru })));
             })
             .catch(error => console.error('Error fetching guru:', error));
     }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "guru") {
-            setSelectedGuru(value);
-        } else if (name === "jurusanKursus") {
-            setSelectedJurusan(value);
-        }
-    };
 
     const handleSubmit = () => {
         setShowModal(true);
@@ -48,8 +40,8 @@ export default function EntryDetailGajiGuru() {
         setShowModal(false);
         
         const createEntryGajiGuru = {
-            idGuru: parseInt(selectedGuru),
-            idJurusanKursus: parseInt(selectedJurusan),
+            idGuru: parseInt(selectedGuru.value),
+            idJurusanKursus: parseInt(selectedJurusan.value),
             listCreateEntryGajiGuruDetailRequestDTO: muridList
         };
     
@@ -74,8 +66,7 @@ export default function EntryDetailGajiGuru() {
 
     const handleTambahMurid = () => {
         const newMurid = {
-            murid: "",
-            idGradeKursus: 1,
+            siswa: 1,
             uangKursus: 0,
             minggu1: 0,
             minggu2: 0,
@@ -95,7 +86,7 @@ export default function EntryDetailGajiGuru() {
             if (index === i) {
                 return {
                     ...murid,
-                    [attributeName]: (name.startsWith("idGradeKursus") || name.startsWith("uangKursus") || name.startsWith("feeGuru") || name.startsWith("minggu")) ? parseInt(value) : name.startsWith("tanggal") ? value : value
+                    [attributeName]: (name.startsWith("siswa") || name.startsWith("uangKursus") || name.startsWith("feeGuru") || name.startsWith("minggu")) ? parseInt(value) : name.startsWith("tanggal") ? value : value
                 };
             }
             return murid;
@@ -109,21 +100,23 @@ export default function EntryDetailGajiGuru() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label htmlFor="guru" className="form-label">Nama Guru</label>
-                        <select className="form-select" name="guru" onChange={handleChange} defaultValue={1}>
-                            {guru.map(guru => (
-                                <option key={guru.idGuru} value={guru.idGuru}>{guru.namaGuru}</option>
-                            ))}
-                        </select>
+                        <Select
+                            options={guru}
+                            value={selectedGuru}
+                            onChange={setSelectedGuru}
+                            placeholder="Pilih Guru"
+                        />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label htmlFor="jurusanKursus" className="form-label">Jurusan</label>
-                        <select className="form-select" name="jurusanKursus" onChange={handleChange} defaultValue={1}>
-                            {jurusanKursus.map(jurusan => (
-                                <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>{jurusan.namaJurusan}</option>
-                            ))}
-                        </select>
+                        <Select
+                            options={jurusanKursus}
+                            value={selectedJurusan}
+                            onChange={setSelectedJurusan}
+                            placeholder="Pilih Jurusan"
+                        />
                     </div>
                 </div>
             </div>
@@ -140,7 +133,6 @@ export default function EntryDetailGajiGuru() {
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama Siswa</th>
-                        <th scope="col">Grade</th>
                         <th scope="col">Uang Kursus</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Minggu 1</th>
@@ -155,13 +147,30 @@ export default function EntryDetailGajiGuru() {
                 {muridList.map((murid,index) => (
                     <tr key={index + 1}>
                         <td>{index + 1}</td>
-                        <td><input type="text" name={`murid${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                         <td>
-                            <select name={`idGradeKursus${index + 1}`} onChange={(e) => handleChangeInput(e, index)}>
-                                {gradeKursus.map(grade => (
-                                    <option key={grade.idGradeKursus} value={grade.idGradeKursus}>{grade.namaGrade}</option>
-                                ))}
-                            </select>
+                            <Select
+                                options={siswa}
+                                onChange={(selectedOption) => {
+                                    const updatedMuridList = muridList.map((murid, i) => {
+                                        if (index === i) {
+                                            return {
+                                                ...murid,
+                                                siswa: parseInt(selectedOption.value)
+                                            };
+                                        }
+                                        return murid;
+                                    });
+                                    setMuridList(updatedMuridList);
+                                }}
+                                placeholder="Pilih Siswa"
+                                styles={{
+                                    control: (provided) => ({
+                                        ...provided,
+                                        width: '100%',
+                                        minWidth: '200px',
+                                    })
+                                }}
+                            />
                         </td>
                         <td><input type="number" name={`uangKursus${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                         <td><input type="date" name={`tanggal${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td> {/* Input tanggal */}
