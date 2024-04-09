@@ -19,6 +19,7 @@ import SidebarKaryawan from './components/sidebarKaryawan';
 import UbahPassword from './pages/ubahPassword';
 import EntryGajiGuru from './pages/entryGajiGuru';
 import LaporanGajiGuru from './pages/laporanGajiGuru';
+import LaporanPembayaranKursus from './pages/laporanPembayaranKursus';
 
 function App() {  
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
         <Route path="/laporan-gaji-guru"><LaporanGajiGuru /></Route>
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
+        <Route path="/laporan-pembayaran-kursus"><LaporanPembayaranKursus /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
         <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>

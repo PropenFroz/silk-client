@@ -7,7 +7,7 @@ export default function EntryPembelianBuku() {
     return (
         <div className="dashboard d-flex">
             <SideBarKaryawan/>
-            <div className="dashboard-laporan">
+            <div className="dashboard-content">
             <h2>Masukkan Data Pembelian Buku</h2>
             <EntryData />
             </div>

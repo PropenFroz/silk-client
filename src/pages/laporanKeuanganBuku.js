@@ -59,7 +59,7 @@ export default function LaporanKeuanganBuku() {
       <div>
         <Sidebar />
       </div>
-      <div className="dashboard-laporan">
+      <div className="dashboard-content">
         <h2>Laporan Transaksi Buku</h2>
         <div className="button-group">
           <div className="left-buttons">
