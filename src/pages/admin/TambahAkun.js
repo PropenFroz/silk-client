@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebarAdmin'; // Import Sidebar component
+import "../../styles/style.css";
+
+import { useAuth } from '../../components/auth/context/AuthContext';
+import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
 
 function TambahAkun() {
     const [formData, setFormData] = useState({
@@ -8,6 +12,21 @@ function TambahAkun() {
         password: '',
         role: ''
     });
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+    const Auth = useAuth();
+    const user = Auth.getUser();
+
+    const [users, setUsers] = useState([]);
+    const history = useHistory(); // Initialize history
+    const [isAdmin, setIsAdmin] = useState(true);
+
+    useEffect(() => {
+        if (user != null) {
+            setIsAdmin(user.data.role[0] === 'Admin');
+        }
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -20,7 +39,7 @@ function TambahAkun() {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://silk-purwa.up.railway.app/api/user/create', {
+            const response = await fetch('https://localhost:8080/api/user/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,15 +48,29 @@ function TambahAkun() {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to create user');
+                // Tangkap pesan error dari respons
+                const errorMessage = await response.text();
+                // Tampilkan pesan error kepada pengguna
+                setErrorMessage(errorMessage);
+                return;
             }
+            
 
             // Handle success response here if needed
-            console.log('User created successfully');
+            setSuccessMessage('User created successfully');
         } catch (error) {
             console.error('Error creating user:', error.message);
         }
     };
+
+    if (!isAdmin) {
+        history.push('/homepage-karyawan');
+        return null;
+    }
+    if (user == null) {
+        history.push('/login');
+        return null;
+    }
 
     return (
         <div className="dashboard d-flex">
@@ -46,6 +79,18 @@ function TambahAkun() {
             </div>
             <div className="dashboard-laporan">
                 <h2>Create User</h2>
+                {/* Tampilkan pesan kesalahan jika ada */}
+                {errorMessage && (
+                    <div className="error-message">
+                        {errorMessage}
+                    </div>
+                )}
+
+                {successMessage && (
+                    <div className="success-message">
+                        {successMessage}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Username:</label>

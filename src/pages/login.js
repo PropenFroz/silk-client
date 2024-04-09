@@ -6,39 +6,89 @@ import PasswordField from "../components/passwordField";
 import logoPurwa from "../components/icons/logo-purwa.png"
 import '../styles/style.css';
 
+import { orderApi } from '../components/auth/context/OrderApi'
+import { useAuth } from '../components/auth/context/AuthContext'
+import { parseJwt, handleLogError } from '../components/auth/context/Helpers'
+
+
 export const Login = () => {
+    const Auth = useAuth()
+    const isLoggedIn = Auth.userIsAuthenticated()
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isError, setIsError] = useState(false)
     const history = useHistory(); // Memindahkan panggilan useHistory() ke sini
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const url = 'https://silk-purwa.up.railway.app/api/';
+    const handleInputChange = (e, { name, value }) => {
+        if (name === 'username') {
+          setUsername(value)
+        } else if (name === 'password') {
+          setPassword(value)
+        }
+      }
 
     const HandleLogin = async () => {
         try {
-            const response = await fetch(`${url}login`, {
-                method: 'POST',
-                headers: {                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
+            const response = await orderApi.authenticate(username, password)
+    
+            console.log("ini response ", JSON.stringify(response))
 
-            if (response.ok) {
-                const data = await response.json();
-                history.push('/homepage-karyawan');
-                console.log(data);
-                console.log("Redirecting to welcome page...");
-                
-            } else {
-                console.error('Response not ok:', response.statusText);
-            }
+            const { accessToken } = response.data
+            console.log("ini accessToken", accessToken)
+                    
+            const data = parseJwt(accessToken)
+            console.log("ini data", JSON.stringify(data))
+        
+            const authenticatedUser = { data, accessToken }
+            console.log("ini authenticatedUser" + authenticatedUser)
+            
+            Auth.userLogin(authenticatedUser)
+            
+            setUsername('')
+            setPassword('')
+            setIsError(false)
+            
         } catch (error) {
             console.error('Error:', error);
-            // Tangani kesalahan fetch
+            if (error.response && error.response.status === 403) {
+                // Tangani kasus ketika respons memiliki status kode 403 (Forbidden)
+                setErrorMessage('Username atau password tidak sesuai!');
+            } else {
+                // Tangani kasus lainnya, seperti kesalahan jaringan atau kesalahan server
+                setErrorMessage('Terjadi kesalahan saat melakukan login.');
+            }
+
         }
-    };
+    
+    }; 
+
+    if (isLoggedIn) {
+               
+        if (Auth.getUser().data.role[0] === 'Admin') {
+            history.push('/admin/daftar-akun');
+            return null;
+        }
+        else if (Auth.getUser().data.role[0] === 'Karyawan') {
+            history.push('/homepage-karyawan');
+            return null;
+        }
+        else if (Auth.getUser().data.role[0] === 'Eksekutif') {
+            history.push('/homepage-karyawan');
+            return null;
+        }
+        else if (Auth.getUser().data.role[0] === 'Guru') {
+            history.push('/homepage-karyawan');
+            return null;
+        }
+
+    }
+     
 
     return (
         <div className="hifi-login-page">
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className="group">
                 <Button
                     brand="one"

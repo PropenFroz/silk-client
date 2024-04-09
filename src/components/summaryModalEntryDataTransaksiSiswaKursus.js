@@ -1,31 +1,24 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
-import updateEntryData from "../service/updateDataTransaksiSiswaService";
+import sendEntryData from "../service/entryDataTransaksiSiswaKursusService";
 
-function SummaryModal({ id, formData, selectedSiswa, show, onHide, onSuccess }) {
+function SummaryModal({ formData, selectedSiswa, show, onHide, onSuccess }) {
 
-    const formatDate = (dateString) => {
-        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-        const date = new Date(dateString);
-        return date.toLocaleDateString('id-ID', options);
-    };
-
-    const handleSubmit = async () => {
-        try {
-          await updateEntryData(id, formData);
-          onHide();
-          onSuccess();
-        } catch (error) {
-          console.error("Error updating entry data:", error);
-        }
-      };
+  const handleSubmit = () => {
+    sendEntryData(formData, () => {
+      onHide();
+      onSuccess();
+    });
+    
+  };
 
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
+        <p><strong>Jenis Pembayaran:</strong> Kursus</p>
         <p><strong>Tahun Kursus:</strong> {formData.tahunKursus}</p>
-        <p><strong>Tanggal Pembayaran:</strong> {formatDate(formData.tanggalPembayaran)}</p>
+        <p><strong>Tanggal Pembayaran:</strong> {formData.tanggalPembayaran}</p>
         <p><strong>Nama Siswa:</strong> {selectedSiswa}</p>
         <p><strong>Uang Pendaftaran:</strong> {formData.uangPendaftaran}</p>
         <p><strong>Uang Kursus:</strong> {formData.uangKursus}</p>

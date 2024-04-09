@@ -15,8 +15,8 @@ function authenticate(username, password) {
   return instance.post('/api/login', { username, password }, {
     headers: {                    'Content-Type': 'application/json'
     },
-    'Access-Control-Allow-Origin': '*',
-    body: JSON.stringify({ username, password })
+    // 'Access-Control-Allow-Origin': '*',
+    // body: JSON.stringify({ username, password })
   })
 }
 

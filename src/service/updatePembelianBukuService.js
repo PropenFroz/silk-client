@@ -10,7 +10,7 @@ const sendEntryData = (formData, setShowModal, id) => {
     hargaJual: formData.hargaJual,
   };
 
-  fetch(`https://silk-purwa.up.railway.app/api/entry-transaksi-buku/update/${id}`, {
+  fetch(`https://localhost:8080/api/entry-transaksi-buku/update/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

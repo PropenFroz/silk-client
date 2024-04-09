@@ -24,7 +24,7 @@ export default function UpdatePembelianBuku() {
   const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
 
   useEffect(() => {
-    fetch(`https://silk-purwa.up.railway.app/api/entry-transaksi-buku/get/${id}`)
+    fetch(`https://localhost:8080/api/entry-transaksi-buku/get/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

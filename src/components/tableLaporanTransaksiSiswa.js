@@ -90,9 +90,9 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{formatDate(transaction.tanggalPembayaran)}</td>
-                            <td>{transaction.namaSiswa}</td>
-                            <td>{transaction.jurusanKursus.namaJurusan}</td>
-                            <td>{transaction.gradeKursus.namaGrade}</td>
+                            <td>{transaction.siswa.namaSiswa}</td>
+                            <td>{transaction.siswa.jurusanKursus.namaJurusan}</td>
+                            <td>{transaction.siswa.gradeKursus.namaGrade}</td>
                             <td>{transaction.uangPendaftaran}</td>
                             <td>{transaction.uangKursus}</td>
                             <td>{transaction.uangBuku}</td>
