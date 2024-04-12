@@ -1,6 +1,7 @@
 const sendEntryData = (formData, setShowModal) => {
     const requestData = {
         jenisTransaksi: formData.jenisTransaksi,
+        bulanKursus: formData.bulanKursus,
         tahunKursus: formData.tahunKursus,
         tanggalPembayaran: new Date(formData.tanggalPembayaran).toISOString(),
         siswa: formData.siswa,

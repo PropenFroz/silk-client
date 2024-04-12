@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Select from 'react-select';
 import '../styles/EntryData.css';
 import { useHistory } from 'react-router-dom';
-import SummaryModal from './summaryModalUpdateDataTransaksiSiswa';
+import SummaryModal from './summaryModalUpdateKursusSiswa';
 import Berhasil from './modalSuccessUpdate';
-import { fetchSiswa, fetchEntryDataById } from "../service/fetchDataService";
+import { fetchSiswa, fetchEntryDataById, fetchIuranSiswaById } from "../service/fetchDataService";
 
 export default function UpdateData({ id }) {
     const [formData, setFormData] = useState({
+        tahunKursus: '',
+        bulanKursus: '',
         tanggalPembayaran: '',
         siswa: '',
         uangPendaftaran: '',
@@ -22,18 +24,29 @@ export default function UpdateData({ id }) {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [siswaOptions, setSiswaOptions] = useState([]);
     const [selectedSiswa, setSelectedSiswa] = useState('');
+    const [selectedMonth, setSelectedMonth] = useState(null);
     const history = useHistory();
 
     useEffect(() => {
         fetchSiswa()
             .then(data => {
-                setSiswaOptions(data.map(siswa => ({
-                    value: siswa.idSiswa,
-                    label: siswa.namaSiswa
-                })));
+                const options = data.map(siswa => ({ value: siswa.idSiswa, label: siswa.namaSiswa }));
+                setSiswaOptions(options);
             })
             .catch(error => console.error('Error fetching siswa:', error));
-    
+
+        fetchIuranSiswaById(id)
+            .then(data => {
+                const dataBulan = data.bulan;
+                const dataTahun = data.tahun;
+                setFormData(prevFormData => ({
+                    ...prevFormData,
+                    bulanKursus: dataBulan,
+                    tahunKursus: dataTahun
+                }));
+            })
+            .catch(error => console.error('Error fetching existing transaction data:', error));
+
         fetchEntryDataById(id)
             .then(data => {
                 const formattedDate = new Date(data.tanggalPembayaran).toISOString().split('T')[0];
@@ -45,6 +58,11 @@ export default function UpdateData({ id }) {
     
 
     const handleChange = (name, value) => {
+        if (name === 'siswa') {
+            setSelectedSiswa(value);
+        } else if (name === 'bulanKursus') {
+            setSelectedMonth(value);
+        }
         setFormData({
             ...formData,
             [name]: value
@@ -52,7 +70,9 @@ export default function UpdateData({ id }) {
     };
 
     const handleSubmit = () => {
-        setSelectedSiswa(siswaOptions.find(option => option.value === formData.siswa.idSiswa).label);
+        const selectedSiswaName = setSelectedSiswa(siswaOptions.find(option => option.value === formData.siswa.idSiswa).label);
+
+        const selectedMonthValue = formData.bulanKursus || selectedMonth;
 
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
@@ -70,9 +90,11 @@ export default function UpdateData({ id }) {
                 transfer: formData.transfer.toString(),
                 keterangan: formData.keterangan,
             };
-            console.log(updatedFormData)
+            console.log('Form submitted:', updatedFormData);
             setFormData(updatedFormData);
             setShowModal(true);
+            setSelectedSiswa(selectedSiswaName);
+            setSelectedMonth(selectedMonthValue); 
         }
     };
 
@@ -81,12 +103,27 @@ export default function UpdateData({ id }) {
         history.push("/laporan-transaksi-siswa");
     };
 
+    const monthOptions = [
+        { value: 1, label: 'Januari' },
+        { value: 2, label: 'Februari' },
+        { value: 3, label: 'Maret' },
+        { value: 4, label: 'April' },
+        { value: 5, label: 'Mei' },
+        { value: 6, label: 'Juni' },
+        { value: 7, label: 'Juli' },
+        { value: 8, label: 'Agustus' },
+        { value: 9, label: 'September' },
+        { value: 10, label: 'Oktober' },
+        { value: 11, label: 'November' },
+        { value: 12, label: 'Desember' }
+    ];
+
     return (
         <div className="frame">
             <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
-                        <label className="form-label">Jenis Pembayaran: {formData.jenisTransaksi === 1 ? "Pendaftaran" : formData.jenisTransaksi === 2 ? "Kursus" : "Lainnya"}</label>
+                        <label className="form-label">Jenis Pembayaran: Kursus</label>
                     </div>
                 </div>
                 <div className="col-sm">
@@ -94,6 +131,12 @@ export default function UpdateData({ id }) {
             </div>
 
             <div className="row">
+                <div className="col-sm">
+                    <div className="input-field">
+                        <label className="form-label">Tahun Kursus</label>
+                        <input type="number" className="form-control" name="tahunKursus" onChange={e => handleChange(e.target.name, e.target.value)} value={formData.tahunKursus} />
+                    </div>
+                </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Pembayaran</label>
@@ -107,6 +150,7 @@ export default function UpdateData({ id }) {
                             options={siswaOptions}
                             onChange={option => handleChange("siswa", option.value)}
                             value={siswaOptions.find(option => option.value === formData.siswa.idSiswa)}
+                            isDisabled={true}
                         />
                     </div>
                 </div>
@@ -147,6 +191,16 @@ export default function UpdateData({ id }) {
                 </div>
             </div>
             <div className="row">
+                <div className="col-sm">
+                    <div className="input-field">
+                        <label className="form-label">Bulan Kursus</label>
+                        <Select
+                            options={monthOptions}
+                            value={monthOptions.find(option => option.value === formData.bulanKursus)}
+                            onChange= {option => handleChange("bulanKursus", option.value)}
+                        />
+                    </div>
+                </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Keterangan</label>

@@ -24,7 +24,6 @@ function SummaryModal({ id, formData, selectedSiswa, show, onHide, onSuccess }) 
     <Modal show={show} onHide={onHide}>
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
-        <p><strong>Tahun Kursus:</strong> {formData.tahunKursus}</p>
         <p><strong>Tanggal Pembayaran:</strong> {formatDate(formData.tanggalPembayaran)}</p>
         <p><strong>Nama Siswa:</strong> {selectedSiswa}</p>
         <p><strong>Uang Pendaftaran:</strong> {formData.uangPendaftaran}</p>

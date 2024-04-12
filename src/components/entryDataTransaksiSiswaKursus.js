@@ -8,6 +8,7 @@ import Select from 'react-select';
 export default function EntryData() { 
     const [formData, setFormData] = useState({
         jenisTransaksi: 2,
+        bulanKursus: '',
         tahunKursus: '',
         tanggalPembayaran: '',
         siswa: null,
@@ -23,6 +24,7 @@ export default function EntryData() {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [siswaOptions, setSiswaOptions] = useState([]);
     const [selectedSiswa, setSelectedSiswa] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(null);
 
     useEffect(() => {
         fetchSiswa()
@@ -41,14 +43,37 @@ export default function EntryData() {
         setSelectedSiswa(selectedOption);
     };
 
+    const handleMonthChange = (selectedOption) => {
+        setFormData({
+            ...formData,
+            bulanKursus: selectedOption ? selectedOption.value : null
+        });
+        setSelectedMonth(selectedOption);
+    };
+
     const handleSubmit = () => {
-        if (!formData.siswa || !formData.tahunKursus || !formData.tanggalPembayaran || !formData.uangPendaftaran || !formData.uangKursus || !formData.uangBuku || !formData.cash || !formData.transfer || !formData.keterangan) {
+        if (!formData.siswa || !formData.tahunKursus || !formData.tanggalPembayaran || !formData.uangPendaftaran || !formData.uangKursus || !formData.uangBuku || !formData.cash || !formData.transfer || !formData.keterangan || !formData.bulanKursus) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
             setShowModal(true);
         }
     };
+
+    const monthOptions = [
+        { value: 1, label: 'Januari' },
+        { value: 2, label: 'Februari' },
+        { value: 3, label: 'Maret' },
+        { value: 4, label: 'April' },
+        { value: 5, label: 'Mei' },
+        { value: 6, label: 'Juni' },
+        { value: 7, label: 'Juli' },
+        { value: 8, label: 'Agustus' },
+        { value: 9, label: 'September' },
+        { value: 10, label: 'Oktober' },
+        { value: 11, label: 'November' },
+        { value: 12, label: 'Desember' }
+    ];
 
     return (
         <div className="frame">
@@ -114,17 +139,27 @@ export default function EntryData() {
             <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
-                        <label className="form-label">Keterangan</label>
-                        <input type="text" className="form-control" name="keterangan" onChange={e => setFormData({ ...formData, keterangan: e.target.value })} />
+                        <label className="form-label">Bulan Kursus</label>
+                        <Select
+                            options={monthOptions}
+                            value={selectedMonth}
+                            onChange={handleMonthChange}
+                            placeholder="Pilih Bulan"
+                        />
                     </div>
                 </div>
                 <div className="col-sm">
+                    <div className="input-field">
+                        <label className="form-label">Keterangan</label>
+                        <input type="text" className="form-control" name="keterangan" onChange={e => setFormData({ ...formData, keterangan: e.target.value })} />
+                    </div>
                 </div>
             </div>
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}
                 selectedSiswa={selectedSiswa ? selectedSiswa.label : ''}
+                selectedMonth={selectedMonth ? selectedMonth.label : ''}
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 onSuccess={() => {
