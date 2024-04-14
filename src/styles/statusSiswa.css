@@ -1,0 +1,35 @@
+.status-baru {
+    background-color: #eb90f5; 
+    color: #090a09; 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 20px; 
+    font-size: 12px;
+}
+
+.status-cuti {
+    background-color: #fa7070; 
+    color: #090a09; 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 20px; 
+    font-size: 12px;
+}
+
+.status-cuti-masuk-kembali {
+    background-color: #edeba6; 
+    color: #090a09; 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 20px; 
+    font-size: 12px;
+}
+
+.status-off {
+    background-color: #707070; 
+    color: #f5f5f5; 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 20px; 
+    font-size: 12px;
+}

@@ -22,6 +22,7 @@ import EntryGajiGuru from './pages/entryGajiGuru';
 import LaporanGajiGuru from './pages/laporanGajiGuru';
 import LaporanPembayaranKursus from './pages/laporanPembayaranKursus';
 import LaporanIuranSiswa from './pages/laporanIuranSiswa';
+import LaporanDaftarSiswa from './pages/laporanDaftarSiswa'
 
 function App() {  
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/admin/tambah-akun"><TambahAkun /></Route>
         <Route path="/profile">< ProfilePage /></Route>
         <Route path="/ubah-password"><UbahPassword /></Route>
+        <Route path="/laporan-daftar-siswa">< LaporanDaftarSiswa /></Route>
       </Switch>
       </Router>
         </AuthProvider>
