@@ -24,6 +24,32 @@
     background-color: #ec6e7b;
 }  
 
+.btn-update-iuran {
+    background-color: #28a745; /* Warna hijau */
+    color: #fff; /* Warna putih untuk teks */
+    padding: 6px 14px; /* Padding tombol */
+    border: none; /* Hapus border */
+    border-radius: 20px; /* Sudut yang lebih bulat */
+    font-size: 10px;
+  }
+  
+  .btn-delete-iuran {
+    background-color: #dc3545; /* Warna merah */
+    color: #fff; /* Warna putih untuk teks */
+    padding: 6px 14px; /* Padding tombol */
+    border: none; /* Hapus border */
+    border-radius: 20px; /* Sudut yang lebih bulat */
+    font-size: 10px;
+  }
+
+.btn-update-iuran:hover {
+    background-color: #96d09a;
+}
+
+.btn-delete-iuran:hover {
+    background-color: #ec6e7b;
+}  
+
 .table thead th {
     background-color: #d5d5d5; /* Warna latar belakang judul kolom */
     color: #000000; /* Warna teks judul kolom */

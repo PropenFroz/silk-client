@@ -34,7 +34,7 @@ const SideBarKaryawan = () => {
             <i className="fa fa-bars fa-large"></i>
           }
         >
-          <a href="/homepage-karyawan" className="text-decoration-none style" style={{color:"inherit"}}>
+          <a href="/" className="text-decoration-none style" style={{color:"inherit"}}>
           <span className="brand-text">Purwacaraka</span>
           </a>
         </CDBSidebarHeader>
@@ -63,10 +63,10 @@ const SideBarKaryawan = () => {
             <NavLink exact to="/laporan-transaksi-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-iuran-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Iuran</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-pembayaran-kursus" activeClassName="activeClicked">
+            <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Pembayaran Kursus</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/laporan-keuangan-buku" activeClassName="activeClicked">
