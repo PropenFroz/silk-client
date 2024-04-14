@@ -24,6 +24,23 @@ export default function LaporanPembayaranKursus() {
             .catch(error => console.error('Error fetching jurusanKursus:', error));
     }, []);
 
+    const handleExport = () => {
+        if (!startDate || !endDate) {
+            alert("Mohon isi kedua tanggal terlebih dahulu.");
+            return;
+        } else if (startDate > endDate) {
+            alert("Tanggal mulai harus sebelum tanggal akhir.");
+            return;
+        }
+        else {
+            const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+            const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+    
+            const exportUrl = `${url}entry-transaksi-siswa/laporan-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            window.open(exportUrl, '_blank');
+        }
+    };
+
     const handleView = async () => {
         if (!startDate || !endDate) {
             alert("Mohon isi kedua tanggal terlebih dahulu.");

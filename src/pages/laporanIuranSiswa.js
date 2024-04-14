@@ -22,6 +22,23 @@ export default function LaporanIuranSiswa() {
             .catch(error => console.error('Error fetching jurusanKursus:', error));
     }, []);
 
+    const handleExport = () => {
+        if (!startDate || !endDate) {
+            alert("Mohon isi kedua tanggal terlebih dahulu.");
+            return;
+        } else if (startDate > endDate) {
+            alert("Tanggal mulai harus sebelum tanggal akhir.");
+            return;
+        }
+        else {
+            const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+            const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+    
+            const exportUrl = `${url}entry-transaksi-siswa/laporan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            window.open(exportUrl, '_blank');
+        }
+    };
+
     const handleView = async () => {
         try {
             const url = `http://localhost:8080/api/iuran-siswa/filter?idJurusanKursus=${selectedJurusan.value}&tahun=${selectedTahun}`;
@@ -79,7 +96,7 @@ export default function LaporanIuranSiswa() {
                         </Button>
                     </div>
                     <div className="right-buttons">
-                        <Button className="button" >
+                        <Button className="button" onClick={handleExport}>
                             <div className="button-base">
                                 <FontAwesomeIcon icon={faDownload} />
                                 <div className="text-12">Export</div>
