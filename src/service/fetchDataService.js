@@ -90,3 +90,17 @@ export async function fetchSiswa() {
     }
 }
 
+export async function fetchEntryGajiGuruById(id){
+    try {
+        const response = await fetch(`http://localhost:8080/api/entry-gaji-guru/${id}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching iuran siswa:", error);
+        return null;
+    }
+};
+
+
+
+

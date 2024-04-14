@@ -4,11 +4,12 @@ import "../styles/tableLaporan.css";
 import Button from "./button";
 import DeleteConfirmationModal from "./deleteModalLaporanBuku";
 import { deleteEntryGajiGuruDetail } from "../service/deleteEntryGajiGuruDetailService";
+import { useHistory } from "react-router-dom";
 
 export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, endDate, setTransactions }) {
-
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  const history = useHistory();
 
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
@@ -46,7 +47,6 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
     }
   };
 
-
   if (!transactions || transactions.length === 0) {
     return <div>Data Tidak Ditemukan</div>;
   }
@@ -60,17 +60,16 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
     return acc;
   }, {});
 
-  const totalFeeGuruPerJurusan = Object.entries(transactionsByJurusan).map(
-    ([jurusan, transactions]) => ({
-      jurusan,
-      totalFeeGuru: transactions.reduce((acc, curr) => acc + curr.feeGuru, 0),
-    })
-  );
+  const totalFeeGuruPerJurusan = Object.entries(transactionsByJurusan).map(([jurusan, transactions]) => ({
+    jurusan,
+    totalFeeGuru: transactions.reduce((acc, curr) => acc + curr.feeGuru, 0),
+  }));
 
-  const totalFeeGuru = totalFeeGuruPerJurusan.reduce(
-    (acc, { totalFeeGuru }) => acc + totalFeeGuru,
-    0
-  );
+  const totalFeeGuru = totalFeeGuruPerJurusan.reduce((acc, { totalFeeGuru }) => acc + totalFeeGuru, 0);
+
+  const handleUpdate = (transactionId) => {
+    history.push(`/update-gaji-guru/${transactionId}`);
+  };
 
   return (
     <div>
@@ -110,8 +109,12 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
                     <td>{transaction.feeGuru}</td>
                     <td>{transaction.keterangan}</td>
                     <td>
-                      <Button className="btn-update">Update</Button>
-                      <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.id)}>Delete</Button>
+                      <Button className="btn-update" onClick={() => handleUpdate(transaction.id)}>
+                        Update
+                      </Button>
+                      <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.id)}>
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -119,21 +122,11 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
                   <td colSpan="5">
                     <strong>Total</strong>
                   </td>
-                  <td>
-                    {transactions.reduce((acc, curr) => acc + curr.minggu1, 0)}
-                  </td>
-                  <td>
-                    {transactions.reduce((acc, curr) => acc + curr.minggu2, 0)}
-                  </td>
-                  <td>
-                    {transactions.reduce((acc, curr) => acc + curr.minggu3, 0)}
-                  </td>
-                  <td>
-                    {transactions.reduce((acc, curr) => acc + curr.minggu4, 0)}
-                  </td>
-                  <td>
-                    {transactions.reduce((acc, curr) => acc + curr.feeGuru, 0)}
-                  </td>
+                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu1, 0)}</td>
+                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu2, 0)}</td>
+                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu3, 0)}</td>
+                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu4, 0)}</td>
+                  <td>{transactions.reduce((acc, curr) => acc + curr.feeGuru, 0)}</td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -162,7 +155,9 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
               </tr>
             ))}
             <tr>
-              <td colSpan="2"><strong>Total Fee Guru</strong></td>
+              <td colSpan="2">
+                <strong>Total Fee Guru</strong>
+              </td>
               <td>{totalFeeGuru}</td>
             </tr>
           </tbody>
