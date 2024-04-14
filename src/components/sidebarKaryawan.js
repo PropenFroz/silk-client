@@ -76,10 +76,10 @@ const SideBarKaryawan = () => {
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Gaji Guru</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Murid</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Murid</CDBSidebarMenuItem>
+            <NavLink exact to="/laporan-daftar-siswa" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Siswa</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
           <CDBSidebarMenu>
