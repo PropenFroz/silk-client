@@ -12,6 +12,7 @@ import EntryTransaksiSiswaKursus from './pages/entryDataTransaksiSiswaKursus';
 import EntryTransaksiSiswaLainnya from './pages/entryDataTransaksiSiswaLainnya';
 import EntryPembelianBuku from './pages/entryPembelianBuku';
 import UpdateDataTransaksiSiswa from './pages/updateDataTransaksiSiswa';
+import UpdateDataKursusSiswa from './pages/updateDataKursusSiswa';
 import UpdateDataPembelianBuku from './pages/updatePembelianBuku';
 import Homepage from './pages/homepageKaryawan';
 import Login from './pages/login';
@@ -35,6 +36,7 @@ function App() {
         <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
         <Route path="/entry-gaji-guru"><EntryGajiGuru/></Route>
         <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>
+        <Route path="/update-kursus-siswa/:id"><UpdateDataKursusSiswa/></Route>
         <Route path="/homepage-karyawan"><Homepage/></Route>
         <Route path="/update-pembelian-buku/:id"><UpdateDataPembelianBuku /></Route>
         <Route path="/sideBarKaryawan"><SidebarKaryawan /></Route>
