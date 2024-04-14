@@ -77,7 +77,7 @@ function TambahAkun() {
             <div>
                 <Sidebar />
             </div>
-            <div className="dashboard-content">
+            <div className="dashboard-laporan">
                 <h2>Create User</h2>
                 {/* Tampilkan pesan kesalahan jika ada */}
                 {errorMessage && (

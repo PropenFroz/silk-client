@@ -4,7 +4,6 @@ import '../styles/modal.css';
 
 function Berhasil({show, onHide}) {
   return (
-    <>
       <Modal show={show} onHide={onHide}>
         <Modal.Body>Berhasil menambahkan data!</Modal.Body>
        <Modal.Footer>
@@ -12,9 +11,7 @@ function Berhasil({show, onHide}) {
             Kembali
         </button>
        </Modal.Footer>
-     
       </Modal>
-    </>
   );
 }
 
