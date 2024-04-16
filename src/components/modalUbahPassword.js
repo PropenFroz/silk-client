@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import '../styles/modal.css';
-
+import { config } from "../Constants"
 function ModalUbahPassword({ show, onHide, onSuccess }) {
   const [newPassword, setNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
 
+  const baseUrl = config.url.API_BASE_URL + '/api/';
+
   const handleChangePassword = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/user/4', {
+      const response = await fetch(`${baseUrl}user/4`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

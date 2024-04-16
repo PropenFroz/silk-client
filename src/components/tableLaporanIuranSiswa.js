@@ -4,11 +4,13 @@ import { useHistory } from 'react-router-dom';
 import DeleteConfirmationModal from './deleteModalLaporanTransaksiSiswa';
 import { deleteEntryTransaksiSiswa } from '../service/deleteDataTransaksiSiswaService';
 import '../styles/tableLaporan.css';
+import { config } from "../Constants"
 
 export default function TabelLaporanIuranSiswa({ transactions, setTransactions, selectedJurusan, tahun }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedTransactionId, setSelectedTransactionId] = useState(null);
     const history = useHistory();
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
     const handleUpdate = (transactionId) => {
         history.push(`/update-kursus-siswa/${transactionId}`);
@@ -38,7 +40,7 @@ export default function TabelLaporanIuranSiswa({ transactions, setTransactions, 
 
     const fetchData = async (jurusan, tahun) => {
         try {
-            const url = `http://localhost:8080/api/iuran-siswa/filter?idJurusanKursus=${jurusan}&tahun=${tahun}`;
+            const url = `${baseUrl}iuran-siswa/filter?idJurusanKursus=${jurusan}&tahun=${tahun}`;
             const response = await fetch(url);
             const data = await response.json();
             return data;

@@ -10,7 +10,12 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { fetchJurusanKursus } from "../service/fetchDataService"; 
 import Select from 'react-select'; 
 
+import { config } from '../Constants'
+
+
 export default function LaporanTransaksi() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const [jurusanKursus, setJurusanKursus] = useState([]);
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [transactions, setTransactions] = useState([]);
@@ -56,7 +61,7 @@ export default function LaporanTransaksi() {
 
     const getAllSiswaByJurusan = async (jurusanId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/siswa/by-jurusan/${jurusanId}`);
+            const response = await fetch(`${baseUrl}siswa/by-jurusan/${jurusanId}`);
             if (!response.ok) {
                 throw new Error('Error fetching data');
             }
@@ -69,7 +74,7 @@ export default function LaporanTransaksi() {
     
     const getAllSiswa = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/siswa/all');
+            const response = await fetch(`${baseUrl}siswa/all`);
             if (!response.ok) {
                 throw new Error('Error fetching data');
             }

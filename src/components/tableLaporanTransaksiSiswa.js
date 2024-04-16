@@ -5,12 +5,14 @@ import Button from './button';
 import DeleteConfirmationModal from './deleteModalLaporanTransaksiSiswa';
 import { deleteEntryTransaksiSiswa } from '../service/deleteDataTransaksiSiswaService';
 import { useHistory } from "react-router-dom";
+import { config } from "../Constants"
 
 
 export default function TabelLaporanTransaksiSiswa({ transactions, startDate, endDate, setTransactions }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedTransactionId, setSelectedTransactionId] = useState(null);
     const history = useHistory();
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
     const handleCloseDeleteModal = () => {
         setShowDeleteModal(false);
@@ -38,7 +40,7 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
         try {
             const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
             const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-            const url = `http://localhost:8080/api/entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            const url = `${baseUrl}entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
             const response = await fetch(url);
             const data = await response.json();
             return data;

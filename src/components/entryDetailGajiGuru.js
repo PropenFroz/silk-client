@@ -3,6 +3,8 @@ import { Table, Button, Modal } from 'react-bootstrap';
 import { fetchSiswa, fetchJurusanKursus, fetchGuru } from "../service/fetchDataService";
 import Select from 'react-select'; 
 
+import { config } from "../Constants"
+
 export default function EntryDetailGajiGuru() {
     const [siswa, setSiswa] = useState([]);
     const [jurusanKursus, setJurusanKursus] = useState([]);
@@ -11,6 +13,8 @@ export default function EntryDetailGajiGuru() {
     const [selectedGuru, setSelectedGuru] = useState(null);
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
     useEffect(() => {
         fetchSiswa()
@@ -45,7 +49,7 @@ export default function EntryDetailGajiGuru() {
             listCreateEntryGajiGuruDetailRequestDTO: muridList
         };
     
-        fetch('http://localhost:8080/api/entry-gaji-guru', {
+        fetch(`${baseUrl}entry-gaji-guru`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

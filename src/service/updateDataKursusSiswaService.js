@@ -1,6 +1,10 @@
+import { config } from '../Constants'
+
+const baseUrl = config.url.API_BASE_URL + '/api/';
+
 const updateEntryDataKursus = async (id, formData) => {
     try {
-        const response = await fetch(`http://localhost:8080/api/entry-transaksi-kursus/update/${id}`, {
+        const response = await fetch(`${baseUrl}entry-transaksi-kursus/update/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

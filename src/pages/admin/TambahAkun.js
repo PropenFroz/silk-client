@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebarAdmin'; // Import Sidebar component
 import "../../styles/style.css";
+import { config } from '../../Constants'
 
 import { useAuth } from '../../components/auth/context/AuthContext';
 import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
@@ -28,6 +29,8 @@ function TambahAkun() {
         }
     }, []);
 
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -39,7 +42,7 @@ function TambahAkun() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/create', {
+            const response = await fetch(`${baseUrl}user/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

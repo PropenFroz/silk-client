@@ -1,3 +1,5 @@
+import { config } from '../Constants'
+
 const sendEntryData = (formData, setShowModal) => {
     const requestData = {
         jenisTransaksi: formData.jenisTransaksi,
@@ -12,8 +14,10 @@ const sendEntryData = (formData, setShowModal) => {
         transfer: formData.transfer,
         keterangan: formData.keterangan
     };
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
-    fetch('http://localhost:8080/api/entry-transaksi-siswa-daftar', {
+
+    fetch(`${baseUrl}entry-transaksi-siswa-daftar`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

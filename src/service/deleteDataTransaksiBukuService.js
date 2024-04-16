@@ -1,6 +1,10 @@
+import { config } from '../Constants'
+
 export async function deleteEntryTransaksiBuku(transactionId) {
   try {
-    const url = `https://localhost:8080/api/entry-transaksi-buku/delete/${transactionId}`;
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
+    const url = `${baseUrl}entry-transaksi-buku/delete/${transactionId}`;
     const response = await fetch(url, { method: "DELETE" });
     if (response.ok) {
       console.log("Data berhasil dihapus");

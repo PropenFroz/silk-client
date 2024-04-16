@@ -8,8 +8,11 @@ import Button from '../components/button';
 import CustomDatePicker from '../components/datePicker'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { config } from '../Constants'
 
 export default function LaporanTransaksi() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [transactions, setTransactions] = useState([]);
@@ -27,7 +30,7 @@ export default function LaporanTransaksi() {
     }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
   
 
-    const url = 'http://localhost:8080/api/';
+    const url = baseUrl;
 
     const handleExport = () => {
         if (!startDate || !endDate) {
@@ -60,7 +63,7 @@ export default function LaporanTransaksi() {
         try {
             const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
             const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-            const url = `http://localhost:8080/api/entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            const url = `${baseUrl}entry-transaksi-siswa/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
             const response = await fetch(url);
             const data = await response.json();
             setTransactions(data);

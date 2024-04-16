@@ -3,8 +3,11 @@ import { useAuth } from '../components/auth/context/AuthContext';
 import { useHistory } from 'react-router-dom'; //
 import '../styles/laporan.css';
 import SideBarKaryawan from '../components/sidebarKaryawan';
+import { config } from '../Constants'
 
 export default function ChangePassword() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -31,7 +34,7 @@ export default function ChangePassword() {
         }
 
         try {
-            const response = await fetch('https://localhost:8080/api/user/2', {
+            const response = await fetch(`${baseUrl}user/2`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

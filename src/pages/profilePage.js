@@ -10,8 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuth } from '../components/auth/context/AuthContext';
+import { config } from '../Constants'
 
 export default function ProfilePage() {
+  const baseUrl = config.url.API_BASE_URL + '/api/';
+
   // Dummy data for user role, replace it with actual user data
 
   const Auth = useAuth();

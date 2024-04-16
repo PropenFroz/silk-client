@@ -11,13 +11,17 @@ import { fetchGuru } from "../service/fetchDataService";
 import Select from "react-select";
 import TabelLaporanGajiGuru from "../components/tableLaporanGajiGuru";
 
+import { config } from '../Constants'
+
 export default function LaporanGajiGuru() {
+  const baseUrl = config.url.API_BASE_URL + '/api/';
+
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guru, setGuru] = useState([]);
   const [selectedGuru, setSelectedGuru] = useState(null);
   const [transactions, setTransactions] = useState([]);
-  const url = "http://localhost:8080/api/";
+  const url = "${baseUrl}";
 
   const Auth = useAuth();
   const user = Auth.getUser();
@@ -68,7 +72,7 @@ export default function LaporanGajiGuru() {
       try {
         const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
         const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-        const url = `http://localhost:8080/api/entry-gaji-guru/filter?idGuru=${parseInt(selectedGuru.value)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+        const url = `${baseUrl}entry-gaji-guru/filter?idGuru=${parseInt(selectedGuru.value)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
         const response = await fetch(url);
         const data = await response.json();
         setTransactions(data);

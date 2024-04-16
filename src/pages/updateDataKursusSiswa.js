@@ -5,8 +5,11 @@ import UpdateData from '../components/updateDataKursusSiswa';
 import { useParams } from 'react-router-dom';
 import '../styles/laporan.css';
 import SideBarKaryawan from '../components/sidebarKaryawan';
+import { config } from '../Constants'
 
 export default function UpdateDataTransaksiSiswa() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const { id } = useParams();
 
     const Auth = useAuth();

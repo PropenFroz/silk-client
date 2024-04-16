@@ -11,7 +11,12 @@ import { fetchJurusanKursus } from "../service/fetchDataService";
 import Select from 'react-select';
 import TabelLaporanPembayaranKursus from "../components/tableLaporanPembayaranKursus";
 
+import { config } from '../Constants'
+
+
 export default function LaporanPembayaranKursus() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [jurusanKursus, setJurusanKursus] = useState([]);
@@ -51,7 +56,7 @@ export default function LaporanPembayaranKursus() {
             const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
             const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
     
-            const exportUrl = `http://localhost:8080/api/entry-transaksi-siswa/laporan-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}&idJurusan=${parseInt(selectedJurusan.value)}`;
+            const exportUrl = `${baseUrl}entry-transaksi-siswa/laporan-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}&idJurusan=${parseInt(selectedJurusan.value)}`;
             window.open(exportUrl, '_blank');
         }
     };
@@ -67,7 +72,7 @@ export default function LaporanPembayaranKursus() {
             try {
                 const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
                 const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-                const url = `http://localhost:8080/api/entry-transaksi-siswa/filter-by-date-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}&idJurusan=${parseInt(selectedJurusan.value)}`;
+                const url = `${baseUrl}entry-transaksi-siswa/filter-by-date-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}&idJurusan=${parseInt(selectedJurusan.value)}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 console.log(transactions)

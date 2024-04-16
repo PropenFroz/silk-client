@@ -3,13 +3,15 @@ import { Table, DropdownButton, Dropdown } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 import '../styles/statusSiswa.css';
 import { useHistory } from "react-router-dom";
+import { config } from "../Constants"
 
 export default function TableLaporan({ transactions }) {
     const history = useHistory();
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
     const handleStatusChange = async (transactionId, newStatus) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/siswa/update/${transactionId}`, {
+            const response = await fetch(`${baseUrl}siswa/update/${transactionId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

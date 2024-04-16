@@ -1,6 +1,10 @@
+import { config } from '../Constants'
+
 export async function deleteEntryGajiGuruDetail(transactionId) {
     try {
-        const url = `http://localhost:8080/api/entry-gaji-guru-detail/delete/${parseInt(transactionId)}`;
+        const baseUrl = config.url.API_BASE_URL + '/api/';
+
+        const url = `${baseUrl}entry-gaji-guru-detail/delete/${parseInt(transactionId)}`;
         console.log("url", url)
         const response = await fetch(url, { method: 'DELETE' });
         if (response.ok) {

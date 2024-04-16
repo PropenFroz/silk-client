@@ -5,8 +5,12 @@ import EntryData from '../components/entryDataTransaksiSiswa'
 import '../styles/laporan.css';
 import SideBarKaryawan from '../components/sidebarKaryawan';
 
+import { config } from '../Constants'
+
 
 export default function EntryDataTransaksiSiswa() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const Auth = useAuth();
     const user = Auth.getUser();
     const history = useHistory();

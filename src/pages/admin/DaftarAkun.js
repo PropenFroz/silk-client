@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../components/auth/context/AuthContext';
+import { config } from '../../Constants'
 import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
 import Sidebar from '../../components/sidebarAdmin'; // Import Sidebar component
 
@@ -14,12 +15,16 @@ function DaftarAkun() {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
+    console.log("ini base url " + baseUrl);
+
     useEffect(() => {
         if (user != null) {
             setIsAdmin(user.data.role[0] === 'Admin');
         }
         // Fetch data from backend
-        fetch('http://localhost:8080/api/user/all')
+        fetch(`${baseUrl}user/all`)
             .then(response => response.json())
             .then(data => setUsers(data));
     }, []);
@@ -38,7 +43,7 @@ function DaftarAkun() {
         }
 
         // Send request to backend to delete user with specified id
-        fetch(`http://localhost:8080/api/user/${id}`, { method: 'DELETE' })
+        fetch(`${baseUrl}user/${id}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
                     // If deletion is successful, update the state to reflect changes

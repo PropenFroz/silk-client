@@ -5,11 +5,13 @@ import Button from "./button";
 import DeleteConfirmationModal from "./deleteModalLaporanBuku";
 import { deleteEntryGajiGuruDetail } from "../service/deleteEntryGajiGuruDetailService";
 import { useHistory } from "react-router-dom";
+import { config } from "../Constants"
 
 export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, endDate, setTransactions }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
   const history = useHistory();
+  const baseUrl = config.url.API_BASE_URL + '/api/';
 
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
@@ -37,7 +39,7 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
     try {
       const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
       const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-      const url = `http://localhost:8080/api/entry-gaji-guru/filter?idGuru=${parseInt(idGuru)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+      const url = `${baseUrl}entry-gaji-guru/filter?idGuru=${parseInt(idGuru)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
       const response = await fetch(url);
       const data = await response.json();
       return data;

@@ -9,7 +9,10 @@ import { faUserGraduate, faWallet, faBook } from '@fortawesome/free-solid-svg-ic
 import { useAuth } from '../components/auth/context/AuthContext';
 import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
 
+import { config } from '../Constants'
+
 export default function EntryPembelianBuku() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
     const Auth = useAuth();
     const user = Auth.getUser();

@@ -12,6 +12,7 @@ import { parseJwt, handleLogError } from '../components/auth/context/Helpers'
 
 
 export const Login = () => {
+    
     const Auth = useAuth()
     const isLoggedIn = Auth.userIsAuthenticated()
 

@@ -10,12 +10,17 @@ import { fetchJurusanKursus } from "../service/fetchDataService";
 import Select from 'react-select';
 import TabelLaporanIuranSiswa from "../components/tableLaporanIuranSiswa";
 
+import { config } from '../Constants'
+
+
 export default function LaporanIuranSiswa() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const [jurusanKursus, setJurusanKursus] = useState([]);
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [selectedTahun, setSelectedTahun] = useState('');
     const [transactions, setTransactions] = useState([]);
-    const url = "http://localhost:8080/api/";
+    const url = baseUrl;
 
     const Auth = useAuth();
     const user = Auth.getUser();

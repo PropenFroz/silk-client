@@ -4,6 +4,7 @@ import SummaryModal from "./summaryModalUpdatePembelianBuku";
 import UpdateBerhasil from "./modalUpdate";
 import "../styles/updatePembelianBuk.css";
 import { fetchBukuPurwacaraka } from "../service/fetchDataService";
+import { config } from "../Constants"
 
 export default function UpdatePembelianBuku() {
   const [formData, setFormData] = useState({
@@ -23,8 +24,10 @@ export default function UpdatePembelianBuku() {
   const { id } = useParams();
   const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
 
+  const baseUrl = config.url.API_BASE_URL + '/api/';
+
   useEffect(() => {
-    fetch(`https://localhost:8080/api/entry-transaksi-buku/get/${id}`)
+    fetch(`${baseUrl}entry-transaksi-buku/get/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

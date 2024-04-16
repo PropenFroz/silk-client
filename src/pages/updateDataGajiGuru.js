@@ -5,8 +5,11 @@ import UpdateGajiGuru from '../components/updateGajiGuru';
 import { useParams } from 'react-router-dom';
 import '../styles/laporan.css';
 import SideBarKaryawan from '../components/sidebarKaryawan';
+import { config } from '../Constants'
 
 export default function UpdateDataGajiGuru() {
+    const baseUrl = config.url.API_BASE_URL + '/api/';
+
     const { id } = useParams(); // Ambil parameter ID dari URL menggunakan useParams
 
     const Auth = useAuth();

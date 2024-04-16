@@ -1,3 +1,7 @@
+import { config } from '../Constants'
+
+const baseUrl = config.url.API_BASE_URL + '/api/';
+
 const sendEntryData = (formData, setShowModal, id) => {
   const requestData = {
     bukuPurwacaraka: formData.bukuPurwacaraka,
@@ -10,7 +14,7 @@ const sendEntryData = (formData, setShowModal, id) => {
     hargaJual: formData.hargaJual,
   };
 
-  fetch(`https://localhost:8080/api/entry-transaksi-buku/update/${id}`, {
+  fetch(`${baseUrl}entry-transaksi-buku/update/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
