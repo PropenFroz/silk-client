@@ -43,12 +43,18 @@ const SideBarKaryawan = () => {
         <div className="sidebar-section-label">Input Data</div>
           <CDBSidebarMenu>
             <NavLink exact to="/entry-transaksi-siswa" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Pendaftaran Siswa</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/entry-transaksi-siswa-kursus" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Kursus Siswa</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/entry-transaksi-siswa-lainnya" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-solid fa-user-graduate" className="sidebar-menu-item">Transaksi Lainnya Siswa</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/entry-pembelian-buku" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-book" className="sidebar-menu-item">Pembelian Buku</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/entry-gaji-guru" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-solid fa-wallet" className="sidebar-menu-item">Gaji Guru</CDBSidebarMenuItem>
             </NavLink>
            
@@ -57,23 +63,23 @@ const SideBarKaryawan = () => {
             <NavLink exact to="/laporan-transaksi-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-iuran-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Iuran</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-pembayaran-kursus" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Pembayaran Kursus</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/laporan-keuangan-buku" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Keuangan & Stok Buku</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-gaji-guru" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Gaji Guru</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Murid</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Murid</CDBSidebarMenuItem>
+            <NavLink exact to="/laporan-daftar-siswa" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Siswa</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
           <CDBSidebarMenu>

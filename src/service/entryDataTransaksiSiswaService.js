@@ -13,7 +13,7 @@ const sendEntryData = (formData, setShowModal) => {
         keterangan: formData.keterangan
     };
 
-    fetch('https://silk-purwa.up.railway.app/api/entry-transaksi-siswa', {
+    fetch('http://localhost:8080/api/entry-transaksi-siswa-daftar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

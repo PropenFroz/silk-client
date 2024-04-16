@@ -13,7 +13,6 @@ function Berhasil({show, onHide}) {
 
 
   return (
-    <>
       <Modal show={show} onHide={onHide}>
         <Modal.Body>Berhasil perbaharui data!</Modal.Body>
        <Modal.Footer>
@@ -21,9 +20,7 @@ function Berhasil({show, onHide}) {
             Kembali
         </button>
        </Modal.Footer>
-     
       </Modal>
-    </>
   );
 }
 

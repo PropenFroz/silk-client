@@ -32,6 +32,7 @@
 }
 
 .text-field .label {
+    margin-bottom:15px;
     align-self: stretch;
     color: var(--coolgray-90);
     font-family: var(--body-s-font-family);

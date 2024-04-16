@@ -2,7 +2,7 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import updateEntryData from "../service/updateDataTransaksiSiswaService";
 
-function SummaryModal({ id,  formData, selectedJurusan, selectedGrade, show, onHide, onSuccess }) {
+function SummaryModal({ id, formData, selectedSiswa, show, onHide, onSuccess }) {
 
     const formatDate = (dateString) => {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -24,22 +24,8 @@ function SummaryModal({ id,  formData, selectedJurusan, selectedGrade, show, onH
     <Modal show={show} onHide={onHide}>
       <Modal.Title>Ringkasan Formulir</Modal.Title>
       <Modal.Body>
-        <p><strong>Jenis Pembayaran:</strong> {
-            (() => {
-                switch (formData.jenisTransaksi) {
-                    case 1:
-                        return 'Pendaftaran';
-                    case 2:
-                        return 'Kursus';
-                    default:
-                        return 'Lainnya';
-                }
-            })()
-        }</p>
         <p><strong>Tanggal Pembayaran:</strong> {formatDate(formData.tanggalPembayaran)}</p>
-        <p><strong>Nama Siswa:</strong> {formData.namaSiswa}</p>
-        <p><strong>Jurusan:</strong> {selectedJurusan}</p>
-        <p><strong>Grade:</strong> {selectedGrade}</p>
+        <p><strong>Nama Siswa:</strong> {selectedSiswa}</p>
         <p><strong>Uang Pendaftaran:</strong> {formData.uangPendaftaran}</p>
         <p><strong>Uang Kursus:</strong> {formData.uangKursus}</p>
         <p><strong>Uang Buku:</strong> {formData.uangBuku}</p>

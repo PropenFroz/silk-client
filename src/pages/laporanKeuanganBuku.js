@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../components/auth/context/AuthContext';
+import { useHistory } from 'react-router-dom'; //
 import Sidebar from "../components/sidebarKaryawan";
 import "../styles/laporan.css";
 import TableLaporanKeuanganBuku from "../components/tableLaporanKeuanganBuku";
@@ -12,7 +14,20 @@ export default function LaporanKeuanganBuku() {
   const [endDate, setEndDate] = useState(null);
   const [transactions, setTransactions] = useState([]);
 
-  const url = 'https://silk-purwa.up.railway.app/api/';
+  const Auth = useAuth();
+  const user = Auth.getUser();
+  const history = useHistory();
+
+  useEffect(() => {
+      // Periksa apakah pengguna telah masuk saat komponen dimuat
+      if (user == null) {
+          // Jika pengguna tidak masuk, arahkan mereka ke halaman login
+          history.push('/login');
+      }
+  }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
+
+
+  const url = 'https://localhost:8080/api/';
 
   const handleExport = () => {
     if (!startDate || !endDate) {
@@ -42,7 +57,7 @@ export default function LaporanKeuanganBuku() {
         try {
           const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
           const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-          const url = `https://silk-purwa.up.railway.app/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+          const url = `https://localhost:8080/api/entry-transaksi-buku/filter-by-date?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
           const response = await fetch(url);
           const data = await response.json();
           setTransactions(data);
@@ -52,7 +67,7 @@ export default function LaporanKeuanganBuku() {
           console.error("Error fetching data:", error);
         }
     };
-    }
+  };
 
   return (
     <div className="dashboard d-flex">

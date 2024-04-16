@@ -1,6 +1,6 @@
 const prod = {
     url: {
-      API_BASE_URL: 'https://silk-purwa.up.railway.app',
+      API_BASE_URL: 'https://localhost:8080',
     }
   }
   
@@ -10,4 +10,4 @@ const prod = {
     }
   }
   
-  export const config = process.env.NODE_ENV === 'production' ? dev : prod
+  export const config = process.env.NODE_ENV === 'development' ? dev : prod

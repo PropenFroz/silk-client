@@ -23,10 +23,6 @@ export default function EntryPembelianBuku() {
         }
     }, []);
 
-    // if (!isKaryawan) {
-    //     history.push('/homepage-karyawan');
-    //     return null;
-    // }
     if (user == null) {
         history.push('/login');
         return null;

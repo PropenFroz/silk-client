@@ -63,21 +63,6 @@ export default function EntryData() {
 
     return (
         <div className="frame">
-             <div class="row">
-                <div className="col-sm">
-                    <div className="input-field">
-                        <label htmlFor="jenisTransaksi" className="form-label">Jenis Pembayaran</label>
-                        <select className="form-select" name="jenisTransaksi" onChange={handleChange} defaultValue={1}>
-                            <option value={1}>Pendaftaran</option>
-                            <option value={2}>Kursus</option>
-                            <option value={3}>Lainnya</option>
-                        </select>
-                    </div>
-                </div>
-            <div className="col-sm">
-            </div>
-               
-            </div>
             <div class="row">
                 <div className="col-sm">
                     <div className="input-field">

@@ -39,7 +39,7 @@ function TambahAkun() {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://silk-purwa.up.railway.app/api/user/create', {
+            const response = await fetch('http://localhost:8080/api/user/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ function TambahAkun() {
             <div>
                 <Sidebar />
             </div>
-            <div className="dashboard-content">
+            <div className="dashboard-laporan">
                 <h2>Create User</h2>
                 {/* Tampilkan pesan kesalahan jika ada */}
                 {errorMessage && (

@@ -48,8 +48,12 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
         }
       };
 
-    const handleUpdate = (transactionId) => {
-        history.push(`/update-transaksi-siswa/${transactionId}`);
+    const handleUpdate = (transactionId, jenisTransaksi) => {
+        if (jenisTransaksi === 2) {
+            history.push(`/update-kursus-siswa/${transactionId}`);
+        } else {
+            history.push(`/update-transaksi-siswa/${transactionId}`);
+        }
     };
 
     const formatDate = (dateString) => {
@@ -90,9 +94,9 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{formatDate(transaction.tanggalPembayaran)}</td>
-                            <td>{transaction.namaSiswa}</td>
-                            <td>{transaction.jurusanKursus.namaJurusan}</td>
-                            <td>{transaction.gradeKursus.namaGrade}</td>
+                            <td>{transaction.siswa.namaSiswa}</td>
+                            <td>{transaction.siswa.jurusanKursus.namaJurusan}</td>
+                            <td>{transaction.siswa.gradeKursus.namaGrade}</td>
                             <td>{transaction.uangPendaftaran}</td>
                             <td>{transaction.uangKursus}</td>
                             <td>{transaction.uangBuku}</td>
@@ -101,7 +105,7 @@ export default function TabelLaporanTransaksiSiswa({ transactions, startDate, en
                             <td>{transaction.cash + transaction.transfer}</td>
                             <td>{transaction.keterangan}</td>
                             <td>
-                                <Button className="btn-update" onClick={() => handleUpdate(transaction.idEntryTransaksiSiswa)}>Update</Button> 
+                                <Button className="btn-update" onClick={() => handleUpdate(transaction.idEntryTransaksiSiswa, transaction.jenisTransaksi)}>Update</Button> 
                                 <Button className="btn-delete" onClick={() => handleShowDeleteModal(transaction.idEntryTransaksiSiswa)}>Delete</Button>
                             </td>
                         </tr>

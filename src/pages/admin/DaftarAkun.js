@@ -19,7 +19,7 @@ function DaftarAkun() {
             setIsAdmin(user.data.role[0] === 'Admin');
         }
         // Fetch data from backend
-        fetch('https://silk-purwa.up.railway.app/api/user/all')
+        fetch('http://localhost:8080/api/user/all')
             .then(response => response.json())
             .then(data => setUsers(data));
     }, []);
@@ -38,7 +38,7 @@ function DaftarAkun() {
         }
 
         // Send request to backend to delete user with specified id
-        fetch(`http://silk-purwa.up.railway.app/api/user/${id}`, { method: 'DELETE' })
+        fetch(`http://localhost:8080/api/user/${id}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
                     // If deletion is successful, update the state to reflect changes
