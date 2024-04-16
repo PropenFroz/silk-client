@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../components/auth/context/AuthContext';
+import { useHistory } from 'react-router-dom'; //
 import Sidebar from "../components/sidebarKaryawan";
 import "../styles/laporan.css";
 import Button from "../components/button";
@@ -15,6 +17,19 @@ export default function LaporanPembayaranKursus() {
     const [jurusanKursus, setJurusanKursus] = useState([]);
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [transactions, setTransactions] = useState([]);
+
+    const Auth = useAuth();
+    const user = Auth.getUser();
+    const history = useHistory();
+  
+    useEffect(() => {
+        // Periksa apakah pengguna telah masuk saat komponen dimuat
+        if (user == null) {
+            // Jika pengguna tidak masuk, arahkan mereka ke halaman login
+            history.push('/login');
+        }
+    }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
+  
 
     useEffect(() => {
         fetchJurusanKursus()
@@ -36,7 +51,7 @@ export default function LaporanPembayaranKursus() {
             const formattedStartDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
             const formattedEndDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
     
-            const exportUrl = `${url}entry-transaksi-siswa/laporan-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+            const exportUrl = `http://localhost:8080/api/entry-transaksi-siswa/laporan-jurusan?startDate=${formattedStartDate}&endDate=${formattedEndDate}&idJurusan=${parseInt(selectedJurusan.value)}`;
             window.open(exportUrl, '_blank');
         }
     };
@@ -93,7 +108,7 @@ export default function LaporanPembayaranKursus() {
                         </Button>
                     </div>
                     <div className="right-buttons">
-                        <Button className="button" >
+                        <Button className="button" onClick={handleExport}>
                             <div className="button-base">
                                 <FontAwesomeIcon icon={faDownload} />
                                 <div className="text-12">Export</div>

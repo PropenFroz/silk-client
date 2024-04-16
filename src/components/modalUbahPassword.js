@@ -1,27 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import '../styles/modal.css';
 
-function ModalUbahPassword({ formData, show, onHide, onSuccess }) {
+function ModalUbahPassword({ show, onHide, onSuccess }) {
+  const [newPassword, setNewPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = () => {
-      onHide();
-      onSuccess();
+  const handleChangePassword = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/user/4', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password: newPassword })
+      });
+
+      if (response.ok) {
+        onSuccess();
+        onHide();
+      } 
+      else if (!response.ok) {
+        // Tangkap pesan error dari respons
+        const errorMessage = await response.text();
+        // Tampilkan pesan error kepada pengguna
+        setErrorMessage(errorMessage);
+        return;
+      } 
+      {
+        // Handle error response
+        console.error('Failed to change password:', response.statusText);
+      }
+    } catch (error) {
+      // Handle network errors
+
+      console.error('Failed to change password:', error.message);
+    }
   };
 
   return (
     <Modal show={show} onHide={onHide}>
+                      {/* Tampilkan pesan kesalahan jika ada */}
+                      {errorMessage && (
+                    <div className="error-message">
+                        {errorMessage}
+                    </div>
+                )}
       <Modal.Title>Change Password</Modal.Title>
       <Modal.Body>
-        <div className="label">Current Password</div>
-        <div className="password">xxxxxxxxxxx</div>
         <div className="label">New Password</div>
-        <div className="password">xxxxxxxxxx</div>
-        <div className="label">Confirm Password</div>
-        <div className="password">xxxxxxxxxx</div>
+        <input
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn-submit" onClick={handleSubmit}>Submit</button>
+        <button className="btn-submit" onClick={handleChangePassword}>Submit</button>
       </Modal.Footer>
     </Modal>
   );

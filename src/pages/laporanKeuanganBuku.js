@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../components/auth/context/AuthContext';
+import { useHistory } from 'react-router-dom'; //
 import Sidebar from "../components/sidebarKaryawan";
 import "../styles/laporan.css";
 import TableLaporanKeuanganBuku from "../components/tableLaporanKeuanganBuku";
@@ -11,6 +13,19 @@ export default function LaporanKeuanganBuku() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [transactions, setTransactions] = useState([]);
+
+  const Auth = useAuth();
+  const user = Auth.getUser();
+  const history = useHistory();
+
+  useEffect(() => {
+      // Periksa apakah pengguna telah masuk saat komponen dimuat
+      if (user == null) {
+          // Jika pengguna tidak masuk, arahkan mereka ke halaman login
+          history.push('/login');
+      }
+  }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
+
 
   const url = 'https://localhost:8080/api/';
 

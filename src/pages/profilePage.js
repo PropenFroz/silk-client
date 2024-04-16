@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'; //
 import Sidebar from "../components/sidebarKaryawan";
 import SidebarAdmin from '../components/sidebarAdmin'; // Import Sidebar component
 import "../styles/lihatprofil.css";
@@ -24,6 +25,18 @@ export default function ProfilePage() {
       return <Sidebar />;
     }
   };
+
+  const history = useHistory();
+
+  useEffect(() => {
+    // Periksa apakah pengguna telah masuk saat komponen dimuat
+    if (user == null) {
+        // Jika pengguna tidak masuk, arahkan mereka ke halaman login
+        history.push('/login');
+    }
+}, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
+
+
 
   return (
     <div className="dashboard d-flex">
