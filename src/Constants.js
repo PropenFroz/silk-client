@@ -11,3 +11,5 @@ const prod = {
   }
   
   export const config = process.env.NODE_ENV === 'production' ? dev : prod
+
+  //production
