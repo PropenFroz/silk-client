@@ -1,11 +1,9 @@
-// UpdateGajiGuru.js
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import SummaryModal from "./summaryModalUpdateGajiGuru";
-import UpdateBerhasil from "./modalUpdate";
+import Berhasil from "./modalSuccessUpdateGajiGuru";
 import { useHistory } from "react-router-dom";
 import { fetchSiswa, fetchEntryGajiGuruById } from "../service/fetchDataService";
-import updateEntryGajiGuru from "../service/updateDataGajiGuruService";
 
 export default function UpdateGajiGuru({ id }) {
   const [formData, setFormData] = useState({
@@ -21,11 +19,11 @@ export default function UpdateGajiGuru({ id }) {
   });
 
   const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [siswaOptions, setSiswaOptions] = useState([]);
   const [selectedSiswa, setSelectedSiswa] = useState("");
   const [namaGuru, setNamaGuru] = useState("");
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-//   const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     fetchSiswa()
@@ -44,7 +42,7 @@ export default function UpdateGajiGuru({ id }) {
         const formattedDate = new Date(data.tanggal).toISOString().split("T")[0];
         const updatedData = { ...data, tanggal: formattedDate };
         setFormData(updatedData);
-        setNamaGuru(data.namaGuru);
+        setNamaGuru(data.entryGajiGuru.guru.namaGuru);
       })
       .catch((error) => console.error("Error fetching existing transaction data:", error));
   }, [id]);
@@ -61,7 +59,7 @@ export default function UpdateGajiGuru({ id }) {
         const updatedFormData = {
           ...formData,
           tanggal: new Date(formData.tanggal).toISOString(),
-          siswa: formData.siswa.idSiswa,
+          siswa: formData.siswa.idSiswa.toString(),
           uangKursus: formData.uangKursus.toString(),
           minggu1: formData.minggu1.toString(),
           minggu2: formData.minggu2.toString(),
@@ -70,19 +68,18 @@ export default function UpdateGajiGuru({ id }) {
           feeGuru: formData.feeGuru.toString(),
           keterangan: formData.keterangan,
         };
-
-        await updateEntryGajiGuru(id, updatedFormData);
+        
+        setFormData(updatedFormData)
         setShowModal(true);
       } catch (error) {
         console.error("Error updating entry data:", error);
       }
     }
   };
-
-//   const handleSuccessModalClose = () => {
-//     setShowSuccessModal(false);
-//     history.push("/laporan-gaji-guru");
-//   };
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+    history.push("/laporan-gaji-guru");
+  };
 
   return (
     <div className="frame">
@@ -159,13 +156,20 @@ export default function UpdateGajiGuru({ id }) {
       <button type="button" className="btn-submit" onClick={handleSubmit}>
         Submit
       </button>
-      <SummaryModal id={id} formData={formData} selectedSiswa={selectedSiswa} show={showModal} onHide={() => setShowModal(false)} onSuccess={() => setShowSuccessModal(true)} />
-      <UpdateBerhasil
-        show={showSuccessModal}
-        onHide={() => {
-          setShowSuccessModal(false);
-          window.location.href = "/silk/laporan-gaji-guru";
-        }}
+      <SummaryModal
+                id={id} 
+                formData={formData}
+                selectedSiswa={selectedSiswa}
+                namaGuru={namaGuru}
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                onSuccess={() => {
+                    setShowSuccessModal(true);
+                }}
+            />
+      <Berhasil
+          show={showSuccessModal}
+          onHide={handleSuccessModalClose}
       />
     </div>
   );

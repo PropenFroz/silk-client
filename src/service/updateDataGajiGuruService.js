@@ -4,6 +4,9 @@ const baseUrl = config.url.API_BASE_URL + '/api/';
 
 const updateEntryGajiGuru = async (id, formData) => {
   try {
+    delete formData.entryGajiGuru;
+    delete formData.deleted;
+    delete formData.id;
     const response = await fetch(`${baseUrl}entry-gaji-guru/update/${id}`, {
       method: "PUT",
       headers: {
