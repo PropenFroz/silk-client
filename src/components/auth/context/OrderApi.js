@@ -52,7 +52,7 @@ function getUserMe(user) {
 // -- Axios
 
 const instance = axios.create({
-  baseURL: config.url.API_BASE_URL
+  baseURL: `https://silk-purwa.up.railway.app`
 })
 
 instance.interceptors.request.use(function (config) {
