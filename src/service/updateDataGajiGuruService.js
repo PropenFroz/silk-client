@@ -1,5 +1,8 @@
 const updateEntryGajiGuru = async (id, formData) => {
   try {
+    delete formData.entryGajiGuru;
+    delete formData.deleted;
+    delete formData.id;
     const response = await fetch(`http://localhost:8080/api/entry-gaji-guru/update/${id}`, {
       method: "PUT",
       headers: {
