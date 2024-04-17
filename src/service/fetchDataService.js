@@ -19,7 +19,7 @@ export async function fetchGradeKursus() {
 
 export async function fetchJurusanKursus() {
     try {
-        const response = await fetch('http://localhost:8080/api/jurusan-kursus/all');
+        const response = await fetch(`${baseUrl}jurusan-kursus/all`);
         if (!response.ok) {
             throw new Error('Failed to fetch jurusanKursus');
         }
@@ -47,7 +47,7 @@ export async function fetchBukuPurwacaraka() {
 
 export async function fetchEntryDataById(id){
     try {
-        const response = await fetch(`http://localhost:8080/api/entry-transaksi-siswa/${id}`);
+        const response = await fetch(`${baseUrl}entry-transaksi-siswa/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -58,7 +58,7 @@ export async function fetchEntryDataById(id){
 
 export async function fetchIuranSiswaById(id){
     try {
-        const response = await fetch(`http://localhost:8080/api/iuran-siswa/${id}`);
+        const response = await fetch(`${baseUrl}iuran-siswa/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -69,7 +69,7 @@ export async function fetchIuranSiswaById(id){
 
 export async function fetchGuru() {
     try {
-        const response = await fetch('http://localhost:8080/api/guru/all');
+        const response = await fetch(`${baseUrl}guru/all`);
         if (!response.ok) {
             throw new Error('Failed to fetch guru');
         }
@@ -83,7 +83,7 @@ export async function fetchGuru() {
 
 export async function fetchSiswa() {
     try {
-        const response = await fetch('http://localhost:8080/api/siswa/all');
+        const response = await fetch(`${baseUrl}siswa/all`);
         if (!response.ok) {
             throw new Error('Failed to fetch siswa');
         }
@@ -97,7 +97,7 @@ export async function fetchSiswa() {
 
 export async function fetchEntryGajiGuruById(id){
     try {
-        const response = await fetch(`http://localhost:8080/api/entry-gaji-guru/${id}`);
+        const response = await fetch(`${baseUrl}entry-gaji-guru/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
