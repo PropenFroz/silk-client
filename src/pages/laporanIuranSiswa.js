@@ -20,7 +20,6 @@ export default function LaporanIuranSiswa() {
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [selectedTahun, setSelectedTahun] = useState('');
     const [transactions, setTransactions] = useState([]);
-    const url = baseUrl;
 
     const Auth = useAuth();
     const user = Auth.getUser();
@@ -44,14 +43,14 @@ export default function LaporanIuranSiswa() {
     }, []);
 
     const handleExport = () => {
-        const exportUrl = `${url}iuran-siswa/laporan-jurusan-filter?idJurusanKursus=${selectedJurusan.value}&tahun=${selectedTahun}`;
+        const exportUrl = `${baseUrl}iuran-siswa/laporan-jurusan-filter?idJurusanKursus=${selectedJurusan.value}&tahun=${selectedTahun}`;
         window.open(exportUrl, '_blank');
         
     };
 
     const handleView = async () => {
         try {
-            const url = `${url}iuran-siswa/filter?idJurusanKursus=${selectedJurusan.value}&tahun=${selectedTahun}`;
+            const url = `${baseUrl}iuran-siswa/filter?idJurusanKursus=${selectedJurusan.value}&tahun=${selectedTahun}`;
             const response = await fetch(url);
             const data = await response.json();
             setTransactions(data);

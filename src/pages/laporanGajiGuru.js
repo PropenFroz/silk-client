@@ -21,7 +21,6 @@ export default function LaporanGajiGuru() {
   const [guru, setGuru] = useState([]);
   const [selectedGuru, setSelectedGuru] = useState(null);
   const [transactions, setTransactions] = useState([]);
-  const url = `${baseUrl}`;
 
   const Auth = useAuth();
   const user = Auth.getUser();
@@ -56,7 +55,7 @@ export default function LaporanGajiGuru() {
       const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
       const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
 
-      const exportUrl = `${url}entry-gaji-guru/laporan?idGuru=${parseInt(selectedGuru.value)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+      const exportUrl = `${baseUrl}entry-gaji-guru/laporan?idGuru=${parseInt(selectedGuru.value)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
       window.open(exportUrl, "_blank");
     }
   };
