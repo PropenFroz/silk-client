@@ -5,7 +5,7 @@ const baseUrl = config.url.API_BASE_URL + '/api/';
 
 export async function fetchGradeKursus() {
     try {
-        const response = await fetch('http://localhost:8080/api/grade-kursus/all');
+        const response = await fetch(`${baseUrl}grade-kursus/all`);
         if (!response.ok) {
             throw new Error('Failed to fetch grades');
         }

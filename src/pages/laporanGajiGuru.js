@@ -21,7 +21,7 @@ export default function LaporanGajiGuru() {
   const [guru, setGuru] = useState([]);
   const [selectedGuru, setSelectedGuru] = useState(null);
   const [transactions, setTransactions] = useState([]);
-  const url = "${baseUrl}";
+  const url = `${baseUrl}`;
 
   const Auth = useAuth();
   const user = Auth.getUser();
