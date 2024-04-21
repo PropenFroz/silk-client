@@ -76,7 +76,7 @@ export const Login = () => {
             return null;
         }
         else if (Auth.getUser().data.role[0] === 'Eksekutif') {
-            history.push('/homepage-karyawan');
+            history.push('/homepage-eksekutif');
             return null;
         }
         else if (Auth.getUser().data.role[0] === 'Guru') {

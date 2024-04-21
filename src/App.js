@@ -25,6 +25,7 @@ import LaporanIuranSiswa from './pages/laporanIuranSiswa';
 import LaporanDaftarSiswa from './pages/laporanDaftarSiswa'
 import UpdateDataGajiGuru from './pages/updateDataGajiGuru';
 import HomepageGuru from "./pages/homepageGuru";
+import HomepageEksekutif from "./pages/homepageEksekutif";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/update-kursus-siswa/:id"><UpdateDataKursusSiswa/></Route>
         <Route path="/homepage-karyawan"><Homepage/></Route>
         <Route path="/homepage-guru"><HomepageGuru/></Route>
+        <Route path="/homepage-eksekutif"><HomepageEksekutif/></Route>
         <Route path="/update-pembelian-buku/:id"><UpdateDataPembelianBuku /></Route>
         <Route path="/sideBarKaryawan"><SidebarKaryawan /></Route>
         <Route path="/login"><Login /></Route>
