@@ -81,6 +81,20 @@ export async function fetchGuru() {
     }
 }
 
+export async function fetchGuruByUserId(id) {
+    try {
+        const response = await fetch(`${baseUrl}guru/user-id/${id}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch guru');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching guru:', error);
+        throw error;
+    }
+}
+
 export async function fetchSiswa() {
     try {
         const response = await fetch(`${baseUrl}siswa/all`);

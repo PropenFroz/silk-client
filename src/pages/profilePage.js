@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'; //
-import Sidebar from "../components/sidebarKaryawan";
+import SidebarKaryawan from "../components/sidebarKaryawan";
+import SidebarGuru from "../components/sidebarGuru";
 import SidebarAdmin from '../components/sidebarAdmin'; // Import Sidebar component
 import "../styles/lihatprofil.css";
 import ProfileComponent from "../components/profileComponent"; // Correct import path
@@ -24,8 +25,10 @@ export default function ProfilePage() {
   const renderSidebar = () => {
     if (user.data.role == "Admin") {
       return <SidebarAdmin />;
-    } else {
-      return <Sidebar />;
+    } else if (user.data.role == "Karyawan") {
+      return <SidebarKaryawan />;
+    } else if (user.data.role == "Guru") {
+      return <SidebarGuru/>;
     }
   };
 

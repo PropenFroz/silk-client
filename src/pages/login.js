@@ -80,7 +80,7 @@ export const Login = () => {
             return null;
         }
         else if (Auth.getUser().data.role[0] === 'Guru') {
-            history.push('/homepage-karyawan');
+            history.push('/homepage-guru');
             return null;
         }
 
