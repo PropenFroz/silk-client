@@ -26,6 +26,10 @@ import LaporanDaftarSiswa from './pages/laporanDaftarSiswa'
 import UpdateDataGajiGuru from './pages/updateDataGajiGuru';
 import HomepageGuru from "./pages/homepageGuru";
 import HomepageEksekutif from "./pages/homepageEksekutif";
+import LaporanTransaksiEksekutif from "./pages/laporanTransaksiSiswaEksekutif";
+import LaporanIuranSiswaEksekutif from "./pages/laporanIuranSiswaEksekutif";
+import LaporanPembayaranKursusEksekutif from "./pages/laporanPembayaranKursusEksekutif";
+import LaporanKeuanganBukuEksekutif from "./pages/laporanKeuanganBukuEksekutif";
 
 function App() {
   return (
@@ -33,11 +37,15 @@ function App() {
      <Router basename="/silk">
       <Switch>
         <Route path="/laporan-keuangan-buku"><LaporanKeuanganBuku /></Route>
+        <Route path="/laporan-keuangan-buku-eksekutif"><LaporanKeuanganBukuEksekutif /></Route>
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
+        <Route path="/laporan-transaksi-siswa-eksekutif"><LaporanTransaksiEksekutif /></Route>
         <Route path="/laporan-gaji-guru"><LaporanGajiGuru /></Route>
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
         <Route path="/laporan-pembayaran-kursus"><LaporanPembayaranKursus /></Route>
+        <Route path="/laporan-pembayaran-kursus-eksekutif"><LaporanPembayaranKursusEksekutif /></Route>
         <Route path="/laporan-iuran-siswa"><LaporanIuranSiswa /></Route>
+        <Route path="/laporan-iuran-siswa-eksekutif"><LaporanIuranSiswaEksekutif /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
         <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>

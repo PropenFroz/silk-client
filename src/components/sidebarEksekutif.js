@@ -46,25 +46,25 @@ const SideBarEksekutif = () => {
            
             <hr className="sidebar-divider" />
             <div className="sidebar-section-label">Laporan</div>
-            <NavLink exact to="/laporan-transaksi-siswa" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-transaksi-siswa-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Transaksi Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-iuran-siswa" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-iuran-siswa-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Iuran</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-pembayaran-kursus" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-pembayaran-kursus-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Pembayaran Kursus</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-keuangan-buku" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-keuangan-buku-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Keuangan & Stok Buku</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-gaji-guru" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-gaji-guru-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Gaji Guru</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-daftar-siswa" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-daftar-siswa-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Siswa</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
