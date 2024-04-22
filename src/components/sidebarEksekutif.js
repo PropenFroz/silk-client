@@ -67,6 +67,9 @@ const SideBarEksekutif = () => {
             <NavLink exact to="/laporan-daftar-siswa-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Siswa</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/laporan-buku" activeClassName="activeClicked">
+                <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Buku</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
           <CDBSidebarMenu>
           </CDBSidebarMenu>
