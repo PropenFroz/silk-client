@@ -16,9 +16,11 @@ export default function HomepageEksekutif() {
     const history = useHistory();
     const [isEksekutif, setIsEksekutif] = useState(true);
     const [jurusanKursus, setJurusanKursus] = useState([]);
+
     const [selectedJurusan, setSelectedJurusan] = useState('1');
     const [pieChartData, setPieChartData] = useState(null);
-    const [selectedYear, setSelectedYear] = useState(0);
+
+    const [selectedYear, setSelectedYear] = useState(2020);
     const [totalPendapatan, setTotalPendapatan] = useState(0);
 
     useEffect(() => {
@@ -32,6 +34,12 @@ export default function HomepageEksekutif() {
         fetchPieChartData(selectedJurusan);
     }, []);
 
+    useEffect (() => {
+        if (selectedYear) {
+            fetchTotalPendapatan(selectedYear);
+        }
+    }, []);
+
     const fetchjurusanKursus = async () => {
         try {
             const jurusanData = await fetchJurusanKursus();
@@ -43,7 +51,7 @@ export default function HomepageEksekutif() {
 
     const fetchPieChartData = async (idJurusan) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/siswa/dashboard/${idJurusan}`);
+            const response = await fetch(`${baseUrl}siswa/dashboard/${idJurusan}`);
             const data = await response.json();
             setPieChartData(data);
         } catch (error) {
@@ -53,7 +61,7 @@ export default function HomepageEksekutif() {
 
     const fetchTotalPendapatan = async (tahun) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/dashboard/pendapatan?tahun=${tahun}`);
+            const response = await fetch(`${baseUrl}dashboard/pendapatan?tahun=${tahun}`);
             const data = await response.json();
             setTotalPendapatan(data);
         } catch (error) {
