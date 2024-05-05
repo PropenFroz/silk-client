@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 import Button from './button';
+import { config } from "../Constants"
 
 export default function TabelLaporanBuku() {
     const [bukuList, setBukuList] = useState([]);
+    const baseUrl = config.url.API_BASE_URL + '/api/';
 
     useEffect(() => {
         fetchData();
@@ -12,7 +14,7 @@ export default function TabelLaporanBuku() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/buku-purwacaraka/all'); 
+            const response = await fetch(`${baseUrl}buku-purwacaraka/all`); 
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
