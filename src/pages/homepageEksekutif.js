@@ -16,12 +16,17 @@ export default function HomepageEksekutif() {
     const history = useHistory();
     const [isEksekutif, setIsEksekutif] = useState(true);
     const [jurusanKursus, setJurusanKursus] = useState([]);
-
     const [selectedJurusan, setSelectedJurusan] = useState('1');
-    const [pieChartData, setPieChartData] = useState(null);
 
+    const [pieChartData, setPieChartData] = useState(null);
     const [selectedYear, setSelectedYear] = useState(2020);
+
+    const [barChartPendapatanData, setBarChartPendapatanData] = useState(null);
+    const [barChartPengeluaranData, setBarChartPengeluaranData] = useState(null);
+    const [selectedYearGrafik, setSelectedYearGrafik] = useState(2020);
+
     const [totalPendapatan, setTotalPendapatan] = useState(0);
+
 
     useEffect(() => {
         if (user != null) {
@@ -32,13 +37,20 @@ export default function HomepageEksekutif() {
 
     useEffect(() => {
         fetchPieChartData(selectedJurusan);
-    }, []);
+    }, [selectedJurusan]);
 
-    useEffect (() => {
+    useEffect(() => {
+        if (selectedYearGrafik) {
+            fetchPendapatanBarChartData(selectedYearGrafik);
+        }
+    }, [selectedYearGrafik]);
+
+    useEffect(() => {
         if (selectedYear) {
             fetchTotalPendapatan(selectedYear);
+            
         }
-    }, []);
+    }, [selectedYear]);
 
     const fetchjurusanKursus = async () => {
         try {
@@ -56,6 +68,26 @@ export default function HomepageEksekutif() {
             setPieChartData(data);
         } catch (error) {
             console.error('Error fetching pie chart data:', error);
+        }
+    };
+
+    const fetchPendapatanBarChartData = async (tahun) => {
+        try {
+            const response = await fetch(`${baseUrl}dashboard/grafik-pendapatan?tahun=${tahun}`);
+            const data = await response.json();
+            setBarChartPendapatanData(data);
+        } catch (error) {
+            console.error('Error fetching bar chart pendapatan data:', error);
+        }
+    };
+
+    const fetchPengeluaranBarChartData = async (tahun) => {
+        try {
+            const response = await fetch(`${baseUrl}dashboard/grafik-pengeluaran?tahun=${tahun}`);
+            const data = await response.json();
+            setBarChartPengeluaranData(data);
+        } catch (error) {
+            console.error('Error fetching bar chart pengeluaran data:', error);
         }
     };
 
@@ -98,7 +130,7 @@ export default function HomepageEksekutif() {
             },
         ],
     };
-    
+
     const pieOptions = {
         plugins: {
             tooltip: {
@@ -116,10 +148,9 @@ export default function HomepageEksekutif() {
         },
         maintainAspectRatio: false,
     };
-    
 
-    const barChartData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    const barData = {
+        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
         datasets: [
             {
                 label: 'Pendapatan',
@@ -128,7 +159,20 @@ export default function HomepageEksekutif() {
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(255, 99, 132, 0.8)',
                 hoverBorderColor: 'rgba(255, 99, 132, 1)',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: [
+                    barChartPendapatanData?.januari || 0, 
+                    barChartPendapatanData?.februari || 0,
+                    barChartPendapatanData?.maret || 0, 
+                    barChartPendapatanData?.april || 0,
+                    barChartPendapatanData?.mei || 0, 
+                    barChartPendapatanData?.juni || 0,
+                    barChartPendapatanData?.juli || 0, 
+                    barChartPendapatanData?.agustus || 0,
+                    barChartPendapatanData?.september || 0, 
+                    barChartPendapatanData?.oktober || 0,
+                    barChartPendapatanData?.november || 0, 
+                    barChartPendapatanData?.desember || 0
+                ],
             },
             {
                 label: 'Pengeluaran',
@@ -137,11 +181,24 @@ export default function HomepageEksekutif() {
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
                 hoverBorderColor: 'rgba(54, 162, 235, 1)',
-                data: [45, 59, 70, 71, 36, 25, 30],
+                data: [
+                    barChartPengeluaranData?.januari || 0, 
+                    barChartPengeluaranData?.februari || 0,
+                    barChartPengeluaranData?.maret || 0, 
+                    barChartPengeluaranData?.april || 0,
+                    barChartPengeluaranData?.mei || 0, 
+                    barChartPengeluaranData?.juni || 0,
+                    barChartPengeluaranData?.juli || 0, 
+                    barChartPengeluaranData?.agustus || 0,
+                    barChartPengeluaranData?.september || 0, 
+                    barChartPengeluaranData?.oktober || 0,
+                    barChartPengeluaranData?.november || 0, 
+                    barChartPengeluaranData?.desember || 0
+                ],
             },
         ],
     };
-
+        
     return (
         <div className="dashboard d-flex">
             <SideBarEksekutif />
@@ -195,7 +252,7 @@ export default function HomepageEksekutif() {
                                     <div className="card">
                                         <div className="card-body">
                                             <h5 className="card-title">Total Pengeluaran</h5>
-                                            <p className="card-text">Rp2,000,000</p>
+                                            <p className="card-text">Rp200000</p>
                                         </div>
                                     </div>
                                 </div>
@@ -204,14 +261,31 @@ export default function HomepageEksekutif() {
                     </div>
                 </div>
                 <div className="section">
-                    <h2>Total Pengeluaran dan Pendapatan</h2>
+                    <h2>Total Pendapatan dan Pengeluaran</h2>
                     <div className="section-content">
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="card">
                                     <div className="card-body">
+                                        <div className="dropdown mb-3">
+                                            <select
+                                                name="yearDropdown"
+                                                onChange={(e) => {
+                                                    setSelectedYearGrafik(parseInt(e.target.value));
+                                                    fetchPendapatanBarChartData(parseInt(e.target.value));
+                                                    fetchPengeluaranBarChartData(parseInt(e.target.value));
+                                                }}
+                                                value={selectedYearGrafik}
+                                            >
+                                                {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((year) => (
+                                                    <option key={year} value={year}>
+                                                        {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
                                         <div className="chart-container" style={{ width: '100%', height: '300px' }}>
-                                            <Bar data={barChartData} options={{ maintainAspectRatio: false }} />
+                                            <Bar data={barData} options={{ maintainAspectRatio: false }} />
                                         </div>
                                     </div>
                                 </div>
