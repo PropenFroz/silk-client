@@ -33,7 +33,7 @@ function DaftarAkun() {
     };
 
     const handleDeleteUser = (id) => {
-        const confirmation = window.confirm("Apakah Anda yakin ingin menghapus akun ini?");
+        const confirmation = window.confirm("Apakah Anda yakin ingin menghapus akun ini? Seluruh entri data yang berhubungan dengan akun role Guru akan ikut terhapus.");
         if (!confirmation) {
             return; // Jika pengguna memilih untuk tidak menghapus, keluar dari fungsi
         }
