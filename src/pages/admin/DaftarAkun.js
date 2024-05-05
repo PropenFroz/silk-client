@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../components/auth/context/AuthContext';
 import { config } from '../../Constants'
-import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
-import Sidebar from '../../components/sidebarAdmin'; // Import Sidebar component
+import { useHistory } from 'react-router-dom'; 
+import Sidebar from '../../components/sidebarAdmin'; 
 
 function DaftarAkun() {
     const Auth = useAuth();
     const user = Auth.getUser();
 
     const [users, setUsers] = useState([]);
-    const history = useHistory(); // Initialize history
+    const history = useHistory(); 
     const [isAdmin, setIsAdmin] = useState(true);
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -23,33 +23,32 @@ function DaftarAkun() {
         if (user != null) {
             setIsAdmin(user.data.role[0] === 'Admin');
         }
-        // Fetch data from backend
         fetch(`${baseUrl}user/all`)
             .then(response => response.json())
             .then(data => setUsers(data));
     }, []);
 
     const handleTambahAkunClick = () => {
-        history.push('/admin/tambah-akun'); // Navigate to '/admin/tambahAkun' when button clicked
+        history.push('/admin/tambah-akun'); 
     };
 
     const handleDeleteUser = (id) => {
+        const confirmation = window.confirm("Apakah Anda yakin ingin menghapus akun ini?");
+        if (!confirmation) {
+            return; // Jika pengguna memilih untuk tidak menghapus, keluar dari fungsi
+        }
 
         if (id === user.data.userId) {
             console.error('User cannot delete their own account.');
             setErrorMessage("Anda sedang login dengan akun ini. Tidak dapat menghapus akun!");
-            // You can set an error message here if needed
             return;
         }
 
-        // Send request to backend to delete user with specified id
         fetch(`${baseUrl}user/${id}`, { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
-                    // If deletion is successful, update the state to reflect changes
                     setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
                 } else {
-                    // Handle error if deletion is not successful
                     console.error('Failed to delete user');
                 }
             })
@@ -59,7 +58,7 @@ function DaftarAkun() {
     };
 
     if (!isAdmin) {
-        history.push('/homepage-karyawan');
+        history.push('/login');
         return null;
     }
     if (user == null) {
@@ -74,7 +73,7 @@ function DaftarAkun() {
                 <Sidebar />
             </div>
             <div className="dashboard-content">
-            {errorMessage && (
+                {errorMessage && (
                     <div className="error-message">
                         {errorMessage}
                     </div>

@@ -61,13 +61,13 @@ const SideBarEksekutif = () => {
             <NavLink exact to="/laporan-gaji-guru-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Gaji Guru</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-data-siswa-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Siswa</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/laporan-daftar-siswa-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Daftar Siswa</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/laporan-buku" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-buku-eksekutif" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Buku</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

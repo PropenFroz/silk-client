@@ -32,6 +32,15 @@ export default function HomepageGuru() {
             })
             .catch((error) => console.error("Error fetching guru:", error));
     }, []);
+
+    if (user == null) {
+        history.push('/login');
+        return null;
+    }
+    if (!isGuru) {
+        history.push('/login');
+        return null;
+    }
     
     const handleView = async () => {
         if (!startDate || !endDate) {
@@ -56,11 +65,6 @@ export default function HomepageGuru() {
           }
         }
     };
-
-    if (user == null) {
-        history.push('/login');
-        return null;
-    }
 
     return (
         <div className="dashboard d-flex">

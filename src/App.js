@@ -27,6 +27,7 @@ import UpdateDataGajiGuru from './pages/updateDataGajiGuru';
 import HomepageGuru from "./pages/homepageGuru";
 import HomepageEksekutif from "./pages/homepageEksekutif";
 import LaporanBuku from "./pages/laporanBuku";
+import LaporanBukuEksekutif from "./pages/laporanBukuEksekutif";
 import EntryTambahBuku from "./pages/entrytambahBuku";
 import LaporanTransaksiEksekutif from "./pages/laporanTransaksiSiswaEksekutif";
 import LaporanIuranSiswaEksekutif from "./pages/laporanIuranSiswaEksekutif";
@@ -35,6 +36,7 @@ import LaporanKeuanganBukuEksekutif from "./pages/laporanKeuanganBukuEksekutif";
 import LaporanGajiGuruEksekutif from "./pages/laporanGajiGuruEksekutif";
 import LaporanDaftarSiswaEksekutif from "./pages/laporanDaftarSiswaEksekutif";
 import LaporanDataSiswa from "./pages/laporanDataSiswa";
+import LaporanDataSiswaEksekutif from "./pages/laporanDataSiswaEksekutif";
 
 function App() {
   return (
@@ -51,6 +53,7 @@ function App() {
         <Route path="/laporan-pembayaran-kursus"><LaporanPembayaranKursus /></Route>
         <Route path="/laporan-pembayaran-kursus-eksekutif"><LaporanPembayaranKursusEksekutif /></Route>
         <Route path="/laporan-iuran-siswa"><LaporanIuranSiswa /></Route>
+        <Route path="/laporan-iuran-siswa-eksekutif"><LaporanIuranSiswaEksekutif /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
         <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>
@@ -73,6 +76,9 @@ function App() {
         <Route path="/laporan-daftar-siswa">< LaporanDaftarSiswa /></Route>
         <Route path="/laporan-daftar-siswa-eksekutif"><LaporanDaftarSiswaEksekutif /></Route>
         <Route path="/laporan-data-siswa"><LaporanDataSiswa /></Route>
+        <Route path="/laporan-data-siswa-eksekutif"><LaporanDataSiswaEksekutif /></Route>
+        <Route path="/laporan-buku"><LaporanBuku /></Route>
+        <Route path="/laporan-buku-eksekutif"><LaporanBukuEksekutif /></Route>
       </Switch>
       </Router>
     </AuthProvider>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'; //
+import SidebarEksekutif from "../components/sidebarEksekutif";
 import SidebarKaryawan from "../components/sidebarKaryawan";
 import SidebarGuru from "../components/sidebarGuru";
 import SidebarAdmin from '../components/sidebarAdmin'; // Import Sidebar component
@@ -29,7 +30,10 @@ export default function ProfilePage() {
       return <SidebarKaryawan />;
     } else if (user.data.role == "Guru") {
       return <SidebarGuru/>;
+    } else if (user.data.role == "Eksekutif") {
+      return <SidebarEksekutif/>;
     }
+    
   };
 
   const history = useHistory();

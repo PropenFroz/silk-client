@@ -29,6 +29,8 @@ export default function HomepageEksekutif() {
     const [totalPengeluaran, setTotalPengeluaran] = useState(0);
 
 
+
+
     useEffect(() => {
         if (user != null) {
             setIsEksekutif(user.data.role[0] === 'Eksekutif');
@@ -59,6 +61,15 @@ export default function HomepageEksekutif() {
             fetchTotalPengeluaran(selectedYear);
         }
     }, [selectedYear]);
+
+    if (user == null) {
+        history.push('/login');
+        return null;
+    }
+    if (!isEksekutif) {
+        history.push('/login');
+        return null;
+    }
 
     const fetchjurusanKursus = async () => {
         try {
