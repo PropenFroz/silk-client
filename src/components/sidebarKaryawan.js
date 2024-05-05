@@ -75,7 +75,7 @@ const SideBarKaryawan = () => {
             <NavLink exact to="/laporan-gaji-guru" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Gaji Guru</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/laporan-data-siswa" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="fa-regular fa-clipboard" className="sidebar-menu-item">Data Siswa</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/laporan-daftar-siswa" activeClassName="activeClicked">

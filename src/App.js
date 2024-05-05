@@ -26,6 +26,7 @@ import LaporanDaftarSiswa from './pages/laporanDaftarSiswa'
 import UpdateDataGajiGuru from './pages/updateDataGajiGuru';
 import HomepageGuru from "./pages/homepageGuru";
 import HomepageEksekutif from "./pages/homepageEksekutif";
+import LaporanDataSiswa from "./pages/laporanDataSiswa";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/laporan-transaksi-siswa"><LaporanTransaksiSiswa /></Route>
         <Route path="/laporan-pembayaran-kursus"><LaporanPembayaranKursus /></Route>
         <Route path="/laporan-iuran-siswa"><LaporanIuranSiswa /></Route>
+        <Route path="/laporan-data-siswa"><LaporanDataSiswa /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
         <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>
