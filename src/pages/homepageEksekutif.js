@@ -26,6 +26,7 @@ export default function HomepageEksekutif() {
     const [selectedYearGrafik, setSelectedYearGrafik] = useState(2020);
 
     const [totalPendapatan, setTotalPendapatan] = useState(0);
+    const [totalPengeluaran, setTotalPengeluaran] = useState(0);
 
 
     useEffect(() => {
@@ -49,6 +50,13 @@ export default function HomepageEksekutif() {
         if (selectedYear) {
             fetchTotalPendapatan(selectedYear);
             
+        }
+    }, [selectedYear]);
+
+    useEffect(() => {
+        if (selectedYear) {
+            fetchTotalPendapatan(selectedYear);
+            fetchTotalPengeluaran(selectedYear);
         }
     }, [selectedYear]);
 
@@ -100,6 +108,17 @@ export default function HomepageEksekutif() {
             console.error('Error fetching total pendapatan data:', error);
         }
     };
+
+    const fetchTotalPengeluaran = async (tahun) => {
+        try {
+            const response = await fetch(`${baseUrl}dashboard/pengeluaran?tahun=${tahun}`);
+            const data = await response.json();
+            setTotalPengeluaran(data);
+        } catch (error) {
+            console.error('Error fetching total pengeluaran data:', error);
+        }
+    };
+
 
     if (user == null) {
         history.push('/login');
@@ -238,6 +257,7 @@ export default function HomepageEksekutif() {
                                     <select name="yearDropdown" onChange={(e) => {
                                         setSelectedYear(parseInt(e.target.value))
                                         fetchTotalPendapatan(parseInt(e.target.value))
+                                        fetchTotalPengeluaran(parseInt(e.target.value))
                                         }} value={selectedYear}>
                                             {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map(year => (
                                                 <option key={year} value={year}>{year}</option>
@@ -252,7 +272,7 @@ export default function HomepageEksekutif() {
                                     <div className="card">
                                         <div className="card-body">
                                             <h5 className="card-title">Total Pengeluaran</h5>
-                                            <p className="card-text">Rp200000</p>
+                                            <p className="card-text">Rp{totalPengeluaran.toLocaleString('id-ID')}</p>
                                         </div>
                                     </div>
                                 </div>

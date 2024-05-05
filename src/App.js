@@ -26,6 +26,8 @@ import LaporanDaftarSiswa from './pages/laporanDaftarSiswa'
 import UpdateDataGajiGuru from './pages/updateDataGajiGuru';
 import HomepageGuru from "./pages/homepageGuru";
 import HomepageEksekutif from "./pages/homepageEksekutif";
+import LaporanBuku from "./pages/laporanBuku";
+import EntryTambahBuku from "./pages/entrytambahBuku";
 import LaporanTransaksiEksekutif from "./pages/laporanTransaksiSiswaEksekutif";
 import LaporanIuranSiswaEksekutif from "./pages/laporanIuranSiswaEksekutif";
 import LaporanPembayaranKursusEksekutif from "./pages/laporanPembayaranKursusEksekutif";
@@ -48,12 +50,14 @@ function App() {
         <Route path="/laporan-pembayaran-kursus"><LaporanPembayaranKursus /></Route>
         <Route path="/laporan-pembayaran-kursus-eksekutif"><LaporanPembayaranKursusEksekutif /></Route>
         <Route path="/laporan-iuran-siswa"><LaporanIuranSiswa /></Route>
+        <Route path="/laporan-buku"><LaporanBuku /></Route>
         <Route path="/laporan-iuran-siswa-eksekutif"><LaporanIuranSiswaEksekutif /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
         <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>
         <Route path="/entry-pembelian-buku"><EntryPembelianBuku/></Route>
         <Route path="/entry-gaji-guru"><EntryGajiGuru/></Route>
+        <Route path="/entry-tambah-buku"><EntryTambahBuku/></Route>
         <Route path="/update-gaji-guru/:id"><UpdateDataGajiGuru/></Route>
         <Route path="/update-transaksi-siswa/:id"><UpdateDataTransaksiSiswa/></Route>
         <Route path="/update-kursus-siswa/:id"><UpdateDataKursusSiswa/></Route>
