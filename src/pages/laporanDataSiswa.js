@@ -28,8 +28,9 @@ export default function LaporanDataSiswa() {
     }, [history]); // Tambahkan history ke dependency array agar useEffect dipanggil ulang saat berubah
 
     const handleExport = () => {
-        // Logic untuk mengekspor data
-    };
+        const exportUrl = `${baseUrl}siswa/jumlah/laporan/${year}`;
+        window.open(exportUrl, '_blank');
+      };
 
     const handleView = async () => {
         // Logic untuk menampilkan data
