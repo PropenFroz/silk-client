@@ -34,6 +34,7 @@ import LaporanPembayaranKursusEksekutif from "./pages/laporanPembayaranKursusEks
 import LaporanKeuanganBukuEksekutif from "./pages/laporanKeuanganBukuEksekutif";
 import LaporanGajiGuruEksekutif from "./pages/laporanGajiGuruEksekutif";
 import LaporanDaftarSiswaEksekutif from "./pages/laporanDaftarSiswaEksekutif";
+import LaporanDataSiswa from "./pages/laporanDataSiswa";
 
 function App() {
   return (
@@ -50,8 +51,6 @@ function App() {
         <Route path="/laporan-pembayaran-kursus"><LaporanPembayaranKursus /></Route>
         <Route path="/laporan-pembayaran-kursus-eksekutif"><LaporanPembayaranKursusEksekutif /></Route>
         <Route path="/laporan-iuran-siswa"><LaporanIuranSiswa /></Route>
-        <Route path="/laporan-buku"><LaporanBuku /></Route>
-        <Route path="/laporan-iuran-siswa-eksekutif"><LaporanIuranSiswaEksekutif /></Route>
         <Route path="/entry-transaksi-siswa"><EntryTransaksiSiswa/></Route>
         <Route path="/entry-transaksi-siswa-kursus"><EntryTransaksiSiswaKursus/></Route>
         <Route path="/entry-transaksi-siswa-lainnya"><EntryTransaksiSiswaLainnya/></Route>
@@ -73,6 +72,7 @@ function App() {
         <Route path="/ubah-password"><UbahPassword /></Route>
         <Route path="/laporan-daftar-siswa">< LaporanDaftarSiswa /></Route>
         <Route path="/laporan-daftar-siswa-eksekutif"><LaporanDaftarSiswaEksekutif /></Route>
+        <Route path="/laporan-data-siswa"><LaporanDataSiswa /></Route>
       </Switch>
       </Router>
     </AuthProvider>

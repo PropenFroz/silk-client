@@ -1,0 +1,35 @@
+/* yearPicker.css */
+
+.year-picker-input {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 12px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.year-picker-input:focus {
+    border-color: #007bff; /* warna fokus ketika dipilih */
+}
+
+.year-picker-wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
+.icon-calendar {
+    margin-left: 8px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.icon-calendar:hover {
+    color: #333; /* warna ikon ketika disorot */
+}
+
+.year-picker-custom {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

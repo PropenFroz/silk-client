@@ -51,7 +51,7 @@
 }  
 
 .table thead th {
-    background-color: #d5d5d5; /* Warna latar belakang judul kolom */
+    background-color: #f0f0f0; /* Warna latar belakang judul kolom */
     color: #000000; /* Warna teks judul kolom */
     font-size: 14px;
     vertical-align: middle; 
@@ -62,4 +62,6 @@
     background: #ffffff;
     font-size: 12px;
     vertical-align: middle; 
+    width: 100%;
+    text-align: center;
 }
