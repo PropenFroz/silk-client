@@ -45,3 +45,8 @@
     width: 20px;
     height: 20px;
 }
+
+.card-link {
+    text-decoration: none;
+    color: inherit; /* Sesuaikan dengan warna teks yang kamu inginkan */
+  }

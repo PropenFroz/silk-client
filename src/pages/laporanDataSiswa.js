@@ -24,6 +24,7 @@ export default function LaporanDataSiswa() {
         } else {
             // Jika pengguna masuk, panggil handleView secara otomatis untuk menampilkan data saat pertama kali dimuat
             handleView();
+            window.scrollTo(0, 0);
         }
     }, [history]); // Tambahkan history ke dependency array agar useEffect dipanggil ulang saat berubah
 

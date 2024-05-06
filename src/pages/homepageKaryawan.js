@@ -38,38 +38,43 @@ export default function EntryPembelianBuku() {
                 <h2>Hi, {user && user.data.sub}!</h2>
                 <h3>Input Data</h3>
                 <div className='input-data'>
-                    <CardInputData icon={faUserGraduate} title="Transaksi Siswa" />
-                    <CardInputData icon={faBook} title="Pembelian Buku" />
-                    <CardInputData icon={faWallet} title="Gaji Guru" />
+                    <CardInputData icon={faUserGraduate} title="Transaksi Pendaftaran" link="/entry-transaksi-siswa"/>
+                    <CardInputData icon={faUserGraduate} title="Transaksi Kursus" link="/entry-transaksi-siswa-kursus"/>
+                    <CardInputData icon={faUserGraduate} title="Transaksi Lainnya" link="/entry-transaksi-siswa-lainnya"/>
+                    <CardInputData icon={faBook} title="Pembelian Buku" link="/entry-pembelian-buku" />
+                    <CardInputData icon={faWallet} title="Gaji Guru"  link="/entry-gaji-guru" />
                 </div>
                 <h3>Report</h3>
                 <div class="row mb-3">
                     <div className="col-sm">
-                        <CardReport title="Laporan Transaksi" />
+                        <CardReport title="Laporan Transaksi" link="/laporan-transaksi-siswa" />
                     </div>
                     <div className="col-sm">
-                        <CardReport title="Laporan Gaji Guru" ></CardReport>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div className="col-sm">
-                        <CardReport title="Laporan Iuran" />
-                    </div>
-                    <div className="col-sm">
-                        <CardReport title="Laporan Data Murid" ></CardReport>
+                        <CardReport title="Laporan Gaji Guru"link="/laporan-gaji-guru"></CardReport>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div className="col-sm">
-                        <CardReport title="Laporan Pembayaran Kursus" />
+                        <CardReport title="Laporan Iuran" link="/laporan-iuran-siswa" />
                     </div>
                     <div className="col-sm">
-                        <CardReport title="Laporan Daftar Murid" ></CardReport>
+                        <CardReport title="Laporan Data Murid" link="/laporan-data-siswa" ></CardReport>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div className="col-sm">
-                        <CardReport title="Laporan Keuangan dan Stok Buku" />
+                        <CardReport title="Laporan Pembayaran Kursus" link="/laporan-pembayaran-kursus"/>
+                    </div>
+                    <div className="col-sm">
+                        <CardReport title="Laporan Daftar Murid" link="/laporan-daftar-siswa" ></CardReport>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div className="col-sm">
+                        <CardReport title="Laporan Keuangan dan Stok Buku" link="/laporan-keuangan-buku"/>
+                    </div>
+                    <div className="col-sm">
+                        <CardReport title="Laporan Buku" link="/laporan-buku" ></CardReport>
                     </div>
                 </div>
             </div>

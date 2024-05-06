@@ -26,6 +26,9 @@ export default function LaporanIuranSiswaEksekutif() {
     useEffect(() => {
         if (user == null) {
             history.push('/login');
+        } else {
+            // Lakukan scroll ke atas setelah halaman dimuat
+            window.scrollTo(0, 0);
         }
     }, [user, history]);
 

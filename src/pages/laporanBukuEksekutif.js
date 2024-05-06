@@ -16,6 +16,9 @@ export default function LaporanBukuEksekutif() {
         if (user == null) {
             // Jika pengguna tidak masuk, arahkan mereka ke halaman login
             history.push('/login');
+        } else {
+            // Lakukan scroll ke atas setelah halaman dimuat
+            window.scrollTo(0, 0);
         }
     }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
 
