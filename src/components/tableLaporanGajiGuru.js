@@ -50,7 +50,7 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
   };
 
   if (!transactions || transactions.length === 0) {
-    return <div>Data Tidak Ditemukan</div>;
+    return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
   }
 
   const transactionsByJurusan = transactions.reduce((acc, transaction) => {

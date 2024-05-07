@@ -108,7 +108,7 @@ export const Login = () => {
                     error={false}
                     fieldText="Email"
                     fieldTextClassName="text-field-3"
-                    label1="Email Address"
+                    label1="Username"
                     labelClassName="text-field-2"
                     textarea={false}
                     onChange={(e) => setUsername(e.target.value)}
