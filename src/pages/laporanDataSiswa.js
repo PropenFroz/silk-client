@@ -58,7 +58,7 @@ export default function LaporanDataSiswa() {
                             className="form-control" 
                             value={year}
                             onChange={e => setYear(parseInt(e.target.value))}
-                            style={{ marginRight: '10px', marginBottom: '10px' }}
+                            style={{ marginRight: '10px', marginBottom: '15px' }}
                         />
 
                         <Button className="button" onClick={handleView}>
