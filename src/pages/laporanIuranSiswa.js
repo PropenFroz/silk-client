@@ -20,6 +20,7 @@ export default function LaporanIuranSiswa() {
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [selectedTahun, setSelectedTahun] = useState('');
     const [transactions, setTransactions] = useState([]);
+    const [showDataNotFound, setShowDataNotFound] = useState(false); // State untuk menampilkan pesan "Data tidak ditemukan"
 
     const Auth = useAuth();
     const user = Auth.getUser();
@@ -57,6 +58,7 @@ export default function LaporanIuranSiswa() {
             const response = await fetch(url);
             const data = await response.json();
             setTransactions(data);
+            setShowDataNotFound(data.length === 0); // Set state showDataNotFound berdasarkan panjang data yang dimuat
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -101,9 +103,9 @@ export default function LaporanIuranSiswa() {
                             style={{ marginRight: '10px' }}
                         />
 
-                        <Button className="button" >
+                        <Button className="button" onClick={handleView}>
                             <div className="button-base-2">
-                                <div className="text-13" onClick={handleView}>Tampilkan</div>
+                                <div className="text-13">Tampilkan</div>
                             </div>
                         </Button>
                     </div>
@@ -116,6 +118,7 @@ export default function LaporanIuranSiswa() {
                         </Button>
                     </div>
                 </div>
+                {showDataNotFound && <div>Data tidak ditemukan!</div>}
                 <TabelLaporanIuranSiswa transactions={transactions} setTransactions={setTransactions} selectedJurusan={selectedJurusan} tahun={selectedTahun}/>
             </div>
         </div>

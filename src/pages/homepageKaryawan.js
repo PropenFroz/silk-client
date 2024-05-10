@@ -29,6 +29,9 @@ export default function EntryPembelianBuku() {
     if (user == null) {
         history.push('/login');
         return null;
+    } else {
+        // Lakukan scroll ke atas setelah halaman dimuat
+        window.scrollTo(0, 0);
     }
 
     return (

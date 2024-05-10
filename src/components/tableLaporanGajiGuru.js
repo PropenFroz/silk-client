@@ -56,7 +56,11 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
   };
 
   if (!transactions || transactions.length === 0) {
-    return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
+    if (!startDate || !endDate || !idGuru) {
+      return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
+    } else {
+      return <div> </div>;
+    }
   }
 
   const transactionsByJurusan = transactions.reduce((acc, transaction) => {

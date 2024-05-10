@@ -52,11 +52,9 @@ export default function ProfilePage() {
         {/* Render sidebar based on user role */}
         {renderSidebar()}
       </div>
-      <div className="col-md-9 d-flex align-items-center justify-content-center">
-        <div className="profile-content">
-          <h2 className="text-center mb-4">My Profile</h2>
-          <ProfileComponent />
-        </div>
+      <div className="profile-content">
+        <h2 className="text-center-profile mb-4">My Profile</h2>
+        <ProfileComponent />
       </div>
     </div>
   );

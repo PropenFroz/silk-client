@@ -60,13 +60,14 @@ export default function TabelLaporanPembayaranKursus({ transactions, selectedJur
         return date.toLocaleDateString('id-ID', options);
     };
 
-    if (!transactions) {
+    if (!selectedJurusan || !startDate || !endDate) {
         return <div>Mohon Pilih Jurusan dan Tanggal Terlebih Dahulu!</div>;
     }
 
     if (transactions.length === 0) {
-        return <div>Mohon Pilih Jurusan dan Tanggal Terlebih Dahulu!</div>;
+        return <div> </div>;
     }
+    
     return (
         <div className="table-wrapper">
             <Table responsive bordered>

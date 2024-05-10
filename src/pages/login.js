@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../components/button';
 import TextField from "../components/textField";
@@ -19,8 +19,11 @@ export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isError, setIsError] = useState(false)
-    const history = useHistory(); // Memindahkan panggilan useHistory() ke sini
+    const history = useHistory();
     const [errorMessage, setErrorMessage] = useState('');
+    
+    // Referensi untuk elemen "group"
+    const groupRef = useRef(null);
 
     const handleInputChange = (e, { name, value }) => {
         if (name === 'username') {
@@ -28,7 +31,7 @@ export const Login = () => {
         } else if (name === 'password') {
           setPassword(value)
         }
-      }
+    }
 
     const HandleLogin = async () => {
         try {
@@ -54,10 +57,8 @@ export const Login = () => {
         } catch (error) {
             console.error('Error:', error);
             if (error.response && error.response.status === 403) {
-                // Tangani kasus ketika respons memiliki status kode 403 (Forbidden)
                 setErrorMessage('Username atau password tidak sesuai!');
             } else {
-                // Tangani kasus lainnya, seperti kesalahan jaringan atau kesalahan server
                 setErrorMessage('Terjadi kesalahan saat melakukan login.');
             }
 
@@ -65,8 +66,15 @@ export const Login = () => {
     
     }; 
 
+    // Efek untuk mengarahkan scroll ke elemen "group" setelah halaman dimuat
+    useEffect(() => {
+        if (groupRef.current) {
+            groupRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
+
+    // Logika pengalihan halaman
     if (isLoggedIn) {
-               
         if (Auth.getUser().data.role[0] === 'Admin') {
             history.push('/admin/daftar-akun');
             return null;
@@ -83,14 +91,14 @@ export const Login = () => {
             history.push('/homepage-guru');
             return null;
         }
-
     }
      
 
     return (
         <div className="hifi-login-page">
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-            <div className="group">
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <div className="group" ref={groupRef}>
+                {/* Konten login */}
                 <Button
                     brand="one"
                     className="button-instance"

@@ -92,12 +92,12 @@ export default function TabelLaporanIuranSiswa({ transactions, setTransactions, 
         </tr>
     ));
 
-    if (!transactions) {
+    if (!selectedJurusan || !tahun) {
         return <div>Mohon Pilih Jurusan dan Tahun Terlebih Dahulu!</div>;
     }
 
     if (transactions.length === 0) {
-        return <div>Mohon Pilih Jurusan dan Tahun Terlebih Dahulu!</div>;
+        return <div>  </div>;
     }
 
     return (
