@@ -1,12 +1,12 @@
 const prod = {
   url: {
-    API_BASE_URL: 'https://silk-purwa.up.railway.app',
+    API_BASE_URL: 'http://localhost:8080',
   }
 }
 
 const dev = {
   url: {
-    API_BASE_URL: 'https://silk-purwa.up.railway.app'
+    API_BASE_URL: 'http://localhost:8080'
   }
 }
 
