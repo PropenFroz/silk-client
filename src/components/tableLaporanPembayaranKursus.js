@@ -61,11 +61,11 @@ export default function TabelLaporanPembayaranKursus({ transactions, selectedJur
     };
 
     if (!transactions) {
-        return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
+        return <div>Mohon Pilih Jurusan dan Tanggal Terlebih Dahulu!</div>;
     }
 
     if (transactions.length === 0) {
-        return <div>Data Tidak Ditemukan</div>;
+        return <div>Mohon Pilih Jurusan dan Tanggal Terlebih Dahulu!</div>;
     }
     return (
         <div className="table-wrapper">

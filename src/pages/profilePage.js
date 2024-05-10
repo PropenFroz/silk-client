@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import { useHistory } from 'react-router-dom'; //
 import SidebarEksekutif from "../components/sidebarEksekutif";
 import SidebarKaryawan from "../components/sidebarKaryawan";
 import SidebarGuru from "../components/sidebarGuru";
-import SidebarAdmin from '../components/sidebarAdmin'; // Import Sidebar component
+import SidebarAdmin from '../components/sidebarAdmin';
 import "../styles/lihatprofil.css";
-import ProfileComponent from "../components/profileComponent"; // Correct import path
-import Button from "../components/button";
-import CustomDatePicker from "../components/datePicker";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import ProfileComponent from "../components/profileComponent";
 
 import { useAuth } from '../components/auth/context/AuthContext';
 import { config } from '../Constants'
@@ -18,7 +14,6 @@ export default function ProfilePage() {
   const baseUrl = config.url.API_BASE_URL + '/api/';
 
   // Dummy data for user role, replace it with actual user data
-
   const Auth = useAuth();
   const user = Auth.getUser();
 
@@ -43,7 +38,10 @@ export default function ProfilePage() {
     if (user == null) {
         // Jika pengguna tidak masuk, arahkan mereka ke halaman login
         history.push('/login');
-    }
+    } else {
+      // Lakukan scroll ke atas setelah halaman dimuat
+      window.scrollTo(0, 0);
+  }
 }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
 
 

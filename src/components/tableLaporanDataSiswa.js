@@ -7,14 +7,14 @@ function TableLaporanDataSiswa({ laporanDataSiswa }) {
         <div className="table-wrapper">
             <Table responsive bordered>
                 <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Bulan</th>
-                        <th scope="col">Siswa Baru</th>
-                        <th scope="col">Siswa Cuti</th>
-                        <th scope="col">Siswa Cuti Masuk Kembali</th>
-                        <th scope="col">Siswa Off</th>
-                        <th scope="col">Total Siswa Aktif</th>
+                <tr>
+                        <th scope="col" style={{ width: "3%" }}>No</th>
+                        <th scope="col" style={{ width: "17%" }}>Bulan</th>
+                        <th scope="col" style={{ width: "16%" }}>Siswa Baru</th>
+                        <th scope="col" style={{ width: "16%" }}>Siswa Cuti</th>
+                        <th scope="col" style={{ width: "16%" }}>Siswa Cuti Masuk Kembali</th>
+                        <th scope="col" style={{ width: "16%" }}>Siswa Off</th>
+                        <th scope="col" style={{ width: "16%" }}>Total Siswa Aktif</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -24,6 +24,7 @@ export default function LaporanDataSiswa() {
         } else {
             // Jika pengguna masuk, panggil handleView secara otomatis untuk menampilkan data saat pertama kali dimuat
             handleView();
+            window.scrollTo(0, 0);
         }
     }, [history]); // Tambahkan history ke dependency array agar useEffect dipanggil ulang saat berubah
 
@@ -57,7 +58,7 @@ export default function LaporanDataSiswa() {
                             className="form-control" 
                             value={year}
                             onChange={e => setYear(parseInt(e.target.value))}
-                            style={{ marginRight: '10px', marginBottom: '10px' }}
+                            style={{ marginRight: '10px', marginBottom: '15px' }}
                         />
 
                         <Button className="button" onClick={handleView}>
