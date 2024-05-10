@@ -3,6 +3,7 @@ import '../styles/EntryData.css';
 import SummaryModal from './summaryModalEntryPembelianBuku';
 import Berhasil from './modal';
 import { fetchBukuPurwacaraka } from "../service/fetchDataService"; 
+import Select from 'react-select'; 
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
@@ -18,13 +19,15 @@ export default function EntryData() {
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [bukuPurwacaraka, setBukuPurwacaraka] = useState([]);
+    const [selectedBuku, setSelectedBuku] = useState(null);
     const [namaBuku, setNamaBuku] = useState('');
     const [namaJurusan, setnamaJurusan] = useState('');
 
     useEffect(() => {
         fetchBukuPurwacaraka()
             .then(data => {
-                setBukuPurwacaraka(data);
+                const options = data.map(buku => ({ value: buku.idBukuPurwacaraka, label: buku.namaBuku, jurusan: buku.jurusanKursus.namaJurusan }));
+                setBukuPurwacaraka(options);
             })
             .catch(error => console.error('Error fetching gradeKursus:', error));
     }, []);
@@ -37,14 +40,22 @@ export default function EntryData() {
         });
     };
 
+    const handleBookChange = (selectedOption) => {
+        setFormData({
+            ...formData,
+            bukuPurwacaraka: selectedOption ? selectedOption.value : null
+        });
+        setSelectedBuku(selectedOption);
+    };
+
     const handleSubmit = () => {
-        setNamaBuku(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).namaBuku);
-        setnamaJurusan(bukuPurwacaraka.find(buku => buku.idBukuPurwacaraka === parseInt(formData.bukuPurwacaraka)).jurusanKursus.namaJurusan);
+        setNamaBuku(selectedBuku.label);
+        setnamaJurusan(selectedBuku.jurusan);
         
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
-            return;
+            return; 
         } else {
             setShowModal(true);
         }
@@ -56,11 +67,12 @@ export default function EntryData() {
             <div className="col-sm">
                     <div className="input-field">
                     <label htmlFor="bukuPurwacaraka" className="form-label">Nama Buku</label>
-                        <select className="form-select" name="bukuPurwacaraka" onChange={handleChange} defaultValue={1}>
-                            {bukuPurwacaraka.map(bukuPurwacaraka => (
-                                <option key={bukuPurwacaraka.idBukuPurwacara} value={bukuPurwacaraka.idBukuPurwacara}>{bukuPurwacaraka.namaBuku}</option>
-                            ))}
-                        </select>
+                        <Select
+                            options={bukuPurwacaraka}
+                            value={selectedBuku}
+                            onChange={handleBookChange}
+                            placeholder="Pilih Buku"
+                        /> 
                     </div>
                 </div>
             <div className="col-sm">
