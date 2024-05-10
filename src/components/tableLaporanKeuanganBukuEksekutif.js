@@ -9,6 +9,12 @@ export default function TabelLaporanTransaksiBukuEksekutif({ transactions }) {
     return <div>Data Tidak Ditemukan</div>;
   }
 
+  const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', options);
+  };
+
   return (
     <div className="table-wrapper">
       <Table responsive bordered>
@@ -34,9 +40,9 @@ export default function TabelLaporanTransaksiBukuEksekutif({ transactions }) {
               <td>{index + 1}</td>
               <td>{transaction.bukuPurwacaraka.namaBuku}</td>
               <td>{transaction.bukuPurwacaraka.jurusanKursus.namaJurusan}</td>
-              <td>{transaction.tanggalBeli}</td>
+              <td>{formatDate(transaction.tanggalBeli)}</td>
               <td>{transaction.jumlahBeli}</td>
-              <td>{transaction.tanggalJual}</td>
+              <td>{formatDate(transaction.tanggalJual)}</td>
               <td>{transaction.jumlahJual}</td>
               <td>{`Rp${transaction.hargaBeli.toLocaleString()}`}</td>
               <td>{`Rp${transaction.hargaJual.toLocaleString()}`}</td>
