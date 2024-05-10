@@ -14,7 +14,6 @@ export default function UpdateGajiGuru({ id }) {
     minggu2: "",
     minggu3: "",
     minggu4: "",
-    feeGuru: "",
     keterangan: "",
   });
 
@@ -65,11 +64,11 @@ export default function UpdateGajiGuru({ id }) {
           minggu2: formData.minggu2.toString(),
           minggu3: formData.minggu3.toString(),
           minggu4: formData.minggu4.toString(),
-          feeGuru: formData.feeGuru.toString(),
           keterangan: formData.keterangan,
+          feeGuru: (parseFloat(formData.uangKursus) * 0.4).toString(), // Hitung feeGuru sebagai 40% dari uangKursus
         };
         
-        setFormData(updatedFormData)
+        setFormData(updatedFormData);
         setShowModal(true);
       } catch (error) {
         console.error("Error updating entry data:", error);
@@ -142,12 +141,6 @@ export default function UpdateGajiGuru({ id }) {
       <div className="row">
         <div className="col-sm">
           <div className="input-field">
-            <label className="form-label">Fee Guru</label>
-            <input type="number" className="form-control" name="feeGuru" onChange={(e) => setFormData({ ...formData, feeGuru: e.target.value })} value={formData.feeGuru} />
-          </div>
-        </div>
-        <div className="col-sm">
-          <div className="input-field">
             <label className="form-label">Keterangan</label>
             <input type="text" className="form-control" name="keterangan" onChange={(e) => setFormData({ ...formData, keterangan: e.target.value })} value={formData.keterangan} />
           </div>
@@ -157,19 +150,19 @@ export default function UpdateGajiGuru({ id }) {
         Submit
       </button>
       <SummaryModal
-                id={id} 
-                formData={formData}
-                selectedSiswa={selectedSiswa}
-                namaGuru={namaGuru}
-                show={showModal}
-                onHide={() => setShowModal(false)}
-                onSuccess={() => {
-                    setShowSuccessModal(true);
-                }}
-            />
+        id={id} 
+        formData={formData}
+        selectedSiswa={selectedSiswa}
+        namaGuru={namaGuru}
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        onSuccess={() => {
+            setShowSuccessModal(true);
+        }}
+      />
       <Berhasil
-          show={showSuccessModal}
-          onHide={handleSuccessModalClose}
+        show={showSuccessModal}
+        onHide={handleSuccessModalClose}
       />
     </div>
   );

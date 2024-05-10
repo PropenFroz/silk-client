@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom'; //
 import '../styles/laporan.css';
 import SideBarKaryawan from '../components/sidebarKaryawan';
 import EntryDetailGajiGuru from '../components/entryDetailGajiGuru';
-
 import { config } from '../Constants'
-
 
 export default function EntryGajiGuru() {
     const baseUrl = config.url.API_BASE_URL + '/api/';
@@ -16,12 +14,10 @@ export default function EntryGajiGuru() {
     const history = useHistory();
 
     useEffect(() => {
-        // Periksa apakah pengguna telah masuk saat komponen dimuat
         if (user == null) {
-            // Jika pengguna tidak masuk, arahkan mereka ke halaman login
             history.push('/login');
         }
-    }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
+    }, [user, history]);
 
     return (
         <div className="dashboard d-flex">

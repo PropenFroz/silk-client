@@ -3,7 +3,6 @@ import { Table, Button, Modal } from 'react-bootstrap';
 import { fetchSiswa, fetchJurusanKursus, fetchGuru } from "../service/fetchDataService";
 import Select from 'react-select'; 
 import '../styles/EntryData.css';
-
 import { config } from "../Constants"
 
 export default function EntryDetailGajiGuru() {
@@ -77,7 +76,6 @@ export default function EntryDetailGajiGuru() {
             minggu2: 0,
             minggu3: 0,
             minggu4: 0,
-            feeGuru: 0,
             keterangan: "",
             tanggal: ""
         };
@@ -89,9 +87,17 @@ export default function EntryDetailGajiGuru() {
         const attributeName = name.substring(0, name.length - 1);
         const updatedMuridList = muridList.map((murid, i) => {
             if (index === i) {
+                let feeGuru = 0;
+                if (attributeName.startsWith("uangKursus")) {
+                    const uangKursus = parseInt(value);
+                    if (!isNaN(uangKursus)) {
+                        feeGuru = uangKursus * 0.4;
+                    }
+                }
                 return {
                     ...murid,
-                    [attributeName]: (name.startsWith("siswa") || name.startsWith("uangKursus") || name.startsWith("feeGuru") || name.startsWith("minggu")) ? parseInt(value) : name.startsWith("tanggal") ? value : value
+                    [attributeName]: attributeName.startsWith("uangKursus") ? parseInt(value) : name.startsWith("tanggal") ? value : value,
+                    feeGuru: attributeName.startsWith("uangKursus") ? feeGuru : murid.feeGuru
                 };
             }
             return murid;
@@ -144,7 +150,6 @@ export default function EntryDetailGajiGuru() {
                         <th scope="col">Minggu 2</th>
                         <th scope="col">Minggu 3</th>
                         <th scope="col">Minggu 4</th>
-                        <th scope="col">Fee Guru (40%)</th>
                         <th scope="col">Keterangan</th>
                     </tr>
                 </thead>
@@ -183,7 +188,6 @@ export default function EntryDetailGajiGuru() {
                         <td><input type="number" name={`minggu2${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                         <td><input type="number" name={`minggu3${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                         <td><input type="number" name={`minggu4${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
-                        <td><input type="number" name={`feeGuru${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                         <td><input type="text" name={`keterangan${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                     </tr>
                 ))}
