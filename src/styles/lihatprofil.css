@@ -45,3 +45,19 @@
 .label {
   font-weight: bold;
 }
+.profile-content {
+  display: flex;
+  align-items: center; /* Menengahkan konten vertikal */
+  justify-content: center; /* Menengahkan konten horizontal */
+  position: absolute; /* Mengatur posisi absolut */
+  top: 50%; /* Pusatkan vertikal */
+  left: 50%; /* Pusatkan horizontal */
+  transform: translate(-25%, -50%); /* Pusatkan vertikal dan horizontal */
+}
+
+.text-center-profile {
+  position: absolute; /* Mengatur posisi absolut */
+  top: -50px; /* Atur jarak ke atas */
+  left: 50%; /* Pusatkan horizontal */
+  transform: translateX(-50%); /* Pusatkan horizontal */
+}

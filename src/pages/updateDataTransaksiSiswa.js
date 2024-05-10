@@ -27,7 +27,7 @@ export default function UpdateDataTransaksiSiswa() {
     return (
         <div className="dashboard d-flex">
             <SideBarKaryawan/>
-            <div className="dashboard-laporan">
+            <div className="dashboard-content">
                 <h2>Update Data Transaksi Pembayaran</h2>
                 <UpdateData id={id} />
             </div>

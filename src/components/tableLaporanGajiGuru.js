@@ -49,8 +49,18 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
     }
   };
 
+  const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', options);
+  };
+
   if (!transactions || transactions.length === 0) {
-    return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
+    if (!startDate || !endDate || !idGuru) {
+      return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
+    } else {
+      return <div> </div>;
+    }
   }
 
   const transactionsByJurusan = transactions.reduce((acc, transaction) => {
@@ -103,7 +113,7 @@ export default function TabelLaporanGajiGuru({ transactions, idGuru, startDate, 
                     <td>{transaction.siswa.namaSiswa}</td>
                     <td>{transaction.siswa.gradeKursus.namaGrade}</td>
                     <td>{transaction.uangKursus}</td>
-                    <td>{transaction.tanggal}</td>
+                    <td>{formatDate(transaction.tanggal)}</td>
                     <td>{transaction.minggu1}</td>
                     <td>{transaction.minggu2}</td>
                     <td>{transaction.minggu3}</td>

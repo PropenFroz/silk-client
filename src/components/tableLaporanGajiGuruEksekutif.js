@@ -24,6 +24,12 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
 
   const totalFeeGuru = totalFeeGuruPerJurusan.reduce((acc, { totalFeeGuru }) => acc + totalFeeGuru, 0);
 
+  const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', options);
+  };
+
   return (
     <div>
       {Object.entries(transactionsByJurusan).map(([jurusan, transactions]) => (
@@ -53,7 +59,7 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
                     <td>{transaction.siswa.namaSiswa}</td>
                     <td>{transaction.siswa.gradeKursus.namaGrade}</td>
                     <td>{transaction.uangKursus}</td>
-                    <td>{transaction.tanggal}</td>
+                    <td>{formatDate(transaction.tanggal)}</td>
                     <td>{transaction.minggu1}</td>
                     <td>{transaction.minggu2}</td>
                     <td>{transaction.minggu3}</td>

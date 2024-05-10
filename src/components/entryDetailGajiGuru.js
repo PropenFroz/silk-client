@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Modal } from 'react-bootstrap';
 import { fetchSiswa, fetchJurusanKursus, fetchGuru } from "../service/fetchDataService";
 import Select from 'react-select'; 
+import '../styles/EntryData.css';
 
 import { config } from "../Constants"
 
@@ -127,7 +128,7 @@ export default function EntryDetailGajiGuru() {
 
             <div className="row mt-4">
                 <div className="col-sm">
-                    <Button className="btn-submit" style={{fontSize: '12px'}} onClick={handleTambahMurid}>+ Tambah Murid</Button>
+                    <button type="button" className="btn-submit" onClick={handleTambahMurid}>+Tambah Murid</button>
                 </div>
                 <div className="col-sm"></div>
             </div>
@@ -191,7 +192,7 @@ export default function EntryDetailGajiGuru() {
 
             <div className="row mt-5">
                 <div className="col-sm">
-                    <Button className="btn-submit" onClick={handleSubmit}>Submit</Button>
+                    <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
                 </div>
                 <div className="col-sm"></div>
             </div>
