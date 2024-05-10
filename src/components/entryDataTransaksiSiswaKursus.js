@@ -20,6 +20,7 @@ export default function EntryData() {
         keterangan: ''
     });
 
+    const [alertPembayaran, setAlertPembayaran] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [siswaOptions, setSiswaOptions] = useState([]);
@@ -34,6 +35,24 @@ export default function EntryData() {
             })
             .catch(error => console.error('Error fetching siswa:', error));
     }, []);
+
+    const handleChangeCashTransfer = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+
+        const totalBiaya = (formData.uangPendaftaran !== '' ? parseInt(formData.uangPendaftaran) : 0) +
+        (formData.uangKursus !== '' ? parseInt(formData.uangKursus) : 0) +
+        (formData.uangBuku !== '' ? parseInt(formData.uangBuku) : 0);
+
+        if (totalBiaya) {
+            setAlertPembayaran(`Total biaya transaksi siswa: ${totalBiaya}`);
+        } else {
+            setAlertPembayaran('');
+        }
+    };
 
     const handleChange = (selectedOption) => {
         setFormData({
@@ -126,13 +145,13 @@ export default function EntryData() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Cash</label>
-                        <input type="number" className="form-control" name="cash" onChange={e => setFormData({ ...formData, cash: e.target.value })} />
+                        <input type="number" className="form-control" name="cash" onChange={handleChangeCashTransfer} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Transfer</label>
-                        <input type="number" className="form-control" name="transfer" onChange={e => setFormData({ ...formData, transfer: e.target.value })} />
+                        <input type="number" className="form-control" name="transfer" onChange={handleChangeCashTransfer} />
                     </div>
                 </div>
             </div>
@@ -155,6 +174,7 @@ export default function EntryData() {
                     </div>
                 </div>
             </div>
+            <p style={ { color: 'red', fontWeight: '600' } }>{alertPembayaran}</p>
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}

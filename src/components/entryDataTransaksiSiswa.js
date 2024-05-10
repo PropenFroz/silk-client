@@ -21,6 +21,7 @@ export default function EntryData() {
 
     const [selectedJurusan, setSelectedJurusan] = useState('');
     const [selectedGrade, setSelectedGrade] = useState('');
+    const [alertPembayaran, setAlertPembayaran] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [gradeKursus, setGradeKursus] = useState([]);
@@ -46,7 +47,42 @@ export default function EntryData() {
             ...formData,
             [name]: value
         });
+
+        const totalBiaya = (formData.uangPendaftaran !== '' ? parseInt(formData.uangPendaftaran) : 0) +
+            (formData.uangKursus !== '' ? parseInt(formData.uangKursus) : 0) +
+            (formData.uangBuku !== '' ? parseInt(formData.uangBuku) : 0);
+    
+        if (totalBiaya) {
+            setAlertPembayaran(`Total biaya transaksi siswa: ${totalBiaya}`);
+        } else {
+            setAlertPembayaran('');
+        }
     };
+    
+    const handleUangPendaftaranChange = (e) => {
+        const { value } = e.target;
+        setFormData({
+            ...formData,
+            uangPendaftaran: value
+        });
+    };
+
+    const handleUangKursusChange = (e) => {
+        const { value } = e.target;
+        setFormData({
+            ...formData,
+            uangKursus: value
+        });
+    };
+
+    const handleUangBukuChange = (e) => {
+        const { value } = e.target;
+        setFormData({
+            ...formData,
+            uangBuku: value
+        });
+    };
+
     const handleSubmit = () => {
         setSelectedJurusan(jurusanKursus.find(jurusan => jurusan.idJurusanKursus === parseInt(formData.jurusanKursus)).namaJurusan);
         setSelectedGrade(gradeKursus.find(grade => grade.idGradeKursus === parseInt(formData.gradeKursus)).namaGrade);
@@ -101,22 +137,22 @@ export default function EntryData() {
                  </div>
             </div>
             <div class="row">
-                 <div className="col-sm">
+                <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Pendaftaran</label>
-                        <input type="number" className="form-control" name="uangPendaftaran" onChange={handleChange} />
+                        <input type="number" className="form-control" name="uangPendaftaran" value={formData.uangPendaftaran} onChange={handleUangPendaftaranChange} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Kursus</label>
-                        <input type="number" className="form-control" name="uangKursus" onChange={handleChange} />
+                        <input type="number" className="form-control" name="uangKursus" value={formData.uangKursus} onChange={handleUangKursusChange} />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Buku</label>
-                        <input type="number" className="form-control" name="uangBuku" onChange={handleChange} />
+                        <input type="number" className="form-control" name="uangBuku" value={formData.uangBuku} onChange={handleUangBukuChange} />
                     </div>
                 </div>
             </div>
@@ -144,6 +180,7 @@ export default function EntryData() {
                 <div className="col-sm">
                 </div>
             </div>
+            <p style={ { color: 'red', fontWeight: '600' } }>{alertPembayaran}</p>
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}
