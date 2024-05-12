@@ -4,6 +4,7 @@ import { fetchSiswa, fetchJurusanKursus, fetchGuru } from "../service/fetchDataS
 import Select from 'react-select'; 
 import '../styles/EntryData.css';
 import { config } from "../Constants"
+import { NumericFormat } from "react-number-format";
 
 export default function EntryDetailGajiGuru() {
     const [siswa, setSiswa] = useState([]);
@@ -196,12 +197,62 @@ export default function EntryDetailGajiGuru() {
                                 }}
                             />
                         </td>
-                        <td><input type="number" name={`uangKursus${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
-                        <td><input type="date" name={`tanggal${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td> {/* Input tanggal */}
-                        <td><input type="number" name={`minggu1${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
-                        <td><input type="number" name={`minggu2${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
-                        <td><input type="number" name={`minggu3${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
-                        <td><input type="number" name={`minggu4${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
+                        <td>
+                            <NumericFormat
+                                value={murid[`uangKursus${index + 1}`]}
+                                thousandSeparator={true}
+                                prefix={'Rp'}
+                                onValueChange={(values) => {
+                                    const { value } = values;
+                                    handleChangeInput({ target: { name: `uangKursus${index + 1}`, value } }, index);
+                                }}
+                            />
+                        </td>
+                        <td><input type="date" name={`tanggal${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
+                        <td>
+                            <NumericFormat
+                                value={murid[`minggu1${index + 1}`]}
+                                thousandSeparator={true}
+                                prefix={'Rp'}
+                                onValueChange={(values) => {
+                                    const { value } = values;
+                                    handleChangeInput({ target: { name: `minggu1${index + 1}`, value } }, index);
+                                }}
+                            />
+                        </td>
+                        <td>
+                            <NumericFormat
+                                value={murid[`minggu2${index + 1}`]}
+                                thousandSeparator={true}
+                                prefix={'Rp'}
+                                onValueChange={(values) => {
+                                    const { value } = values;
+                                    handleChangeInput({ target: { name: `minggu2${index + 1}`, value } }, index);
+                                }}
+                            />
+                        </td>
+                        <td>
+                            <NumericFormat
+                                value={murid[`minggu3${index + 1}`]}
+                                thousandSeparator={true}
+                                prefix={'Rp'}
+                                onValueChange={(values) => {
+                                    const { value } = values;
+                                    handleChangeInput({ target: { name: `minggu3${index + 1}`, value } }, index);
+                                }}
+                            />
+                        </td>
+                        <td>
+                            <NumericFormat
+                                value={murid[`minggu4${index + 1}`]}
+                                thousandSeparator={true}
+                                prefix={'Rp'}
+                                onValueChange={(values) => {
+                                    const { value } = values;
+                                    handleChangeInput({ target: { name: `minggu4${index + 1}`, value } }, index);
+                                }}
+                            />
+                        </td>
                         <td><input type="text" name={`keterangan${index + 1}`} onChange={(e) => handleChangeInput(e, index)} /></td>
                     </tr>
                 ))}

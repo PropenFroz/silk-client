@@ -4,6 +4,7 @@ import SummaryModal from './summaryModalEntryPembelianBuku';
 import Berhasil from './modal';
 import { fetchBukuPurwacaraka } from "../service/fetchDataService"; 
 import Select from 'react-select'; 
+import { NumericFormat } from "react-number-format";
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
@@ -57,6 +58,11 @@ export default function EntryData() {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return; 
         } else {
+            setFormData({
+                ...formData,
+                hargaBeli: parseInt(formData.hargaBeli.replaceAll(/[^\d]/g, '')),
+                hargaJual: parseInt(formData.hargaJual.replaceAll(/[^\d]/g, ''))
+            })
             setShowModal(true);
         }
     };
@@ -110,13 +116,13 @@ export default function EntryData() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Harga Beli</label>
-                        <input type="number" className="form-control" name="hargaBeli" onChange={handleChange} />
+                        <NumericFormat name="hargaBeli" onChange={handleChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Harga Jual</label>
-                        <input type="number"className="form-control" name="hargaJual" onChange={handleChange} />
+                        <NumericFormat name="hargaJual" onChange={handleChange} thousandSeparator={true} prefix="Rp"/>
                     </div>
                 </div>
             </div>

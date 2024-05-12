@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import '../styles/EntryData.css';
 import SummaryModal from './summaryModalEntryDataTransaksiSiswa';
 import Berhasil from './modal';
-import { fetchGradeKursus, fetchJurusanKursus } from "../service/fetchDataService"; 
+import { fetchGradeKursus, fetchJurusanKursus } from "../service/fetchDataService";
+import { NumericFormat } from "react-number-format";
 
 export default function EntryData() { 
     const [formData, setFormData] = useState({
@@ -48,12 +49,12 @@ export default function EntryData() {
             [name]: value
         });
 
-        const totalBiaya = (formData.uangPendaftaran !== '' ? parseInt(formData.uangPendaftaran) : 0) +
-            (formData.uangKursus !== '' ? parseInt(formData.uangKursus) : 0) +
-            (formData.uangBuku !== '' ? parseInt(formData.uangBuku) : 0);
+        const totalBiaya = (parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, ''))) +
+            (parseInt(formData.uangKursus.replaceAll(/[^\d]/g, ''))) +
+            (parseInt(formData.uangBuku.replaceAll(/[^\d]/g, '')));
     
         if (totalBiaya) {
-            setAlertPembayaran(`Total biaya transaksi siswa: ${totalBiaya}`);
+            setAlertPembayaran(`Total biaya transaksi siswa: Rp${totalBiaya.toLocaleString()}`);
         } else {
             setAlertPembayaran('');
         }
@@ -92,7 +93,14 @@ export default function EntryData() {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
-            console.log(formData);
+            setFormData({
+                ...formData,
+                uangPendaftaran: parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, '')),
+                uangKursus: parseInt(formData.uangKursus.replaceAll(/[^\d]/g, '')),
+                uangBuku: parseInt(formData.uangBuku.replaceAll(/[^\d]/g, '')),
+                cash: parseInt(formData.cash.replaceAll(/[^\d]/g, '')),
+                transfer: parseInt(formData.transfer.replaceAll(/[^\d]/g, ''))
+            });
             setShowModal(true);
         }
     };
@@ -140,19 +148,19 @@ export default function EntryData() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Pendaftaran</label>
-                        <input type="number" className="form-control" name="uangPendaftaran" value={formData.uangPendaftaran} onChange={handleUangPendaftaranChange} />
+                        <NumericFormat name="uangPendaftaran" value={formData.uangPendaftaran} onChange={handleUangPendaftaranChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Kursus</label>
-                        <input type="number" className="form-control" name="uangKursus" value={formData.uangKursus} onChange={handleUangKursusChange} />
+                        <NumericFormat name="uangKursus" value={formData.uangKursus} onChange={handleUangKursusChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Buku</label>
-                        <input type="number" className="form-control" name="uangBuku" value={formData.uangBuku} onChange={handleUangBukuChange} />
+                        <NumericFormat name="uangBuku" value={formData.uangBuku} onChange={handleUangBukuChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
             </div>
@@ -160,13 +168,13 @@ export default function EntryData() {
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Cash</label>
-                        <input type="number" className="form-control" name="cash" onChange={handleChange} />
+                        <NumericFormat name="cash" value={formData.cash} onChange={handleChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Transfer</label>
-                        <input type="number"className="form-control" name="transfer" onChange={handleChange} />
+                        <NumericFormat name="transfer" value={formData.transfer} onChange={handleChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
             </div>
