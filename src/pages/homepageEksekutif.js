@@ -43,6 +43,7 @@ export default function HomepageEksekutif() {
             fetchTotalPendapatan(selectedYear);
             fetchTotalPengeluaran(selectedYear);
             fetchPendapatanBarChartData(selectedYear);
+            fetchPengeluaranBarChartData(selectedYear);
         }
     }, [selectedYear]);
 
