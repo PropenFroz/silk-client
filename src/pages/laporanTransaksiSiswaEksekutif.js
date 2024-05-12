@@ -16,6 +16,7 @@ export default function LaporanTransaksiEksekutif() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [transactions, setTransactions] = useState([]);
+    const [viewClicked, setViewClicked] = useState(false);
 
     const Auth = useAuth();
     const user = Auth.getUser();
@@ -25,7 +26,6 @@ export default function LaporanTransaksiEksekutif() {
         if (user == null) {
             history.push('/login');
         } else {
-            // Lakukan scroll ke atas setelah halaman dimuat
             window.scrollTo(0, 0);
         }
     }, [user, history]);
@@ -52,11 +52,13 @@ export default function LaporanTransaksiEksekutif() {
 
     const handleView = async () => {
         if (!startDate || !endDate) {
+            setViewClicked(false);
             alert("Mohon isi kedua tanggal terlebih dahulu.");
             return;
         }
 
         if (startDate > endDate) {
+            setViewClicked(false);
             alert("Tanggal mulai harus sebelum tanggal akhir.");
             return;
         }
@@ -70,6 +72,7 @@ export default function LaporanTransaksiEksekutif() {
             setTransactions(data);
             setStartDate(startDate);
             setEndDate(endDate);
+            setViewClicked(true);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -111,7 +114,7 @@ export default function LaporanTransaksiEksekutif() {
                         </Button>
                     </div>
                 </div>
-                <TabelLaporanTransaksiSiswaEksekutif transactions={transactions} />
+                <TabelLaporanTransaksiSiswaEksekutif transactions={transactions} viewClicked={viewClicked}/>
             </div>
         </div>
     )

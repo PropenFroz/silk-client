@@ -21,6 +21,7 @@ export default function HomepageGuru() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [transactions, setTransactions] = useState([]);
+    const [viewClicked, setViewClicked] = useState(false);
 
     useEffect(() => {
         if (user != null) {
@@ -44,22 +45,25 @@ export default function HomepageGuru() {
     
     const handleView = async () => {
         if (!startDate || !endDate) {
-          alert("Mohon isi kedua tanggal terlebih dahulu.");
-          return;
+            setViewClicked(false);
+            alert("Mohon isi kedua tanggal terlebih dahulu.");
+            return;
         } else if (startDate > endDate) {
-          alert("Tanggal mulai harus sebelum tanggal akhir.");
-          return;
+            setViewClicked(false);
+            alert("Tanggal mulai harus sebelum tanggal akhir.");
+            return;
         } else {
-          try {
-            const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-            const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-            const url = `${baseUrl}entry-gaji-guru/filter?idGuru=${parseInt(guru.idGuru)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            setTransactions(data);
-            console.log(transactions);
-            setStartDate(startDate);
-            setEndDate(endDate);
+            try {
+                const formattedStartDate = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+                const formattedEndDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+                const url = `${baseUrl}entry-gaji-guru/filter?idGuru=${parseInt(guru.idGuru)}&startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                setTransactions(data);
+                console.log(transactions);
+                setStartDate(startDate);
+                setEndDate(endDate);
+                setViewClicked(true);
           } catch (error) {
             console.error("Error fetching data:", error);
           }
@@ -83,7 +87,7 @@ export default function HomepageGuru() {
                     </div>
                     </Button>
                 </div>
-                <RincianGajiGuru transactions={transactions}/>
+                <RincianGajiGuru transactions={transactions} viewClicked={viewClicked}/>
             </div>
         </div>
     )

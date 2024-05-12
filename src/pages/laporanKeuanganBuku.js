@@ -18,21 +18,19 @@ export default function LaporanKeuanganBuku() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [transactions, setTransactions] = useState([]);
+  const [viewClicked, setViewClicked] = useState(false);
 
   const Auth = useAuth();
   const user = Auth.getUser();
   const history = useHistory();
 
   useEffect(() => {
-      // Periksa apakah pengguna telah masuk saat komponen dimuat
       if (user == null) {
-          // Jika pengguna tidak masuk, arahkan mereka ke halaman login
           history.push('/login');
       } else {
-        // Lakukan scroll ke atas setelah halaman dimuat
         window.scrollTo(0, 0);
     }
-  }, [user, history]); // Tambahkan user dan history ke dependency array agar useEffect dipanggil ulang saat mereka berubah
+  }, [user, history]);
 
 
   const url = baseUrl;
@@ -56,9 +54,11 @@ export default function LaporanKeuanganBuku() {
 
   const handleView = async () => {
     if (!startDate || !endDate) {
+      setViewClicked(false);
       alert("Mohon isi kedua tanggal terlebih dahulu.");
       return;
     } else if (startDate > endDate) {
+      setViewClicked(false);
       alert("Tanggal mulai harus sebelum tanggal akhir.");
       return;
     } else {
@@ -71,6 +71,7 @@ export default function LaporanKeuanganBuku() {
           setTransactions(data);
           setStartDate(startDate);
           setEndDate(endDate);
+          setViewClicked(true);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -105,7 +106,7 @@ export default function LaporanKeuanganBuku() {
             </Button>
           </div>
         </div>
-        <TableLaporanKeuanganBuku transactions={transactions} startDate={startDate} endDate={endDate} setTransactions={setTransactions} />
+        <TableLaporanKeuanganBuku transactions={transactions} startDate={startDate} endDate={endDate} setTransactions={setTransactions} viewClicked={viewClicked}/>
       </div>
     </div>
   );

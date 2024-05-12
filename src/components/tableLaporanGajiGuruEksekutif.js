@@ -58,13 +58,13 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
                     <td>{index + 1}</td>
                     <td>{transaction.siswa.namaSiswa}</td>
                     <td>{transaction.siswa.gradeKursus.namaGrade}</td>
-                    <td>{transaction.uangKursus}</td>
+                    <td>{`Rp${transaction.uangKursus.toLocaleString()}`}</td>
                     <td>{formatDate(transaction.tanggal)}</td>
-                    <td>{transaction.minggu1}</td>
-                    <td>{transaction.minggu2}</td>
-                    <td>{transaction.minggu3}</td>
-                    <td>{transaction.minggu4}</td>
-                    <td>{transaction.feeGuru}</td>
+                    <td>{`Rp${transaction.minggu1.toLocaleString()}`}</td>
+                    <td>{`Rp${transaction.minggu2.toLocaleString()}`}</td>
+                    <td>{`Rp${transaction.minggu3.toLocaleString()}`}</td>
+                    <td>{`Rp${transaction.minggu4.toLocaleString()}`}</td>
+                    <td>{`Rp${transaction.feeGuru.toLocaleString()}`}</td>
                     <td>{transaction.keterangan}</td>
                   </tr>
                 ))}
@@ -72,11 +72,11 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
                   <td colSpan="5">
                     <strong>Total</strong>
                   </td>
-                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu1, 0)}</td>
-                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu2, 0)}</td>
-                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu3, 0)}</td>
-                  <td>{transactions.reduce((acc, curr) => acc + curr.minggu4, 0)}</td>
-                  <td>{transactions.reduce((acc, curr) => acc + curr.feeGuru, 0)}</td>
+                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu1, 0)).toLocaleString()}`}</td>
+                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu2, 0)).toLocaleString()}`}</td>
+                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu3, 0)).toLocaleString()}`}</td>
+                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu4, 0)).toLocaleString()}`}</td>
+                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.feeGuru, 0)).toLocaleString()}`}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -100,14 +100,14 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.jurusan}</td>
-                <td>{item.totalFeeGuru}</td>
+                <td>{`Rp${item.totalFeeGuru.toLocaleString()}`}</td>
               </tr>
             ))}
             <tr>
               <td colSpan="2">
                 <strong>Total Fee Guru</strong>
               </td>
-              <td>{totalFeeGuru}</td>
+              <td>{`Rp${totalFeeGuru.toLocaleString()}`}</td>
             </tr>
           </tbody>
         </Table>

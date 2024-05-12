@@ -1,5 +1,5 @@
 // TableLaporanKeuanganBuku.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
 import Button from "./button";
@@ -8,11 +8,24 @@ import { deleteEntryTransaksiBuku } from "../service/deleteDataTransaksiBukuServ
 import { useHistory } from "react-router-dom";
 import { config } from "../Constants"
 
-export default function TabelLaporanTransaksiBuku({ transactions, startDate, endDate, setTransactions }) {
+export default function TabelLaporanTransaksiBuku({ transactions, startDate, endDate, setTransactions, viewClicked }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  const [sortedTransactions, setSortedTransactions] = useState([]);
   const history = useHistory();
   const baseUrl = config.url.API_BASE_URL + '/api/';
+
+  useEffect(() => {
+    const sortTransactions = () => {
+      const sorted = [...transactions];
+      sorted.sort((a, b) => new Date(a.tanggalBeli) - new Date(b.tanggalBeli));
+      setSortedTransactions(sorted);
+    };
+
+    if (transactions && transactions.length > 0) {
+      sortTransactions();
+    }
+  }, [transactions]);
 
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
@@ -22,6 +35,10 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
     setSelectedTransactionId(transactionId);
     setShowDeleteModal(true);
   };
+
+  if (viewClicked === false) {
+    return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
+  }
 
   if (!transactions || transactions.length === 0) {
     return <div>Data Tidak Ditemukan</div>;
@@ -85,7 +102,7 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction, index) => (
+          {sortedTransactions.map((transaction, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{transaction.bukuPurwacaraka.namaBuku}</td>
@@ -96,9 +113,9 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
               <td>{transaction.jumlahJual}</td>
               <td>{`Rp${transaction.hargaBeli.toLocaleString()}`}</td>
               <td>{`Rp${transaction.hargaJual.toLocaleString()}`}</td>
-              <td>{`Rp${transaction.hargaJual - transaction.hargaBeli}`}</td>
-              <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
-              <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
+              <td>{`Rp${(transaction.hargaJual - transaction.hargaBeli).toLocaleString()}`}</td>
+              <td>{`Rp${(transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)).toLocaleString()}`}</td>
+              <td>{`Rp${(transaction.jumlahJual * transaction.hargaJual).toLocaleString()}`}</td>
               <td>
                 <Button className="btn-update" onClick={() => handleUpdate(transaction.idEntryBuku)}>
                   Update
@@ -112,8 +129,8 @@ export default function TabelLaporanTransaksiBuku({ transactions, startDate, end
 
           <tr>
             <td colSpan="10">Total</td>
-            <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli), 0)}`}</td>
-            <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * transaction.hargaJual, 0)}`}</td>
+            <td colSpan="1">{`Rp${(sortedTransactions.reduce((sum, transaction) => sum + transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli), 0)).toLocaleString()}`}</td>
+            <td colSpan="1">{`Rp${(sortedTransactions.reduce((sum, transaction) => sum + transaction.jumlahJual * transaction.hargaJual, 0)).toLocaleString()}`}</td>
             <td colSpan="1"></td>
           </tr>
         </tbody>

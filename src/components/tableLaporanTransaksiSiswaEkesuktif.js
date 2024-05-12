@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 import Button from './button';
 
-export default function TabelLaporanTransaksiSiswaEksekutif({ transactions }) {
+export default function TabelLaporanTransaksiSiswaEksekutif({ transactions, viewClicked }) {
 
     const formatDate = (dateString) => {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -11,7 +11,7 @@ export default function TabelLaporanTransaksiSiswaEksekutif({ transactions }) {
         return date.toLocaleDateString('id-ID', options);
     };
 
-    if (!transactions) {
+    if (viewClicked === false) {
         return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
     }
 
@@ -45,23 +45,23 @@ export default function TabelLaporanTransaksiSiswaEksekutif({ transactions }) {
                             <td>{transaction.siswa.namaSiswa}</td>
                             <td>{transaction.siswa.jurusanKursus.namaJurusan}</td>
                             <td>{transaction.siswa.gradeKursus.namaGrade}</td>
-                            <td>{transaction.uangPendaftaran}</td>
-                            <td>{transaction.uangKursus}</td>
-                            <td>{transaction.uangBuku}</td>
-                            <td>{transaction.cash}</td>
-                            <td>{transaction.transfer}</td>
-                            <td>{transaction.cash + transaction.transfer}</td>
+                            <td>{`Rp${transaction.uangPendaftaran.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.uangKursus.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.uangBuku.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.cash.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.transfer.toLocaleString()}`}</td>
+                            <td>{`Rp${(transaction.cash + transaction.transfer).toLocaleString()}`}</td>
                             <td>{transaction.keterangan}</td>
                         </tr>
                     ))}
                     <tr>
                         <td colSpan="5">Total</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangPendaftaran, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangKursus, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangBuku, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.cash, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.transfer, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + ( transaction.cash + transaction.transfer), 0)}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.uangPendaftaran, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.uangKursus, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.uangBuku, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.cash, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.transfer, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + ( transaction.cash + transaction.transfer), 0)).toLocaleString()}`}</td>
                     </tr>
                 </tbody>
             </Table>

@@ -13,6 +13,7 @@ export default function EntryDetailGajiGuru() {
     const [selectedGuru, setSelectedGuru] = useState(null);
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [error, setError] = useState(null);
 
     const baseUrl = config.url.API_BASE_URL + '/api/';
 
@@ -37,6 +38,16 @@ export default function EntryDetailGajiGuru() {
     }, []);
 
     const handleSubmit = () => {
+        if (!selectedGuru || !selectedJurusan) {
+            setError("Mohon lengkapi data guru dan jurusan.");
+            return;
+        }
+
+        if (muridList.some(murid => !murid.siswa || !murid.uangKursus || !murid.tanggal || !murid.minggu1 || !murid.minggu2 || !murid.minggu3 || !murid.minggu4 || !murid.keterangan)) {
+            setError("Mohon lengkapi semua field pada tabel.");
+            return;
+        }
+
         setShowModal(true);
     };
 
@@ -62,6 +73,7 @@ export default function EntryDetailGajiGuru() {
             }
             console.log('Data submitted successfully');
             setMuridList([]);
+            setError(null);
         })
         .catch(error => {
             console.error('Error submitting data:', error);
@@ -138,6 +150,8 @@ export default function EntryDetailGajiGuru() {
                 </div>
                 <div className="col-sm"></div>
             </div>
+
+            {error && <div className="alert alert-danger mt-3">{error}</div>}
 
             <Table responsive bordered className="mt-4">
                 <thead>

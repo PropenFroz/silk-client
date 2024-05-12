@@ -43,21 +43,21 @@ export default function TabelLaporanPembayaranKursusEksekutif({ transactions }) 
                             <td>{formatDate(transaction.tanggalPembayaran)}</td>
                             <td>{formatDate(transaction.siswa.tanggalDaftar)}</td>
                             <td>{transaction.siswa.gradeKursus.namaGrade}</td>
-                            <td>{transaction.uangPendaftaran}</td>
-                            <td>{transaction.uangKursus}</td>
-                            <td>{transaction.cash}</td>
-                            <td>{transaction.transfer}</td>
-                            <td>{transaction.cash + transaction.transfer}</td>
+                            <td>{`Rp${transaction.uangPendaftaran.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.uangKursus.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.cash.toLocaleString()}`}</td>
+                            <td>{`Rp${transaction.transfer.toLocaleString()}`}</td>
+                            <td>{`Rp${(transaction.cash + transaction.transfer).toLocaleString()}`}</td>
                             <td>{transaction.keterangan}</td>
                         </tr>
                     ))}
                     <tr>
                         <td colSpan="5">Total</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangPendaftaran, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.uangKursus, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.cash, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.transfer, 0)}`}</td>
-                        <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + ( transaction.cash + transaction.transfer), 0)}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.uangPendaftaran, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.uangKursus, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.cash, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.transfer, 0)).toLocaleString()}`}</td>
+                        <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + ( transaction.cash + transaction.transfer), 0)).toLocaleString()}`}</td>
                     </tr>
                 </tbody>
             </Table>

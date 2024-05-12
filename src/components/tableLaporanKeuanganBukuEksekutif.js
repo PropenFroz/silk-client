@@ -1,9 +1,26 @@
-// TableLaporanKeuanganBuku.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
 
-export default function TabelLaporanTransaksiBukuEksekutif({ transactions }) {
+export default function TabelLaporanTransaksiBukuEksekutif({ transactions, viewClicked }) {
+
+  const [sortedTransactions, setSortedTransactions] = useState([]);
+
+  useEffect(() => {
+    const sortTransactions = () => {
+      const sorted = [...transactions];
+      sorted.sort((a, b) => new Date(a.tanggalBeli) - new Date(b.tanggalBeli));
+      setSortedTransactions(sorted);
+    };
+
+    if (transactions && transactions.length > 0) {
+      sortTransactions();
+    }
+  }, [transactions]);
+
+  if (viewClicked === false) {
+    return <div>Mohon Pilih Tanggal Terlebih Dahulu!</div>;
+  }
 
   if (!transactions || transactions.length === 0) {
     return <div>Data Tidak Ditemukan</div>;
@@ -35,7 +52,7 @@ export default function TabelLaporanTransaksiBukuEksekutif({ transactions }) {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction, index) => (
+          {sortedTransactions.map((transaction, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{transaction.bukuPurwacaraka.namaBuku}</td>
@@ -46,16 +63,16 @@ export default function TabelLaporanTransaksiBukuEksekutif({ transactions }) {
               <td>{transaction.jumlahJual}</td>
               <td>{`Rp${transaction.hargaBeli.toLocaleString()}`}</td>
               <td>{`Rp${transaction.hargaJual.toLocaleString()}`}</td>
-              <td>{`Rp${transaction.hargaJual - transaction.hargaBeli}`}</td>
-              <td>{`Rp${transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)}`}</td>
-              <td>{`Rp${transaction.jumlahJual * transaction.hargaJual}`}</td>
+              <td>{`Rp${(transaction.hargaJual - transaction.hargaBeli).toLocaleString()}`}</td>
+              <td>{`Rp${(transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli)).toLocaleString()}`}</td>
+              <td>{`Rp${(transaction.jumlahJual * transaction.hargaJual).toLocaleString()}`}</td>
             </tr>
           ))}
 
           <tr>
             <td colSpan="10">Total</td>
-            <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli), 0)}`}</td>
-            <td colSpan="1">{`Rp${transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * transaction.hargaJual, 0)}`}</td>
+            <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * (transaction.hargaJual - transaction.hargaBeli), 0)).toLocaleString()}`}</td>
+            <td colSpan="1">{`Rp${(transactions.reduce((sum, transaction) => sum + transaction.jumlahJual * transaction.hargaJual, 0)).toLocaleString()}`}</td>
           </tr>
         </tbody>
       </Table>
