@@ -23,13 +23,9 @@ export default function HomepageEksekutif() {
 
     const [barChartPendapatanData, setBarChartPendapatanData] = useState(null);
     const [barChartPengeluaranData, setBarChartPengeluaranData] = useState(null);
-    const [selectedYearGrafik, setSelectedYearGrafik] = useState(2020);
 
     const [totalPendapatan, setTotalPendapatan] = useState(0);
     const [totalPengeluaran, setTotalPengeluaran] = useState(0);
-
-
-
 
     useEffect(() => {
         if (user != null) {
@@ -43,22 +39,10 @@ export default function HomepageEksekutif() {
     }, [selectedJurusan]);
 
     useEffect(() => {
-        if (selectedYearGrafik) {
-            fetchPendapatanBarChartData(selectedYearGrafik);
-        }
-    }, [selectedYearGrafik]);
-
-    useEffect(() => {
-        if (selectedYear) {
-            fetchTotalPendapatan(selectedYear);
-            
-        }
-    }, [selectedYear]);
-
-    useEffect(() => {
         if (selectedYear) {
             fetchTotalPendapatan(selectedYear);
             fetchTotalPengeluaran(selectedYear);
+            fetchPendapatanBarChartData(selectedYear);
         }
     }, [selectedYear]);
 
@@ -302,11 +286,11 @@ export default function HomepageEksekutif() {
                                             <select
                                                 name="yearDropdown"
                                                 onChange={(e) => {
-                                                    setSelectedYearGrafik(parseInt(e.target.value));
+                                                    setSelectedYear(parseInt(e.target.value));
                                                     fetchPendapatanBarChartData(parseInt(e.target.value));
                                                     fetchPengeluaranBarChartData(parseInt(e.target.value));
                                                 }}
-                                                value={selectedYearGrafik}
+                                                value={selectedYear}
                                             >
                                                 {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((year) => (
                                                     <option key={year} value={year}>
