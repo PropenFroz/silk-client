@@ -22,6 +22,8 @@ export default function LaporanPembayaranKursusEksekutif() {
     const [jurusanKursus, setJurusanKursus] = useState([]);
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [transactions, setTransactions] = useState([]);
+    const [showDataNotFound, setShowDataNotFound] = useState(false); // State untuk menampilkan pesan "Data tidak ditemukan"
+
 
     const Auth = useAuth();
     const user = Auth.getUser();
@@ -80,6 +82,7 @@ export default function LaporanPembayaranKursusEksekutif() {
                 setTransactions(data);
                 setStartDate(startDate);
                 setEndDate(endDate);
+                setShowDataNotFound(data.length === 0); // Set state showDataNotFound berdasarkan panjang data yang dimuat
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -122,7 +125,8 @@ export default function LaporanPembayaranKursusEksekutif() {
                         </Button>
                     </div>
                 </div>
-                <TabelLaporanPembayaranKursus transactions={transactions} />
+                {showDataNotFound && <div>Data tidak ditemukan!</div>}
+                <TabelLaporanPembayaranKursus transactions={transactions} selectedJurusan={selectedJurusan} startDate={startDate} endDate={endDate}/>
             </div>
         </div>
     );

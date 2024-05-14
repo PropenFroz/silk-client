@@ -21,6 +21,8 @@ export default function LaporanGajiGuruEksekutif() {
   const [selectedGuru, setSelectedGuru] = useState(null);
   const [transactions, setTransactions] = useState([]);
 
+  const [dataNotFound, setDataNotFound] = useState(false);
+
   const Auth = useAuth();
   const user = Auth.getUser();
   const history = useHistory();
@@ -78,6 +80,7 @@ export default function LaporanGajiGuruEksekutif() {
         console.log(transactions);
         setStartDate(startDate);
         setEndDate(endDate);
+        setDataNotFound(data.length === 0);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -117,7 +120,10 @@ export default function LaporanGajiGuruEksekutif() {
             </Button>
           </div>
         </div>
-        <TabelLaporanGajiGuru transactions={transactions} />
+        {dataNotFound ? (
+          <div>Data tidak ditemukan!</div>
+        ) : (
+        <TabelLaporanGajiGuru transactions={transactions} idGuru={selectedGuru} startDate={startDate} endDate={endDate} /> )}
       </div>
     </div>
   );
