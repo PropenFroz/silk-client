@@ -18,8 +18,8 @@ export default function HomepageEksekutif() {
   const [jurusanKursus, setJurusanKursus] = useState([]);
   const [selectedJurusan, setSelectedJurusan] = useState("1");
 
-    const [pieChartData, setPieChartData] = useState(null);
-    const [selectedYear, setSelectedYear] = useState(2020);
+  const [pieChartData, setPieChartData] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(2024);
 
   const [barChartPendapatanData, setBarChartPendapatanData] = useState(null);
   const [barChartPengeluaranData, setBarChartPengeluaranData] = useState(null);
@@ -153,152 +153,161 @@ export default function HomepageEksekutif() {
     maintainAspectRatio: false,
   };
 
-    const barData = {
-        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-        datasets: [
-            {
-                label: 'Pendapatan',
-                backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255, 99, 132, 0.8)',
-                hoverBorderColor: 'rgba(255, 99, 132, 1)',
-                data: [
-                    barChartPendapatanData?.januari || 0, 
-                    barChartPendapatanData?.februari || 0,
-                    barChartPendapatanData?.maret || 0, 
-                    barChartPendapatanData?.april || 0,
-                    barChartPendapatanData?.mei || 0, 
-                    barChartPendapatanData?.juni || 0,
-                    barChartPendapatanData?.juli || 0, 
-                    barChartPendapatanData?.agustus || 0,
-                    barChartPendapatanData?.september || 0, 
-                    barChartPendapatanData?.oktober || 0,
-                    barChartPendapatanData?.november || 0, 
-                    barChartPendapatanData?.desember || 0
-                ],
-            },
-            {
-                label: 'Pengeluaran',
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
-                hoverBorderColor: 'rgba(54, 162, 235, 1)',
-                data: [
-                    barChartPengeluaranData?.januari || 0, 
-                    barChartPengeluaranData?.februari || 0,
-                    barChartPengeluaranData?.maret || 0, 
-                    barChartPengeluaranData?.april || 0,
-                    barChartPengeluaranData?.mei || 0, 
-                    barChartPengeluaranData?.juni || 0,
-                    barChartPengeluaranData?.juli || 0, 
-                    barChartPengeluaranData?.agustus || 0,
-                    barChartPengeluaranData?.september || 0, 
-                    barChartPengeluaranData?.oktober || 0,
-                    barChartPengeluaranData?.november || 0, 
-                    barChartPengeluaranData?.desember || 0
-                ],
-            },
+  const barData = {
+    labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+    datasets: [
+      {
+        label: "Pendapatan",
+        backgroundColor: "rgba(255, 99, 132, 0.6)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(255, 99, 132, 0.8)",
+        hoverBorderColor: "rgba(255, 99, 132, 1)",
+        data: [
+          barChartPendapatanData?.januari || 0,
+          barChartPendapatanData?.februari || 0,
+          barChartPendapatanData?.maret || 0,
+          barChartPendapatanData?.april || 0,
+          barChartPendapatanData?.mei || 0,
+          barChartPendapatanData?.juni || 0,
+          barChartPendapatanData?.juli || 0,
+          barChartPendapatanData?.agustus || 0,
+          barChartPendapatanData?.september || 0,
+          barChartPendapatanData?.oktober || 0,
+          barChartPendapatanData?.november || 0,
+          barChartPendapatanData?.desember || 0,
         ],
-    };
-        
-    return (
-        <div className="dashboard d-flex">
-            <SideBarEksekutif />
-            <div className="dashboard-content">
-                <div className="section">
-                    <h2>Overview</h2>
-                    <div className="section-content mb-4">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="card">
-                                    <div className="card-header text-center">Siswa Per Jurusan</div>
-                                    <div className="card-body">
-                                        <div className='text-center mb-2'>
-                                            <label htmlFor="jurusanKursus">Pilih Jurusan:</label>
-                                            <select name="jurusanKursus" onChange={(e) => {
-                                                setSelectedJurusan(e.target.value);
-                                                fetchPieChartData(e.target.value);
-                                            }} value={selectedJurusan}>
-                                                {jurusanKursus.map(jurusan => (
-                                                    <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>{jurusan.namaJurusan}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <div className="card-body d-flex justify-content-center align-items-center">
-                                            <div className="chart-container" style={{ width: '300px', height: '300px' }}>
-                                                <Pie data={pieData} options={pieOptions} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6 d-flex justify-content-center align-items-center">
-                                <div
-                                    className="cards-container"
-                                    style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}
-                                >
-                                    <select name="yearDropdown" onChange={(e) => {
-                                        setSelectedYear(parseInt(e.target.value))
-                                        fetchTotalPendapatan(parseInt(e.target.value))
-                                        fetchTotalPengeluaran(parseInt(e.target.value))
-                                        }} value={selectedYear}>
-                                            {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map(year => (
-                                                <option key={year} value={year}>{year}</option>
-                                            ))}
-                                    </select>
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <h5 className="card-title">Total Pendapatan</h5>
-                                            <p className="card-text">Rp{totalPendapatan.toLocaleString('id-ID')}</p>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <h5 className="card-title">Total Pengeluaran</h5>
-                                            <p className="card-text">Rp{totalPengeluaran.toLocaleString('id-ID')}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      },
+      {
+        label: "Pengeluaran",
+        backgroundColor: "rgba(54, 162, 235, 0.6)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
+        hoverBorderColor: "rgba(54, 162, 235, 1)",
+        data: [
+          barChartPengeluaranData?.januari || 0,
+          barChartPengeluaranData?.februari || 0,
+          barChartPengeluaranData?.maret || 0,
+          barChartPengeluaranData?.april || 0,
+          barChartPengeluaranData?.mei || 0,
+          barChartPengeluaranData?.juni || 0,
+          barChartPengeluaranData?.juli || 0,
+          barChartPengeluaranData?.agustus || 0,
+          barChartPengeluaranData?.september || 0,
+          barChartPengeluaranData?.oktober || 0,
+          barChartPengeluaranData?.november || 0,
+          barChartPengeluaranData?.desember || 0,
+        ],
+      },
+    ],
+  };
+
+  return (
+    <div className="dashboard d-flex">
+      <SideBarEksekutif />
+      <div className="dashboard-content">
+        <div className="section">
+          <h2>Overview</h2>
+          <div className="section-content mb-4">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="card">
+                  <div className="card-header text-center">Siswa Per Jurusan</div>
+                  <div className="card-body">
+                    <div className="text-center mb-2">
+                      <label htmlFor="jurusanKursus">Pilih Jurusan:</label>
+                      <select
+                        name="jurusanKursus"
+                        onChange={(e) => {
+                          setSelectedJurusan(e.target.value);
+                          fetchPieChartData(e.target.value);
+                        }}
+                        value={selectedJurusan}
+                      >
+                        {jurusanKursus.map((jurusan) => (
+                          <option key={jurusan.idJurusanKursus} value={jurusan.idJurusanKursus}>
+                            {jurusan.namaJurusan}
+                          </option>
+                        ))}
+                      </select>
                     </div>
-                </div>
-                <div className="section">
-                    <h2>Total Pendapatan dan Pengeluaran</h2>
-                    <div className="section-content">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="dropdown mb-3">
-                                            <select
-                                                name="yearDropdown"
-                                                onChange={(e) => {
-                                                    setSelectedYear(parseInt(e.target.value));
-                                                    fetchPendapatanBarChartData(parseInt(e.target.value));
-                                                    fetchPengeluaranBarChartData(parseInt(e.target.value));
-                                                }}
-                                                value={selectedYear}
-                                            >
-                                                {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((year) => (
-                                                    <option key={year} value={year}>
-                                                        {year}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <div className="chart-container" style={{ width: '100%', height: '300px' }}>
-                                            <Bar data={barData} options={{ maintainAspectRatio: false }} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="card-body d-flex justify-content-center align-items-center">
+                      <div className="chart-container" style={{ width: "300px", height: "300px" }}>
+                        <Pie data={pieData} options={pieOptions} />
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
+              <div className="col-md-6 d-flex justify-content-center align-items-center">
+                <div className="cards-container" style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
+                  <select
+                    name="yearDropdown"
+                    onChange={(e) => {
+                      setSelectedYear(parseInt(e.target.value));
+                      fetchTotalPendapatan(parseInt(e.target.value));
+                      fetchTotalPengeluaran(parseInt(e.target.value));
+                    }}
+                    value={selectedYear}
+                  >
+                    {[2024, 2025, 2026, 2027, 2028].map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5 className="card-title">Total Pendapatan</h5>
+                      <p className="card-text">Rp{totalPendapatan.toLocaleString("id-ID")}</p>
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5 className="card-title">Total Pengeluaran</h5>
+                      <p className="card-text">Rp{totalPengeluaran.toLocaleString("id-ID")}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    );
+        <div className="section">
+          <h2>Total Pendapatan dan Pengeluaran</h2>
+          <div className="section-content">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="dropdown mb-3">
+                      <select
+                        name="yearDropdown"
+                        onChange={(e) => {
+                          setSelectedYear(parseInt(e.target.value));
+                          fetchPendapatanBarChartData(parseInt(e.target.value));
+                          fetchPengeluaranBarChartData(parseInt(e.target.value));
+                        }}
+                        value={selectedYear}
+                      >
+                        {[2024, 2025, 2026, 2027, 2028].map((year) => (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="chart-container" style={{ width: "100%", height: "300px" }}>
+                      <Bar data={barData} options={{ maintainAspectRatio: false }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
