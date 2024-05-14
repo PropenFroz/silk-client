@@ -2,10 +2,14 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
 
-export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
+export default function TabelLaporanGajiGuruEksekutif({ transactions, idGuru, startDate, endDate }) {
 
   if (!transactions || transactions.length === 0) {
-    return <div>Data Tidak Ditemukan</div>;
+    if (!startDate || !endDate || !idGuru) {
+      return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
+    } else {
+      return <div></div>;
+    }
   }
 
   const transactionsByJurusan = transactions.reduce((acc, transaction) => {

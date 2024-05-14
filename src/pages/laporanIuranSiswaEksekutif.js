@@ -18,7 +18,9 @@ export default function LaporanIuranSiswaEksekutif() {
     const [selectedJurusan, setSelectedJurusan] = useState(null);
     const [selectedTahun, setSelectedTahun] = useState('');
     const [transactions, setTransactions] = useState([]);
+    const [showDataNotFound, setShowDataNotFound] = useState(false); // State untuk menampilkan pesan "Data tidak ditemukan"
 
+    
     const Auth = useAuth();
     const user = Auth.getUser();
     const history = useHistory();
@@ -52,6 +54,7 @@ export default function LaporanIuranSiswaEksekutif() {
             const url = `${baseUrl}iuran-siswa/filter?idJurusanKursus=${selectedJurusan.value}&tahun=${selectedTahun}`;
             const response = await fetch(url);
             const data = await response.json();
+            setShowDataNotFound(data.length === 0); // Set state showDataNotFound berdasarkan panjang data yang dimuat
             setTransactions(data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -112,7 +115,8 @@ export default function LaporanIuranSiswaEksekutif() {
                         </Button>
                     </div>
                 </div>
-                <TabelLaporanIuranSiswaEksekutif transactions={transactions} />
+                {showDataNotFound && <div>Data tidak ditemukan!</div>}
+                <TabelLaporanIuranSiswaEksekutif transactions={transactions} selectedJurusan={selectedJurusan} tahun={selectedTahun} />
             </div>
         </div>
     );

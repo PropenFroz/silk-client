@@ -19,7 +19,7 @@ export default function HomepageEksekutif() {
     const [selectedJurusan, setSelectedJurusan] = useState('1');
 
     const [pieChartData, setPieChartData] = useState(null);
-    const [selectedYear, setSelectedYear] = useState(2020);
+    const [selectedYear, setSelectedYear] = useState(2024);
 
     const [barChartPendapatanData, setBarChartPendapatanData] = useState(null);
     const [barChartPengeluaranData, setBarChartPengeluaranData] = useState(null);
@@ -255,7 +255,7 @@ export default function HomepageEksekutif() {
                                         fetchTotalPendapatan(parseInt(e.target.value))
                                         fetchTotalPengeluaran(parseInt(e.target.value))
                                         }} value={selectedYear}>
-                                            {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map(year => (
+                                            {[2024, 2025, 2026, 2027, 2028].map(year => (
                                                 <option key={year} value={year}>{year}</option>
                                             ))}
                                     </select>
@@ -293,7 +293,7 @@ export default function HomepageEksekutif() {
                                                 }}
                                                 value={selectedYear}
                                             >
-                                                {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((year) => (
+                                                {[2024, 2025, 2026, 2027, 2028].map((year) => (
                                                     <option key={year} value={year}>
                                                         {year}
                                                     </option>
