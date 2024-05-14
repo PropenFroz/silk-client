@@ -21,9 +21,7 @@ function SummaryModal({ formData, selectedSiswa, selectedMonth, show, onHide, on
         <p><strong>Bulan Kursus:</strong> {selectedMonth}</p>
         <p><strong>Tanggal Pembayaran:</strong> {formData.tanggalPembayaran}</p>
         <p><strong>Nama Siswa:</strong> {selectedSiswa}</p>
-        <p><strong>Uang Pendaftaran:</strong> {formData.uangPendaftaran}</p>
         <p><strong>Uang Kursus:</strong> {formData.uangKursus}</p>
-        <p><strong>Uang Buku:</strong> {formData.uangBuku}</p>
         <p><strong>Cash:</strong> {formData.cash}</p>
         <p><strong>Transfer:</strong> {formData.transfer}</p>
         <p><strong>Keterangan:</strong> {formData.keterangan}</p>
