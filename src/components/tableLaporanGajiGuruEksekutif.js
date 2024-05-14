@@ -7,7 +7,7 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions, idGuru, st
     if (!startDate || !endDate || !idGuru) {
       return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
     } else {
-      return <div> </div>;
+      return <div></div>;
     }
   }
   const transactionsByJurusan = transactions.reduce((acc, transaction) => {

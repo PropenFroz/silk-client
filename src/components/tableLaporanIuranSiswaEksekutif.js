@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 
-export default function TabelLaporanIuranSiswaEksekutif({ transactions, selectedJurusan, tahun }) {
+export default function TabelLaporanIuranSiswaEksekutif({ transactions, selectedJurusan, tahun  }) {
 
     const siswaMap = {};
     transactions.forEach(transaction => {

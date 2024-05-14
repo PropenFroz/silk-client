@@ -118,8 +118,10 @@ export default function LaporanGajiGuruEksekutif() {
             </Button>
           </div>
         </div>
-        {dataNotFound && <div>Data tidak ditemukan!</div>}
-        <TabelLaporanGajiGuru transactions={transactions} idGuru={selectedGuru} startDate={startDate} endDate={endDate} />
+        {dataNotFound ? (
+          <div>Data tidak ditemukan!</div>
+        ) : (
+        <TabelLaporanGajiGuru transactions={transactions} idGuru={selectedGuru} startDate={startDate} endDate={endDate} /> )}
       </div>
     </div>
   );

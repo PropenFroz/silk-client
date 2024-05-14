@@ -17,6 +17,7 @@ export default function TabelLaporanPembayaranKursusEksekutif({ transactions, se
     if (transactions.length === 0) {
         return <div> </div>;
     }
+
     return (
         <div className="table-wrapper">
             <Table responsive bordered>
