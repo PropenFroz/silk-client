@@ -13,8 +13,8 @@ export default function EntryData() {
         jurusanKursus: 1,
         gradeKursus: 1,
         uangPendaftaran: '',
-        uangKursus: '',
-        uangBuku: '',
+        uangKursus: 0,
+        uangBuku: 0,
         cash: '',
         transfer: '',
         keterangan: ''
@@ -49,38 +49,22 @@ export default function EntryData() {
             [name]: value
         });
 
-        const totalBiaya = (parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, ''))) +
-            (parseInt(formData.uangKursus.replaceAll(/[^\d]/g, ''))) +
-            (parseInt(formData.uangBuku.replaceAll(/[^\d]/g, '')));
-    
+        const totalBiaya = (parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, '')) || 0) +
+            (parseInt(formData.uangKursus) || 0) +
+            (parseInt(formData.uangBuku) || 0);
+
         if (totalBiaya) {
             setAlertPembayaran(`Total biaya transaksi siswa: Rp${totalBiaya.toLocaleString()}`);
         } else {
             setAlertPembayaran('');
         }
     };
-    
+
     const handleUangPendaftaranChange = (e) => {
         const { value } = e.target;
         setFormData({
             ...formData,
             uangPendaftaran: value
-        });
-    };
-
-    const handleUangKursusChange = (e) => {
-        const { value } = e.target;
-        setFormData({
-            ...formData,
-            uangKursus: value
-        });
-    };
-
-    const handleUangBukuChange = (e) => {
-        const { value } = e.target;
-        setFormData({
-            ...formData,
-            uangBuku: value
         });
     };
 
@@ -96,8 +80,8 @@ export default function EntryData() {
             setFormData({
                 ...formData,
                 uangPendaftaran: parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, '')),
-                uangKursus: parseInt(formData.uangKursus.replaceAll(/[^\d]/g, '')),
-                uangBuku: parseInt(formData.uangBuku.replaceAll(/[^\d]/g, '')),
+                uangKursus: parseInt(formData.uangKursus),
+                uangBuku: parseInt(formData.uangBuku),
                 cash: parseInt(formData.cash.replaceAll(/[^\d]/g, '')),
                 transfer: parseInt(formData.transfer.replaceAll(/[^\d]/g, ''))
             });
@@ -131,7 +115,6 @@ export default function EntryData() {
                             ))}
                         </select>
                     </div>
-                    
                  </div>
                  <div className="col-sm">
                     <div className="input-field">
@@ -151,18 +134,9 @@ export default function EntryData() {
                         <NumericFormat name="uangPendaftaran" value={formData.uangPendaftaran} onChange={handleUangPendaftaranChange} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
-                <div className="col-sm">
-                    <div className="input-field">
-                        <label className="form-label">Uang Kursus</label>
-                        <NumericFormat name="uangKursus" value={formData.uangKursus} onChange={handleUangKursusChange} thousandSeparator={true} prefix="Rp" />
-                    </div>
-                </div>
-                <div className="col-sm">
-                    <div className="input-field">
-                        <label className="form-label">Uang Buku</label>
-                        <NumericFormat name="uangBuku" value={formData.uangBuku} onChange={handleUangBukuChange} thousandSeparator={true} prefix="Rp" />
-                    </div>
-                </div>
+                {/* uangKursus and uangBuku hidden */}
+                <input type="hidden" name="uangKursus" value={formData.uangKursus} />
+                <input type="hidden" name="uangBuku" value={formData.uangBuku} />
             </div>
             <div class="row">
                 <div className="col-sm">
@@ -188,7 +162,7 @@ export default function EntryData() {
                 <div className="col-sm">
                 </div>
             </div>
-            <p style={ { color: 'red', fontWeight: '600' } }>{alertPembayaran}</p>
+            <p style={{ color: 'red', fontWeight: '600' }}>{alertPembayaran}</p>
             <button type="button" className="btn-submit" onClick={handleSubmit}>Submit</button>
             <SummaryModal
                 formData={formData}
@@ -204,7 +178,7 @@ export default function EntryData() {
                 show={showSuccessModal}
                 onHide={() => {
                     setShowSuccessModal(false);
-                    window.location.reload()
+                    window.location.reload();
                 }}
             />
          </div>

@@ -13,9 +13,9 @@ export default function EntryData() {
         tahunKursus: '',
         tanggalPembayaran: '',
         siswa: null,
-        uangPendaftaran: '',
+        uangPendaftaran: 0,
         uangKursus: '',
-        uangBuku: '',
+        uangBuku: 0,
         cash: '',
         transfer: '',
         keterangan: ''
@@ -44,9 +44,9 @@ export default function EntryData() {
             [name]: value
         });
 
-        const totalBiaya = (parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, ''))) +
+        const totalBiaya = (parseInt(formData.uangPendaftaran)) +
             (parseInt(formData.uangKursus.replaceAll(/[^\d]/g, ''))) +
-            (parseInt(formData.uangBuku.replaceAll(/[^\d]/g, '')));
+            (parseInt(formData.uangBuku));
     
         if (totalBiaya) {
             setAlertPembayaran(`Total biaya transaksi siswa: Rp${totalBiaya.toLocaleString()}`);
@@ -72,20 +72,17 @@ export default function EntryData() {
     };
 
     const handleSubmit = () => {
-        if (!formData.siswa || !formData.tahunKursus || !formData.tanggalPembayaran || !formData.uangPendaftaran || !formData.uangKursus || !formData.uangBuku || !formData.cash || !formData.transfer || !formData.keterangan || !formData.bulanKursus) {
+        if (!formData.siswa || !formData.tahunKursus || !formData.tanggalPembayaran || !formData.uangKursus || !formData.cash || !formData.transfer || !formData.keterangan || !formData.bulanKursus) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
             return;
         } else {
             setFormData({
                 ...formData,
-                uangPendaftaran: parseInt(formData.uangPendaftaran.replaceAll(/[^\d]/g, '')),
                 uangKursus: parseInt(formData.uangKursus.replaceAll(/[^\d]/g, '')),
-                uangBuku: parseInt(formData.uangBuku.replaceAll(/[^\d]/g, '')),
                 cash: parseInt(formData.cash.replaceAll(/[^\d]/g, '')),
                 transfer: parseInt(formData.transfer.replaceAll(/[^\d]/g, ''))
             });
             setShowModal(true);
-
         }
     };
 
@@ -132,24 +129,17 @@ export default function EntryData() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-sm">
-                    <div className="input-field">
-                        <label className="form-label">Uang Pendaftaran</label>
-                        <NumericFormat className="form-control" name="uangPendaftaran" value={formData.uangPendaftaran} onValueChange={e => setFormData({ ...formData, uangPendaftaran: e.value })} thousandSeparator={true} prefix="Rp" />
-                    </div>
-                </div>
+                    <input type="hidden" name="uangPendaftaran" value={formData.uangPendaftaran} />
+                
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Uang Kursus</label>
                         <NumericFormat className="form-control" name="uangKursus" value={formData.uangKursus} onValueChange={e => setFormData({ ...formData, uangKursus: e.value })} thousandSeparator={true} prefix="Rp" />
                     </div>
                 </div>
-                <div className="col-sm">
-                    <div className="input-field">
-                        <label className="form-label">Uang Buku</label>
-                        <NumericFormat className="form-control" name="uangBuku" value={formData.uangBuku} onValueChange={e => setFormData({ ...formData, uangBuku: e.value })} thousandSeparator={true} prefix="Rp" />
-                    </div>
-                </div>
+              
+                    <input type="hidden" name="uangBuku" value={formData.uangBuku} />
+             
             </div>
             <div className="row">
                 <div className="col-sm">
