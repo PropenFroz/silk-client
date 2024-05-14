@@ -23,14 +23,21 @@ export default function EntryData() {
     const [selectedBuku, setSelectedBuku] = useState(null);
     const [namaBuku, setNamaBuku] = useState('');
     const [namaJurusan, setnamaJurusan] = useState('');
+    const [stokBuku, setStokBuku] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         fetchBukuPurwacaraka()
             .then(data => {
-                const options = data.map(buku => ({ value: buku.idBukuPurwacaraka, label: buku.namaBuku, jurusan: buku.jurusanKursus.namaJurusan }));
+                const options = data.map(buku => ({
+                    value: buku.idBukuPurwacaraka,
+                    label: buku.namaBuku,
+                    jurusan: buku.jurusanKursus.namaJurusan,
+                    jumlah: buku.jumlah
+                }));
                 setBukuPurwacaraka(options);
             })
-            .catch(error => console.error('Error fetching gradeKursus:', error));
+            .catch(error => console.error('Error fetching bukuPurwacaraka:', error));
     }, []);
 
     const handleChange = (e) => {
@@ -39,6 +46,14 @@ export default function EntryData() {
             ...formData,
             [name]: value
         });
+
+        if (name === 'jumlahJual') {
+            if (parseInt(value) > stokBuku) {
+                setErrorMessage('Stok buku tidak mencukupi penjualan');
+            } else {
+                setErrorMessage('');
+            }
+        }
     };
 
     const handleBookChange = (selectedOption) => {
@@ -47,12 +62,14 @@ export default function EntryData() {
             bukuPurwacaraka: selectedOption ? selectedOption.value : null
         });
         setSelectedBuku(selectedOption);
+        setStokBuku(selectedOption ? selectedOption.jumlah : 0);
+        setErrorMessage('');
     };
 
     const handleSubmit = () => {
         setNamaBuku(selectedBuku.label);
         setnamaJurusan(selectedBuku.jurusan);
-        
+
         const isFormValid = Object.values(formData).every(value => value !== '');
         if (!isFormValid) {
             alert('Mohon lengkapi semua kolom sebelum mengirimkan data.');
@@ -62,17 +79,23 @@ export default function EntryData() {
                 ...formData,
                 hargaBeli: parseInt(formData.hargaBeli.replaceAll(/[^\d]/g, '')),
                 hargaJual: parseInt(formData.hargaJual.replaceAll(/[^\d]/g, ''))
-            })
+            });
+
+            if (parseInt(formData.jumlahJual) > stokBuku) {
+                alert('Stok buku tidak mencukupi penjualan.');
+                return;
+            }
+
             setShowModal(true);
         }
     };
 
     return (
         <div className="frame">
-            <div class="row">
-            <div className="col-sm">
+            <div className="row">
+                <div className="col-sm">
                     <div className="input-field">
-                    <label htmlFor="bukuPurwacaraka" className="form-label">Nama Buku</label>
+                        <label htmlFor="bukuPurwacaraka" className="form-label">Nama Buku</label>
                         <Select
                             options={bukuPurwacaraka}
                             value={selectedBuku}
@@ -81,10 +104,10 @@ export default function EntryData() {
                         /> 
                     </div>
                 </div>
-            <div className="col-sm">
+                <div className="col-sm">
+                </div>
             </div>
-            </div>
-            <div class="row">
+            <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Beli</label>
@@ -98,7 +121,7 @@ export default function EntryData() {
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Tanggal Jual</label>
@@ -109,10 +132,11 @@ export default function EntryData() {
                     <div className="input-field">
                         <label className="form-label">Jumlah Jual</label>
                         <input type="number" className="form-control" name="jumlahJual" onChange={handleChange} />
+                        {errorMessage && <div className="error-message">{errorMessage}</div>}
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div className="row">
                 <div className="col-sm">
                     <div className="input-field">
                         <label className="form-label">Harga Beli</label>
