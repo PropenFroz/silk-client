@@ -67,7 +67,7 @@ export default function UpdateData({ id }) {
     };
 
     const handleSubmit = () => {
-        const selectedSiswaName = siswaOptions.find(option => option.value === formData.siswa)?.label;
+        const selectedSiswaName = setSelectedSiswa(siswaOptions.find(option => option.value === formData.siswa.idSiswa).label);
 
         const selectedMonthValue = formData.bulanKursus || selectedMonth;
 
@@ -79,7 +79,7 @@ export default function UpdateData({ id }) {
             const updatedFormData = { 
                 ...formData,
                 tanggalPembayaran: new Date(formData.tanggalPembayaran).toISOString(),
-                siswa: formData.siswa,
+                siswa: formData.siswa.idSiswa,
                 uangPendaftaran: formData.uangPendaftaran.toString(),
                 uangKursus: formData.uangKursus.toString(),
                 uangBuku: formData.uangBuku.toString(),
