@@ -51,7 +51,7 @@ export default function TabelLaporanPembayaranKursus({ transactions, selectedJur
       };
 
     const handleUpdate = (transactionId) => {
-        history.push(`/update-transaksi-siswa/${transactionId}`);
+        history.push(`/update-kursus-siswa/${transactionId}`);
     };
 
     const formatDate = (dateString) => {

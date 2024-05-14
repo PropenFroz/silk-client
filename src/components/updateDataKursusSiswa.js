@@ -28,34 +28,31 @@ export default function UpdateData({ id }) {
     const history = useHistory();
 
     useEffect(() => {
-        fetchSiswa()
-            .then(data => {
-                const options = data.map(siswa => ({ value: siswa.idSiswa, label: siswa.namaSiswa }));
-                setSiswaOptions(options);
-            })
-            .catch(error => console.error('Error fetching siswa:', error));
+        const fetchData = async () => {
+            try {
+                const siswaData = await fetchSiswa();
+                const siswaOptions = siswaData.map(siswa => ({ value: siswa.idSiswa, label: siswa.namaSiswa }));
+                setSiswaOptions(siswaOptions);
 
-        fetchIuranSiswaById(id)
-            .then(data => {
-                const dataBulan = data.bulan;
-                const dataTahun = data.tahun;
-                setFormData(prevFormData => ({
-                    ...prevFormData,
-                    bulanKursus: dataBulan,
-                    tahunKursus: dataTahun
-                }));
-            })
-            .catch(error => console.error('Error fetching existing transaction data:', error));
+                const iuranData = await fetchIuranSiswaById(id);
+                const { bulan, tahun } = iuranData;
 
-        fetchEntryDataById(id)
-            .then(data => {
-                const formattedDate = new Date(data.tanggalPembayaran).toISOString().split('T')[0];
-                const updatedData = { ...data, tanggalPembayaran: formattedDate };
-                setFormData(updatedData);
-            })
-            .catch(error => console.error('Error fetching existing transaction data:', error));
+                const entryData = await fetchEntryDataById(id);
+                const formattedDate = new Date(entryData.tanggalPembayaran).toISOString().split('T')[0];
+
+                setFormData({
+                    ...entryData,
+                    bulanKursus: bulan,
+                    tahunKursus: tahun,
+                    tanggalPembayaran: formattedDate
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
     }, [id]);
-    
 
     const handleChange = (name, value) => {
         if (name === 'siswa') {
@@ -63,14 +60,14 @@ export default function UpdateData({ id }) {
         } else if (name === 'bulanKursus') {
             setSelectedMonth(value);
         }
-        setFormData({
-            ...formData,
+        setFormData(prevFormData => ({
+            ...prevFormData,
             [name]: value
-        });
+        }));
     };
 
     const handleSubmit = () => {
-        const selectedSiswaName = setSelectedSiswa(siswaOptions.find(option => option.value === formData.siswa.idSiswa).label);
+        const selectedSiswaName = siswaOptions.find(option => option.value === formData.siswa)?.label;
 
         const selectedMonthValue = formData.bulanKursus || selectedMonth;
 
@@ -82,7 +79,7 @@ export default function UpdateData({ id }) {
             const updatedFormData = { 
                 ...formData,
                 tanggalPembayaran: new Date(formData.tanggalPembayaran).toISOString(),
-                siswa: formData.siswa.idSiswa,
+                siswa: formData.siswa,
                 uangPendaftaran: formData.uangPendaftaran.toString(),
                 uangKursus: formData.uangKursus.toString(),
                 uangBuku: formData.uangBuku.toString(),
@@ -149,7 +146,7 @@ export default function UpdateData({ id }) {
                         <Select
                             options={siswaOptions}
                             onChange={option => handleChange("siswa", option.value)}
-                            value={siswaOptions.find(option => option.value === formData.siswa.idSiswa)}
+                            value={siswaOptions.find(option => option.value === formData.siswa)}
                             isDisabled={true}
                         />
                     </div>
