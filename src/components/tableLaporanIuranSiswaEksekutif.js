@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 
-export default function TabelLaporanIuranSiswaEksekutif({ transactions }) {
+export default function TabelLaporanIuranSiswaEksekutif({ transactions, selectedJurusan, tahun }) {
 
     const siswaMap = {};
     transactions.forEach(transaction => {
@@ -40,12 +40,12 @@ export default function TabelLaporanIuranSiswaEksekutif({ transactions }) {
         </tr>
     ));
 
-    if (!transactions) {
+    if (!selectedJurusan || !tahun) {
         return <div>Mohon Pilih Jurusan dan Tahun Terlebih Dahulu!</div>;
     }
 
     if (transactions.length === 0) {
-        return <div>Mohon Pilih Jurusan dan Tahun Terlebih Dahulu!</div>;
+        return <div>  </div>;
     }
 
     return (

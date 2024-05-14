@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../components/auth/context/AuthContext';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../components/auth/context/AuthContext";
+import { useHistory } from "react-router-dom";
 import Sidebar from "../components/sidebarEksekutif";
 import "../styles/laporan.css";
 import Button from "../components/button";
@@ -10,30 +10,30 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { fetchGuru } from "../service/fetchDataService";
 import Select from "react-select";
 import TabelLaporanGajiGuru from "../components/tableLaporanGajiGuruEksekutif";
-import { config } from '../Constants'
+import { config } from "../Constants";
 
 export default function LaporanGajiGuruEksekutif() {
-  const baseUrl = config.url.API_BASE_URL + '/api/';
+  const baseUrl = config.url.API_BASE_URL + "/api/";
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guru, setGuru] = useState([]);
   const [selectedGuru, setSelectedGuru] = useState(null);
   const [transactions, setTransactions] = useState([]);
+  const [dataNotFound, setDataNotFound] = useState(false);
 
   const Auth = useAuth();
   const user = Auth.getUser();
   const history = useHistory();
 
   useEffect(() => {
-      if (user == null) {
-          history.push('/login');
-      } else {
-        // Lakukan scroll ke atas setelah halaman dimuat
-        window.scrollTo(0, 0);
+    if (user == null) {
+      history.push("/login");
+    } else {
+      // Lakukan scroll ke atas setelah halaman dimuat
+      window.scrollTo(0, 0);
     }
   }, [user, history]);
-
 
   useEffect(() => {
     fetchGuru()
@@ -78,6 +78,7 @@ export default function LaporanGajiGuruEksekutif() {
         console.log(transactions);
         setStartDate(startDate);
         setEndDate(endDate);
+        setDataNotFound(data.length === 0);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -117,7 +118,8 @@ export default function LaporanGajiGuruEksekutif() {
             </Button>
           </div>
         </div>
-        <TabelLaporanGajiGuru transactions={transactions} />
+        {dataNotFound && <div>Data tidak ditemukan!</div>}
+        <TabelLaporanGajiGuru transactions={transactions} idGuru={selectedGuru} startDate={startDate} endDate={endDate} />
       </div>
     </div>
   );

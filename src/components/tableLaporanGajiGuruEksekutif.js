@@ -2,12 +2,14 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import "../styles/tableLaporan.css";
 
-export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
-
+export default function TabelLaporanGajiGuruEksekutif({ transactions, idGuru, startDate, endDate }) {
   if (!transactions || transactions.length === 0) {
-    return <div>Data Tidak Ditemukan</div>;
+    if (!startDate || !endDate || !idGuru) {
+      return <div>Mohon Pilih Guru dan Tanggal Terlebih Dahulu!</div>;
+    } else {
+      return <div> </div>;
+    }
   }
-
   const transactionsByJurusan = transactions.reduce((acc, transaction) => {
     const { namaJurusan } = transaction.entryGajiGuru.jurusanKursus;
     if (!acc[namaJurusan]) {
@@ -25,9 +27,9 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
   const totalFeeGuru = totalFeeGuruPerJurusan.reduce((acc, { totalFeeGuru }) => acc + totalFeeGuru, 0);
 
   const formatDate = (dateString) => {
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const options = { day: "2-digit", month: "2-digit", year: "numeric" };
     const date = new Date(dateString);
-    return date.toLocaleDateString('id-ID', options);
+    return date.toLocaleDateString("id-ID", options);
   };
 
   return (
@@ -72,11 +74,11 @@ export default function TabelLaporanGajiGuruEksekutif({ transactions }) {
                   <td colSpan="5">
                     <strong>Total</strong>
                   </td>
-                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu1, 0)).toLocaleString()}`}</td>
-                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu2, 0)).toLocaleString()}`}</td>
-                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu3, 0)).toLocaleString()}`}</td>
-                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.minggu4, 0)).toLocaleString()}`}</td>
-                  <td>{`Rp${(transactions.reduce((acc, curr) => acc + curr.feeGuru, 0)).toLocaleString()}`}</td>
+                  <td>{`Rp${transactions.reduce((acc, curr) => acc + curr.minggu1, 0).toLocaleString()}`}</td>
+                  <td>{`Rp${transactions.reduce((acc, curr) => acc + curr.minggu2, 0).toLocaleString()}`}</td>
+                  <td>{`Rp${transactions.reduce((acc, curr) => acc + curr.minggu3, 0).toLocaleString()}`}</td>
+                  <td>{`Rp${transactions.reduce((acc, curr) => acc + curr.minggu4, 0).toLocaleString()}`}</td>
+                  <td>{`Rp${transactions.reduce((acc, curr) => acc + curr.feeGuru, 0).toLocaleString()}`}</td>
                   <td></td>
                 </tr>
               </tbody>

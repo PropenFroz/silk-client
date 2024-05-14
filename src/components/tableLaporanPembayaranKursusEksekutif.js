@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import '../styles/tableLaporan.css';
 
-export default function TabelLaporanPembayaranKursusEksekutif({ transactions }) {
+export default function TabelLaporanPembayaranKursusEksekutif({ transactions, selectedJurusan, startDate, endDate }) {
 
     const formatDate = (dateString) => {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -10,12 +10,12 @@ export default function TabelLaporanPembayaranKursusEksekutif({ transactions }) 
         return date.toLocaleDateString('id-ID', options);
     };
 
-    if (!transactions) {
+    if (!selectedJurusan || !startDate || !endDate) {
         return <div>Mohon Pilih Jurusan dan Tanggal Terlebih Dahulu!</div>;
     }
 
     if (transactions.length === 0) {
-        return <div>Mohon Pilih Jurusan dan Tanggal Terlebih Dahulu!</div>;
+        return <div> </div>;
     }
     return (
         <div className="table-wrapper">
